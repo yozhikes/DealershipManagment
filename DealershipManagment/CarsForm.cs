@@ -13,6 +13,7 @@ namespace DealershipManagment
 {
     public partial class CarsForm : Form
     {
+        DbDealershipManagmentContext db = new DbDealershipManagmentContext();
         public CarsForm()
         {
             InitializeComponent();
@@ -55,7 +56,12 @@ namespace DealershipManagment
 
         private void filterCmb_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
+        }
+
+        private void CarsForm_Load(object sender, EventArgs e)
+        {
+            carsDgv.DataSource = db.Cars.ToList();
         }
     }
 }

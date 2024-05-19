@@ -11,7 +11,7 @@ namespace DealershipManagment
         {
             if (true)
             {
-                int goida = 0;
+                int goida = 1;
                 switch (goida)
                 {
                     case 0:

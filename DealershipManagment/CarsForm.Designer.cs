@@ -126,6 +126,7 @@
             Controls.Add(carsDgv);
             Name = "CarsForm";
             Text = "Автомобили";
+            Load += CarsForm_Load;
             ((System.ComponentModel.ISupportInitialize)carsDgv).EndInit();
             groupBox1.ResumeLayout(false);
             ResumeLayout(false);
