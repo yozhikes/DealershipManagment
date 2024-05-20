@@ -2,59 +2,69 @@ namespace DealershipManagment
 {
     public partial class AutorisationForm : Form
     {
+        DbDealershipManagmentContext db = new DbDealershipManagmentContext();
         public AutorisationForm()
         {
             InitializeComponent();
+            passTxt.UseSystemPasswordChar = true;
         }
 
         private void entryBtn_Click(object sender, EventArgs e)
         {
-            if (true)
+            if(loginTxt.Text==string.Empty && passTxt.Text==string.Empty)
             {
-                int goida = 1;
-                switch (goida)
-                {
-                    case 0:
-                        AdminForm admin = new AdminForm();
-                        Hide();
-                        admin.ShowDialog();
-                        Show();
-                        break;
-                    case 1:
-                        CarsForm cars = new CarsForm();
-                        Hide();
-                        cars.ShowDialog();
-                        Show();
-                        break;
-                    case 2:
-                        FinancesForm finances = new FinancesForm();
-                        Hide();
-                        finances.ShowDialog();
-                        Show();
-                        break;
-                    case 3:
-                        SalesForm sales = new SalesForm();
-                        Hide();
-                        sales.ShowDialog();
-                        Show();
-                        break;
-                    case 4:
-                        ServiceForm service = new ServiceForm();
-                        Hide();
-                        service.ShowDialog();
-                        Show();
-                        break;
-                    case 5:
-                        StaffForm staff = new StaffForm();
-                        Hide();
-                        staff.ShowDialog();
-                        Show();
-                        break;
-                }
+                MessageBox.Show("Некоторые или все поля пустые!", "Ошибка при входе", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                MessageBox.Show("Неверный логин и/или пароль", "Ошибка при входе", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                var worker = db.Workers.FirstOrDefault(x => x.Login == loginTxt.Text && x.Password == passTxt.Text);
+                if (worker != null)
+                {
+                    var role = worker.RoleId;
+                    switch (role)
+                    {
+                        case 1:
+                            AdminForm admin = new AdminForm();
+                            Hide();
+                            admin.ShowDialog();
+                            Show();
+                            break;
+                        case 2:
+                            CarsForm cars = new CarsForm();
+                            Hide();
+                            cars.ShowDialog();
+                            Show();
+                            break;
+                        case 3:
+                            FinancesForm finances = new FinancesForm();
+                            Hide();
+                            finances.ShowDialog();
+                            Show();
+                            break;
+                        case 4:
+                            SalesForm sales = new SalesForm();
+                            Hide();
+                            sales.ShowDialog();
+                            Show();
+                            break;
+                        case 5:
+                            ServiceForm service = new ServiceForm();
+                            Hide();
+                            service.ShowDialog();
+                            Show();
+                            break;
+                        case 6:
+                            StaffForm staff = new StaffForm();
+                            Hide();
+                            staff.ShowDialog();
+                            Show();
+                            break;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Неверный логин и/или пароль", "Ошибка при входе", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
 

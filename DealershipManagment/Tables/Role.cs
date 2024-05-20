@@ -5,7 +5,7 @@ namespace DealershipManagment.Tables;
 
 public partial class Role
 {
-    public Guid IdRole { get; set; }
+    public int IdRole { get; set; }
 
     public string NameRole { get; set; } = null!;
 
