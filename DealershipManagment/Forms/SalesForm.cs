@@ -35,11 +35,12 @@ namespace DealershipManagment
                 .Include(x => x.Worker)
                 .Include(x => x.Car)
                 .Include(x => x.Client)
+                .Include(x=>x.Car.Mark)
                 .ToList();
             foreach (var s in sales)
             {
                 DataRow dataRow = dt.NewRow();
-                dataRow[0] = $"{s.Car.MarkId} {s.Car.Model}";//поменять id на наме
+                dataRow[0] = $"{s.Car.Mark.NameMark} {s.Car.Model}";
                 dataRow[1] = s.Client.Fio;
                 dataRow[2] = s.Worker.Fio;
                 dataRow[3] = s.Total;

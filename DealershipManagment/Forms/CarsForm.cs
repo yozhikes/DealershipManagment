@@ -33,6 +33,8 @@ namespace DealershipManagment
             dt.Columns.Add("Цена");
             dt.Columns.Add("Примечания");
             dt.Columns.Add("Статус");
+            dt.Columns.Add("idCar");
+            filterCmb.DataSource = db.Marks.Select(x => x.NameMark).ToList();
         }
 
         private void searchBtn_Click(object sender, EventArgs e)
@@ -45,7 +47,7 @@ namespace DealershipManagment
                 {
                     for (int j = 0; j <= carsDgv.ColumnCount - 1; j++)
                     {
-                        if (carsDgv.Rows[i].Cells[j].Value != null && carsDgv.Rows[i].Cells[j].Value.ToString() == searchTxt.Text)
+                        if (carsDgv.Rows[i].Cells[j].Value != null && carsDgv.Rows[i].Cells[j].Value.ToString().Contains(searchTxt.Text))
                         {
                             carsDgv.Rows[i].Cells[j].Selected = true;
                             quantity++;
@@ -67,14 +69,10 @@ namespace DealershipManagment
             }
         }
 
-        private void filterCmb_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void CarsForm_Load(object sender, EventArgs e)
         {
             UpdateDgv();
+            carsDgv.Columns[11].Visible = false;
         }
 
         private void UpdateDgv()
@@ -179,9 +177,43 @@ namespace DealershipManagment
                         dataRow[10] = Statuses.Ремонт;
                         break;
                 }
+                dataRow[11] = c.IdCar;
                 dt.Rows.Add(dataRow);
             }
             carsDgv.DataSource = dt;
+        }
+
+        private void applyFilterBtn_Click(object sender, EventArgs e)
+        {
+            UpdateDgv();
+            for (int i = dt.Rows.Count - 1; i >= 0; i--)
+            {
+                if (dt.Rows[i][0].ToString() != filterCmb.Text)
+                {
+                    dt.Rows.Remove(dt.Rows[i]);
+                }
+            }
+        }
+
+        private void clrFltrBtn_Click(object sender, EventArgs e)
+        {
+            UpdateDgv();
+        }
+
+        private void addBtn_Click(object sender, EventArgs e)
+        {
+            AddEditCarsForm addCar = new AddEditCarsForm();
+            Hide();
+            addCar.ShowDialog();
+            Show();
+        }
+
+        private void editBtn_Click(object sender, EventArgs e)
+        {
+            AddEditCarsForm editCar = new AddEditCarsForm(Guid.Parse(carsDgv[11,carsDgv.SelectedRows[0].Index].Value.ToString()));
+            Hide();
+            editCar.ShowDialog();
+            Show();
         }
     }
 }

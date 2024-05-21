@@ -33,11 +33,12 @@ namespace DealershipManagment
             dt.Clear();
             var services = db.Requests
                 .Include(x => x.Car)
+                .Include(x => x.Car.Mark)
                 .ToList();
             foreach (var s in services)
             {
                 DataRow dataRow = dt.NewRow();
-                dataRow[0] = $"{s.Car.MarkId} {s.Car.Model}";//поменять id на наме
+                dataRow[0] = $"{s.Car.Mark.NameMark} {s.Car.Model}";
                 switch (s.StatusZayavki)
                 {
                     case 0:
