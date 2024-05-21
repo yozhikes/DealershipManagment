@@ -34,9 +34,9 @@
             groupBox1 = new GroupBox();
             clrFltrBtn = new Button();
             filterCmb = new ComboBox();
-            carsDgv = new DataGridView();
+            staffDgv = new DataGridView();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)carsDgv).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)staffDgv).BeginInit();
             SuspendLayout();
             // 
             // searchBtn
@@ -100,17 +100,17 @@
             filterCmb.Size = new Size(202, 29);
             filterCmb.TabIndex = 1;
             // 
-            // carsDgv
+            // staffDgv
             // 
-            carsDgv.AllowUserToAddRows = false;
-            carsDgv.AllowUserToDeleteRows = false;
-            carsDgv.BackgroundColor = SystemColors.Control;
-            carsDgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            carsDgv.Location = new Point(30, 25);
-            carsDgv.Name = "carsDgv";
-            carsDgv.ReadOnly = true;
-            carsDgv.Size = new Size(742, 316);
-            carsDgv.TabIndex = 8;
+            staffDgv.AllowUserToAddRows = false;
+            staffDgv.AllowUserToDeleteRows = false;
+            staffDgv.BackgroundColor = SystemColors.Control;
+            staffDgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            staffDgv.Location = new Point(30, 25);
+            staffDgv.Name = "staffDgv";
+            staffDgv.ReadOnly = true;
+            staffDgv.Size = new Size(742, 316);
+            staffDgv.TabIndex = 8;
             // 
             // StaffForm
             // 
@@ -121,11 +121,12 @@
             Controls.Add(label3);
             Controls.Add(searchTxt);
             Controls.Add(groupBox1);
-            Controls.Add(carsDgv);
+            Controls.Add(staffDgv);
             Name = "StaffForm";
             Text = "Персонал";
+            Load += StaffForm_Load;
             groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)carsDgv).EndInit();
+            ((System.ComponentModel.ISupportInitialize)staffDgv).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -138,6 +139,6 @@
         private GroupBox groupBox1;
         private Button clrFltrBtn;
         private ComboBox filterCmb;
-        private DataGridView carsDgv;
+        private DataGridView staffDgv;
     }
 }

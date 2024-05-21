@@ -34,9 +34,9 @@
             groupBox1 = new GroupBox();
             clrFltrBtn = new Button();
             filterCmb = new ComboBox();
-            carsDgv = new DataGridView();
+            financesDgv = new DataGridView();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)carsDgv).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)financesDgv).BeginInit();
             SuspendLayout();
             // 
             // searchBtn
@@ -79,7 +79,7 @@
             groupBox1.Size = new Size(214, 93);
             groupBox1.TabIndex = 9;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Фильтрация по маркам";
+            groupBox1.Text = "Фильтрация по часам";
             // 
             // clrFltrBtn
             // 
@@ -100,17 +100,17 @@
             filterCmb.Size = new Size(202, 29);
             filterCmb.TabIndex = 1;
             // 
-            // carsDgv
+            // financesDgv
             // 
-            carsDgv.AllowUserToAddRows = false;
-            carsDgv.AllowUserToDeleteRows = false;
-            carsDgv.BackgroundColor = SystemColors.Control;
-            carsDgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            carsDgv.Location = new Point(40, 22);
-            carsDgv.Name = "carsDgv";
-            carsDgv.ReadOnly = true;
-            carsDgv.Size = new Size(742, 316);
-            carsDgv.TabIndex = 8;
+            financesDgv.AllowUserToAddRows = false;
+            financesDgv.AllowUserToDeleteRows = false;
+            financesDgv.BackgroundColor = SystemColors.Control;
+            financesDgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            financesDgv.Location = new Point(40, 22);
+            financesDgv.Name = "financesDgv";
+            financesDgv.ReadOnly = true;
+            financesDgv.Size = new Size(742, 316);
+            financesDgv.TabIndex = 8;
             // 
             // FinancesForm
             // 
@@ -121,11 +121,12 @@
             Controls.Add(label3);
             Controls.Add(searchTxt);
             Controls.Add(groupBox1);
-            Controls.Add(carsDgv);
+            Controls.Add(financesDgv);
             Name = "FinancesForm";
             Text = "Финансы";
+            Load += FinancesForm_Load;
             groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)carsDgv).EndInit();
+            ((System.ComponentModel.ISupportInitialize)financesDgv).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -138,6 +139,6 @@
         private GroupBox groupBox1;
         private Button clrFltrBtn;
         private ComboBox filterCmb;
-        private DataGridView carsDgv;
+        private DataGridView financesDgv;
     }
 }

@@ -34,9 +34,9 @@
             groupBox1 = new GroupBox();
             clrFltrBtn = new Button();
             filterCmb = new ComboBox();
-            carsDgv = new DataGridView();
+            serviceDgv = new DataGridView();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)carsDgv).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)serviceDgv).BeginInit();
             SuspendLayout();
             // 
             // searchBtn
@@ -100,17 +100,17 @@
             filterCmb.Size = new Size(202, 29);
             filterCmb.TabIndex = 1;
             // 
-            // carsDgv
+            // serviceDgv
             // 
-            carsDgv.AllowUserToAddRows = false;
-            carsDgv.AllowUserToDeleteRows = false;
-            carsDgv.BackgroundColor = SystemColors.Control;
-            carsDgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            carsDgv.Location = new Point(38, 12);
-            carsDgv.Name = "carsDgv";
-            carsDgv.ReadOnly = true;
-            carsDgv.Size = new Size(742, 316);
-            carsDgv.TabIndex = 8;
+            serviceDgv.AllowUserToAddRows = false;
+            serviceDgv.AllowUserToDeleteRows = false;
+            serviceDgv.BackgroundColor = SystemColors.Control;
+            serviceDgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            serviceDgv.Location = new Point(38, 12);
+            serviceDgv.Name = "serviceDgv";
+            serviceDgv.ReadOnly = true;
+            serviceDgv.Size = new Size(742, 316);
+            serviceDgv.TabIndex = 8;
             // 
             // ServiceForm
             // 
@@ -121,11 +121,12 @@
             Controls.Add(label3);
             Controls.Add(searchTxt);
             Controls.Add(groupBox1);
-            Controls.Add(carsDgv);
+            Controls.Add(serviceDgv);
             Name = "ServiceForm";
             Text = "Сервис";
+            Load += ServiceForm_Load;
             groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)carsDgv).EndInit();
+            ((System.ComponentModel.ISupportInitialize)serviceDgv).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -138,6 +139,6 @@
         private GroupBox groupBox1;
         private Button clrFltrBtn;
         private ComboBox filterCmb;
-        private DataGridView carsDgv;
+        private DataGridView serviceDgv;
     }
 }

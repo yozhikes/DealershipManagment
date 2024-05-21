@@ -124,6 +124,7 @@
             Controls.Add(salesDgv);
             Name = "SalesForm";
             Text = "Продажи";
+            Load += SalesForm_Load;
             groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)salesDgv).EndInit();
             ResumeLayout(false);

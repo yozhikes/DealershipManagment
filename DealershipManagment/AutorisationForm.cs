@@ -23,12 +23,6 @@ namespace DealershipManagment
                     var role = worker.RoleId;
                     switch (role)
                     {
-                        case 1:
-                            AdminForm admin = new AdminForm();
-                            Hide();
-                            admin.ShowDialog();
-                            Show();
-                            break;
                         case 2:
                             CarsForm cars = new CarsForm();
                             Hide();
