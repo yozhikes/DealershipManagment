@@ -62,6 +62,42 @@ namespace DealershipManagment
         private void ServiceForm_Load(object sender, EventArgs e)
         {
             UpdateDgv();
+            serviceDgv.Columns[5].Visible = false;
+            serviceDgv.Sort(serviceDgv.Columns[5], ListSortDirection.Ascending);
+        }
+
+        private void addBtn_Click(object sender, EventArgs e)
+        {
+            AddEditRequestsForm addRequest = new AddEditRequestsForm();
+            Hide();
+            if (addRequest.ShowDialog() == DialogResult.OK)
+            {
+                UpdateDgv();
+                Show();
+            }
+        }
+
+        private void editBtn_Click(object sender, EventArgs e)
+        {
+            AddEditRequestsForm editRequest = new AddEditRequestsForm(Guid.Parse(serviceDgv[5, serviceDgv.SelectedRows[0].Index].Value.ToString()));
+            Hide();
+            if (editRequest.ShowDialog() == DialogResult.OK)
+            {
+                UpdateDgv();
+                Show();
+            }
+        }
+
+        private void delBtn_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Вы действительно хотите удалить этот запрос?", "Удаление",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                db.Cars.Remove(db.Cars.FirstOrDefault(x => x.IdCar == Guid.Parse(serviceDgv[5,
+                    serviceDgv.SelectedRows[0].Index].Value.ToString())));
+                db.SaveChanges();
+                UpdateDgv();
+            }
         }
     }
 }

@@ -52,6 +52,42 @@ namespace DealershipManagment
         private void FinancesForm_Load(object sender, EventArgs e)
         {
             UpdateDgv();
+            financesDgv.Columns[6].Visible = false;
+            financesDgv.Sort(financesDgv.Columns[6], ListSortDirection.Ascending);
+        }
+
+        private void addBtn_Click(object sender, EventArgs e)
+        {
+            AddEditReportsForm addReport = new AddEditReportsForm();
+            Hide();
+            if (addReport.ShowDialog() == DialogResult.OK)
+            {
+                UpdateDgv();
+                Show();
+            }
+        }
+
+        private void editBtn_Click(object sender, EventArgs e)
+        {
+            AddEditReportsForm editReport = new AddEditReportsForm(Guid.Parse(financesDgv[6, financesDgv.SelectedRows[0].Index].Value.ToString()));
+            Hide();
+            if (editReport.ShowDialog() == DialogResult.OK)
+            {
+                UpdateDgv();
+                Show();
+            }
+        }
+
+        private void delBtn_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Вы действительно хотите удалить этот отчёт?", "Удаление",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                db.Reports.Remove(db.Reports.FirstOrDefault(x => x.IdReport == Guid.Parse(financesDgv[6,
+                    financesDgv.SelectedRows[0].Index].Value.ToString())));
+                db.SaveChanges();
+                UpdateDgv();
+            }
         }
     }
 }

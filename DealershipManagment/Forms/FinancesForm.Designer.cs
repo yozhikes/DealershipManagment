@@ -49,9 +49,9 @@
             groupBox1.Controls.Add(filterCmb);
             groupBox1.Font = new Font("Times New Roman", 20.25F);
             groupBox1.Location = new Point(1043, 28);
-            groupBox1.Margin = new Padding(4, 4, 4, 4);
+            groupBox1.Margin = new Padding(4);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(4, 4, 4, 4);
+            groupBox1.Padding = new Padding(4);
             groupBox1.Size = new Size(275, 118);
             groupBox1.TabIndex = 9;
             groupBox1.TabStop = false;
@@ -62,7 +62,7 @@
             clrFltrBtn.BackColor = SystemColors.ControlLightLight;
             clrFltrBtn.Font = new Font("Times New Roman", 14.25F);
             clrFltrBtn.Location = new Point(78, 71);
-            clrFltrBtn.Margin = new Padding(4, 4, 4, 4);
+            clrFltrBtn.Margin = new Padding(4);
             clrFltrBtn.Name = "clrFltrBtn";
             clrFltrBtn.Size = new Size(99, 39);
             clrFltrBtn.TabIndex = 8;
@@ -73,7 +73,7 @@
             // 
             filterCmb.FormattingEnabled = true;
             filterCmb.Location = new Point(8, 28);
-            filterCmb.Margin = new Padding(4, 4, 4, 4);
+            filterCmb.Margin = new Padding(4);
             filterCmb.Name = "filterCmb";
             filterCmb.Size = new Size(259, 39);
             filterCmb.TabIndex = 1;
@@ -85,7 +85,7 @@
             financesDgv.BackgroundColor = SystemColors.Control;
             financesDgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             financesDgv.Location = new Point(51, 28);
-            financesDgv.Margin = new Padding(4, 4, 4, 4);
+            financesDgv.Margin = new Padding(4);
             financesDgv.Name = "financesDgv";
             financesDgv.ReadOnly = true;
             financesDgv.Size = new Size(954, 400);
@@ -102,6 +102,7 @@
             delBtn.TabIndex = 15;
             delBtn.Text = "Удалить";
             delBtn.UseVisualStyleBackColor = false;
+            delBtn.Click += delBtn_Click;
             // 
             // editBtn
             // 
@@ -114,6 +115,7 @@
             editBtn.TabIndex = 14;
             editBtn.Text = "Изменить";
             editBtn.UseVisualStyleBackColor = false;
+            editBtn.Click += editBtn_Click;
             // 
             // addBtn
             // 
@@ -126,6 +128,7 @@
             addBtn.TabIndex = 13;
             addBtn.Text = "Добавить";
             addBtn.UseVisualStyleBackColor = false;
+            addBtn.Click += addBtn_Click;
             // 
             // groupBox2
             // 
@@ -174,7 +177,7 @@
             Controls.Add(groupBox1);
             Controls.Add(financesDgv);
             Font = new Font("Times New Roman", 12F);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "FinancesForm";
             Text = "Финансы";
             Load += FinancesForm_Load;

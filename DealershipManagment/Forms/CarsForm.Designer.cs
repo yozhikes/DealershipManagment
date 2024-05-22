@@ -166,6 +166,7 @@
             delBtn.TabIndex = 10;
             delBtn.Text = "Удалить";
             delBtn.UseVisualStyleBackColor = false;
+            delBtn.Click += delBtn_Click;
             // 
             // groupBox2
             // 

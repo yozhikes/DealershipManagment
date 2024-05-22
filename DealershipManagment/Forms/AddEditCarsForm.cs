@@ -92,10 +92,13 @@ namespace DealershipManagment
             car.Notes = notesTxt.Text;
             if(addEditBtn.Text == "Добавить")
             {
+                car.IdCar = Guid.NewGuid();
                 car.Status = 0;
                 db.Cars.Add(car);
             }
+            DialogResult = DialogResult.OK;
             db.SaveChanges();
+            MessageBox.Show("Данные внесены", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

@@ -102,6 +102,7 @@
             delBtn.TabIndex = 15;
             delBtn.Text = "Удалить";
             delBtn.UseVisualStyleBackColor = false;
+            delBtn.Click += delBtn_Click;
             // 
             // editBtn
             // 
@@ -114,6 +115,7 @@
             editBtn.TabIndex = 14;
             editBtn.Text = "Изменить";
             editBtn.UseVisualStyleBackColor = false;
+            editBtn.Click += editBtn_Click;
             // 
             // addBtn
             // 
@@ -126,6 +128,7 @@
             addBtn.TabIndex = 13;
             addBtn.Text = "Добавить";
             addBtn.UseVisualStyleBackColor = false;
+            addBtn.Click += addBtn_Click;
             // 
             // groupBox2
             // 

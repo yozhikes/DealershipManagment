@@ -73,6 +73,7 @@ namespace DealershipManagment
         {
             UpdateDgv();
             carsDgv.Columns[11].Visible = false;
+            carsDgv.Sort(carsDgv.Columns[11],ListSortDirection.Ascending);
         }
 
         private void UpdateDgv()
@@ -204,16 +205,34 @@ namespace DealershipManagment
         {
             AddEditCarsForm addCar = new AddEditCarsForm();
             Hide();
-            addCar.ShowDialog();
-            Show();
+            if (addCar.ShowDialog() == DialogResult.OK)
+            {
+                UpdateDgv();
+                Show();
+            }
         }
 
         private void editBtn_Click(object sender, EventArgs e)
         {
-            AddEditCarsForm editCar = new AddEditCarsForm(Guid.Parse(carsDgv[11,carsDgv.SelectedRows[0].Index].Value.ToString()));
+            AddEditCarsForm editCar = new AddEditCarsForm(Guid.Parse(carsDgv[11, carsDgv.SelectedRows[0].Index].Value.ToString()));
             Hide();
-            editCar.ShowDialog();
-            Show();
+            if (editCar.ShowDialog() == DialogResult.OK)
+            {
+                UpdateDgv();
+                Show();
+            }
+        }
+
+        private void delBtn_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("Вы действительно хотите удалить эту машину?", "Удаление",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question)==DialogResult.Yes)
+            {
+                db.Cars.Remove(db.Cars.FirstOrDefault(x => x.IdCar == Guid.Parse(carsDgv[11,
+                    carsDgv.SelectedRows[0].Index].Value.ToString())));
+                db.SaveChanges();
+                UpdateDgv();
+            }
         }
     }
 }
