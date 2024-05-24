@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddEditSalesForm));
             yearTxt = new NumericUpDown();
             label10 = new Label();
             label9 = new Label();
@@ -55,7 +56,7 @@
             // yearTxt
             // 
             yearTxt.Font = new Font("Times New Roman", 14.25F);
-            yearTxt.Location = new Point(202, 302);
+            yearTxt.Location = new Point(661, 128);
             yearTxt.Maximum = new decimal(new int[] { 2100, 0, 0, 0 });
             yearTxt.Name = "yearTxt";
             yearTxt.Size = new Size(291, 29);
@@ -65,6 +66,7 @@
             // label10
             // 
             label10.AutoSize = true;
+            label10.BackColor = Color.Transparent;
             label10.Font = new Font("Times New Roman", 14.25F);
             label10.Location = new Point(31, 159);
             label10.Name = "label10";
@@ -75,8 +77,9 @@
             // label9
             // 
             label9.AutoSize = true;
+            label9.BackColor = Color.Transparent;
             label9.Font = new Font("Times New Roman", 14.25F);
-            label9.Location = new Point(78, 203);
+            label9.Location = new Point(537, 29);
             label9.Name = "label9";
             label9.Size = new Size(104, 21);
             label9.TabIndex = 50;
@@ -85,8 +88,9 @@
             // label8
             // 
             label8.AutoSize = true;
+            label8.BackColor = Color.Transparent;
             label8.Font = new Font("Times New Roman", 14.25F);
-            label8.Location = new Point(67, 250);
+            label8.Location = new Point(526, 76);
             label8.Name = "label8";
             label8.Size = new Size(115, 21);
             label8.TabIndex = 49;
@@ -95,8 +99,9 @@
             // label7
             // 
             label7.AutoSize = true;
+            label7.BackColor = Color.Transparent;
             label7.Font = new Font("Times New Roman", 14.25F);
-            label7.Location = new Point(67, 302);
+            label7.Location = new Point(526, 128);
             label7.Name = "label7";
             label7.Size = new Size(114, 21);
             label7.TabIndex = 48;
@@ -105,8 +110,9 @@
             // label6
             // 
             label6.AutoSize = true;
+            label6.BackColor = Color.Transparent;
             label6.Font = new Font("Times New Roman", 14.25F);
-            label6.Location = new Point(133, 350);
+            label6.Location = new Point(592, 176);
             label6.Name = "label6";
             label6.Size = new Size(46, 21);
             label6.TabIndex = 47;
@@ -115,8 +121,9 @@
             // label5
             // 
             label5.AutoSize = true;
+            label5.BackColor = Color.Transparent;
             label5.Font = new Font("Times New Roman", 14.25F);
-            label5.Location = new Point(126, 400);
+            label5.Location = new Point(516, 226);
             label5.Name = "label5";
             label5.Size = new Size(53, 21);
             label5.TabIndex = 46;
@@ -125,8 +132,9 @@
             // label4
             // 
             label4.AutoSize = true;
+            label4.BackColor = Color.Transparent;
             label4.Font = new Font("Times New Roman", 14.25F);
-            label4.Location = new Point(100, 440);
+            label4.Location = new Point(490, 266);
             label4.Name = "label4";
             label4.Size = new Size(79, 21);
             label4.TabIndex = 45;
@@ -135,6 +143,7 @@
             // label3
             // 
             label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
             label3.Font = new Font("Times New Roman", 14.25F);
             label3.Location = new Point(107, 69);
             label3.Name = "label3";
@@ -145,6 +154,7 @@
             // label2
             // 
             label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
             label2.Font = new Font("Times New Roman", 14.25F);
             label2.Location = new Point(107, 117);
             label2.Name = "label2";
@@ -164,7 +174,7 @@
             // notesTxt
             // 
             notesTxt.Font = new Font("Times New Roman", 14.25F);
-            notesTxt.Location = new Point(202, 440);
+            notesTxt.Location = new Point(592, 266);
             notesTxt.Margin = new Padding(4);
             notesTxt.Name = "notesTxt";
             notesTxt.Size = new Size(291, 29);
@@ -173,7 +183,7 @@
             // priceTxt
             // 
             priceTxt.Font = new Font("Times New Roman", 14.25F);
-            priceTxt.Location = new Point(202, 397);
+            priceTxt.Location = new Point(592, 223);
             priceTxt.Margin = new Padding(4);
             priceTxt.Name = "priceTxt";
             priceTxt.Size = new Size(291, 29);
@@ -182,7 +192,7 @@
             // vinTxt
             // 
             vinTxt.Font = new Font("Times New Roman", 14.25F);
-            vinTxt.Location = new Point(202, 350);
+            vinTxt.Location = new Point(661, 176);
             vinTxt.Margin = new Padding(4);
             vinTxt.Name = "vinTxt";
             vinTxt.Size = new Size(291, 29);
@@ -209,7 +219,7 @@
             // engineCmb
             // 
             engineCmb.FormattingEnabled = true;
-            engineCmb.Location = new Point(204, 251);
+            engineCmb.Location = new Point(663, 77);
             engineCmb.Margin = new Padding(4);
             engineCmb.Name = "engineCmb";
             engineCmb.Size = new Size(289, 23);
@@ -218,7 +228,7 @@
             // bodyCmb
             // 
             bodyCmb.FormattingEnabled = true;
-            bodyCmb.Location = new Point(202, 204);
+            bodyCmb.Location = new Point(661, 30);
             bodyCmb.Margin = new Padding(4);
             bodyCmb.Name = "bodyCmb";
             bodyCmb.Size = new Size(289, 23);
@@ -227,6 +237,7 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
             label1.Font = new Font("Times New Roman", 14.25F);
             label1.Location = new Point(117, 29);
             label1.Name = "label1";
@@ -238,7 +249,7 @@
             // 
             addEditBtn.BackColor = SystemColors.ControlLightLight;
             addEditBtn.Font = new Font("Times New Roman", 14.25F);
-            addEditBtn.Location = new Point(186, 496);
+            addEditBtn.Location = new Point(454, 363);
             addEditBtn.Margin = new Padding(4);
             addEditBtn.Name = "addEditBtn";
             addEditBtn.Size = new Size(152, 39);
@@ -259,7 +270,9 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(524, 562);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(1051, 519);
             Controls.Add(yearTxt);
             Controls.Add(label10);
             Controls.Add(label9);
@@ -281,6 +294,7 @@
             Controls.Add(label1);
             Controls.Add(addEditBtn);
             Controls.Add(marksCmb);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "AddEditSalesForm";
             Text = "AddEditSalesForm";
             ((System.ComponentModel.ISupportInitialize)yearTxt).EndInit();

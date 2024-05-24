@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FinancesForm));
             groupBox1 = new GroupBox();
             clrFltrBtn = new Button();
             filterCmb = new ComboBox();
@@ -45,6 +46,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.BackColor = Color.Transparent;
             groupBox1.Controls.Add(clrFltrBtn);
             groupBox1.Controls.Add(filterCmb);
             groupBox1.Font = new Font("Times New Roman", 20.25F);
@@ -93,7 +95,7 @@
             // 
             // delBtn
             // 
-            delBtn.BackColor = SystemColors.ControlLightLight;
+            delBtn.BackColor = Color.Transparent;
             delBtn.Font = new Font("Times New Roman", 14.25F);
             delBtn.Location = new Point(761, 453);
             delBtn.Margin = new Padding(4);
@@ -106,7 +108,7 @@
             // 
             // editBtn
             // 
-            editBtn.BackColor = SystemColors.ControlLightLight;
+            editBtn.BackColor = Color.Transparent;
             editBtn.Font = new Font("Times New Roman", 14.25F);
             editBtn.Location = new Point(410, 453);
             editBtn.Margin = new Padding(4);
@@ -119,7 +121,7 @@
             // 
             // addBtn
             // 
-            addBtn.BackColor = SystemColors.ControlLightLight;
+            addBtn.BackColor = Color.Transparent;
             addBtn.Font = new Font("Times New Roman", 14.25F);
             addBtn.Location = new Point(50, 453);
             addBtn.Margin = new Padding(4);
@@ -132,10 +134,11 @@
             // 
             // groupBox2
             // 
+            groupBox2.BackColor = Color.Transparent;
             groupBox2.Controls.Add(searchTxt);
             groupBox2.Controls.Add(searchBtn);
             groupBox2.Font = new Font("Times New Roman", 20.25F);
-            groupBox2.Location = new Point(1043, 208);
+            groupBox2.Location = new Point(1043, 168);
             groupBox2.Margin = new Padding(4);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(4);
@@ -169,6 +172,8 @@
             // 
             AutoScaleDimensions = new SizeF(9F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1337, 568);
             Controls.Add(groupBox2);
             Controls.Add(delBtn);
@@ -177,6 +182,7 @@
             Controls.Add(groupBox1);
             Controls.Add(financesDgv);
             Font = new Font("Times New Roman", 12F);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             Name = "FinancesForm";
             Text = "Финансы";

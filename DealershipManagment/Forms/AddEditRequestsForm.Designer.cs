@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddEditRequestsForm));
             label3 = new Label();
             label2 = new Label();
             notesTxt = new TextBox();
@@ -40,6 +41,7 @@
             // label3
             // 
             label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
             label3.Font = new Font("Times New Roman", 14.25F);
             label3.Location = new Point(70, 69);
             label3.Name = "label3";
@@ -50,6 +52,7 @@
             // label2
             // 
             label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
             label2.Font = new Font("Times New Roman", 14.25F);
             label2.Location = new Point(83, 114);
             label2.Name = "label2";
@@ -78,6 +81,7 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
             label1.Font = new Font("Times New Roman", 14.25F);
             label1.Location = new Point(117, 29);
             label1.Name = "label1";
@@ -89,7 +93,7 @@
             // 
             addEditBtn.BackColor = SystemColors.ControlLightLight;
             addEditBtn.Font = new Font("Times New Roman", 14.25F);
-            addEditBtn.Location = new Point(176, 163);
+            addEditBtn.Location = new Point(181, 308);
             addEditBtn.Margin = new Padding(4);
             addEditBtn.Name = "addEditBtn";
             addEditBtn.Size = new Size(152, 39);
@@ -111,7 +115,9 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(524, 228);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(524, 395);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(notesTxt);
@@ -119,6 +125,7 @@
             Controls.Add(label1);
             Controls.Add(addEditBtn);
             Controls.Add(carsCmb);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "AddEditRequestsForm";
             Text = "AddEditRequestsForm";
             Load += AddEditRequestsForm_Load;

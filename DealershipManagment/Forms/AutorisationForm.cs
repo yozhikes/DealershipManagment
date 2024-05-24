@@ -11,7 +11,7 @@ namespace DealershipManagment
 
         private void entryBtn_Click(object sender, EventArgs e)
         {
-            if(loginTxt.Text==string.Empty && passTxt.Text==string.Empty)
+            if (loginTxt.Text == string.Empty && passTxt.Text == string.Empty)
             {
                 MessageBox.Show("Некоторые или все поля пустые!", "Ошибка при входе", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }

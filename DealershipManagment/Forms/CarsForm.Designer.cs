@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CarsForm));
             carsDgv = new DataGridView();
             filterCmb = new ComboBox();
             groupBox1 = new GroupBox();
@@ -54,7 +55,7 @@
             carsDgv.Margin = new Padding(4);
             carsDgv.Name = "carsDgv";
             carsDgv.ReadOnly = true;
-            carsDgv.Size = new Size(954, 471);
+            carsDgv.Size = new Size(954, 511);
             carsDgv.TabIndex = 0;
             // 
             // filterCmb
@@ -68,11 +69,12 @@
             // 
             // groupBox1
             // 
+            groupBox1.BackColor = Color.Transparent;
             groupBox1.Controls.Add(applyFilterBtn);
             groupBox1.Controls.Add(clrFltrBtn);
             groupBox1.Controls.Add(filterCmb);
             groupBox1.Font = new Font("Times New Roman", 20.25F);
-            groupBox1.Location = new Point(1035, 15);
+            groupBox1.Location = new Point(1035, 13);
             groupBox1.Margin = new Padding(4);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(4);
@@ -131,9 +133,9 @@
             // 
             // addBtn
             // 
-            addBtn.BackColor = SystemColors.ControlLightLight;
+            addBtn.BackColor = Color.Transparent;
             addBtn.Font = new Font("Times New Roman", 14.25F);
-            addBtn.Location = new Point(60, 509);
+            addBtn.Location = new Point(60, 555);
             addBtn.Margin = new Padding(4);
             addBtn.Name = "addBtn";
             addBtn.Size = new Size(243, 73);
@@ -144,9 +146,9 @@
             // 
             // editBtn
             // 
-            editBtn.BackColor = SystemColors.ControlLightLight;
+            editBtn.BackColor = Color.Transparent;
             editBtn.Font = new Font("Times New Roman", 14.25F);
-            editBtn.Location = new Point(420, 509);
+            editBtn.Location = new Point(420, 555);
             editBtn.Margin = new Padding(4);
             editBtn.Name = "editBtn";
             editBtn.Size = new Size(243, 73);
@@ -157,9 +159,9 @@
             // 
             // delBtn
             // 
-            delBtn.BackColor = SystemColors.ControlLightLight;
+            delBtn.BackColor = Color.Transparent;
             delBtn.Font = new Font("Times New Roman", 14.25F);
-            delBtn.Location = new Point(771, 509);
+            delBtn.Location = new Point(771, 555);
             delBtn.Margin = new Padding(4);
             delBtn.Name = "delBtn";
             delBtn.Size = new Size(243, 73);
@@ -170,6 +172,7 @@
             // 
             // groupBox2
             // 
+            groupBox2.BackColor = Color.Transparent;
             groupBox2.Controls.Add(searchTxt);
             groupBox2.Controls.Add(searchBtn);
             groupBox2.Font = new Font("Times New Roman", 20.25F);
@@ -186,7 +189,9 @@
             // 
             AutoScaleDimensions = new SizeF(9F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1347, 608);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(1347, 641);
             Controls.Add(groupBox2);
             Controls.Add(delBtn);
             Controls.Add(editBtn);
@@ -194,6 +199,7 @@
             Controls.Add(groupBox1);
             Controls.Add(carsDgv);
             Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             Name = "CarsForm";
             Text = "Автомобили";

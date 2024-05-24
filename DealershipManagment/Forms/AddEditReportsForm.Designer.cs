@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddEditReportsForm));
             label10 = new Label();
             label9 = new Label();
             label3 = new Label();
@@ -45,8 +46,9 @@
             // label10
             // 
             label10.AutoSize = true;
+            label10.BackColor = Color.Transparent;
             label10.Font = new Font("Times New Roman", 14.25F);
-            label10.Location = new Point(107, 184);
+            label10.Location = new Point(421, 55);
             label10.Name = "label10";
             label10.Size = new Size(76, 21);
             label10.TabIndex = 51;
@@ -55,8 +57,9 @@
             // label9
             // 
             label9.AutoSize = true;
+            label9.BackColor = Color.Transparent;
             label9.Font = new Font("Times New Roman", 14.25F);
-            label9.Location = new Point(95, 12);
+            label9.Location = new Point(53, 12);
             label9.Name = "label9";
             label9.Size = new Size(90, 21);
             label9.TabIndex = 50;
@@ -65,8 +68,9 @@
             // label3
             // 
             label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
             label3.Font = new Font("Times New Roman", 14.25F);
-            label3.Location = new Point(63, 98);
+            label3.Location = new Point(21, 98);
             label3.Name = "label3";
             label3.Size = new Size(120, 21);
             label3.TabIndex = 44;
@@ -75,8 +79,9 @@
             // label2
             // 
             label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
             label2.Font = new Font("Times New Roman", 14.25F);
-            label2.Location = new Point(98, 143);
+            label2.Location = new Point(412, 14);
             label2.Name = "label2";
             label2.Size = new Size(85, 21);
             label2.TabIndex = 43;
@@ -85,17 +90,18 @@
             // workersCmb
             // 
             workersCmb.FormattingEnabled = true;
-            workersCmb.Location = new Point(204, 13);
+            workersCmb.Location = new Point(162, 13);
             workersCmb.Margin = new Padding(4);
             workersCmb.Name = "workersCmb";
-            workersCmb.Size = new Size(289, 23);
+            workersCmb.Size = new Size(238, 23);
             workersCmb.TabIndex = 35;
             // 
             // label1
             // 
             label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
             label1.Font = new Font("Times New Roman", 14.25F);
-            label1.Location = new Point(117, 55);
+            label1.Location = new Point(75, 55);
             label1.Name = "label1";
             label1.Size = new Size(66, 21);
             label1.TabIndex = 34;
@@ -105,7 +111,7 @@
             // 
             addEditBtn.BackColor = SystemColors.ControlLightLight;
             addEditBtn.Font = new Font("Times New Roman", 14.25F);
-            addEditBtn.Location = new Point(176, 237);
+            addEditBtn.Location = new Point(330, 220);
             addEditBtn.Margin = new Padding(4);
             addEditBtn.Name = "addEditBtn";
             addEditBtn.Size = new Size(152, 39);
@@ -118,26 +124,26 @@
             // 
             monthCmb.FormattingEnabled = true;
             monthCmb.Items.AddRange(new object[] { "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" });
-            monthCmb.Location = new Point(204, 53);
+            monthCmb.Location = new Point(162, 53);
             monthCmb.Margin = new Padding(4);
             monthCmb.Name = "monthCmb";
-            monthCmb.Size = new Size(289, 23);
+            monthCmb.Size = new Size(238, 23);
             monthCmb.TabIndex = 32;
             // 
             // hoursTxt
             // 
             hoursTxt.Font = new Font("Times New Roman", 14.25F);
-            hoursTxt.Location = new Point(204, 96);
+            hoursTxt.Location = new Point(162, 96);
             hoursTxt.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             hoursTxt.Name = "hoursTxt";
-            hoursTxt.Size = new Size(291, 29);
+            hoursTxt.Size = new Size(240, 29);
             hoursTxt.TabIndex = 53;
             hoursTxt.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // salaryTxt
             // 
             salaryTxt.Font = new Font("Times New Roman", 14.25F);
-            salaryTxt.Location = new Point(202, 143);
+            salaryTxt.Location = new Point(516, 14);
             salaryTxt.Margin = new Padding(4);
             salaryTxt.Name = "salaryTxt";
             salaryTxt.Size = new Size(293, 29);
@@ -146,7 +152,7 @@
             // prizeTxt
             // 
             prizeTxt.Font = new Font("Times New Roman", 14.25F);
-            prizeTxt.Location = new Point(202, 184);
+            prizeTxt.Location = new Point(516, 55);
             prizeTxt.Margin = new Padding(4);
             prizeTxt.Name = "prizeTxt";
             prizeTxt.Size = new Size(293, 29);
@@ -156,7 +162,9 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(524, 314);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(822, 314);
             Controls.Add(prizeTxt);
             Controls.Add(salaryTxt);
             Controls.Add(hoursTxt);
@@ -168,6 +176,7 @@
             Controls.Add(label1);
             Controls.Add(addEditBtn);
             Controls.Add(monthCmb);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "AddEditReportsForm";
             Text = "AddEditReportsForm";
             Load += AddEditReportsForm_Load;

@@ -42,7 +42,7 @@
             // 
             entryBtn.BackColor = SystemColors.ControlLightLight;
             entryBtn.Font = new Font("Times New Roman", 14.25F);
-            entryBtn.Location = new Point(213, 217);
+            entryBtn.Location = new Point(224, 214);
             entryBtn.Name = "entryBtn";
             entryBtn.Size = new Size(99, 41);
             entryBtn.TabIndex = 0;
@@ -53,8 +53,9 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
             label1.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(57, 78);
+            label1.Location = new Point(57, 55);
             label1.Name = "label1";
             label1.Size = new Size(65, 21);
             label1.TabIndex = 1;
@@ -63,7 +64,7 @@
             // loginTxt
             // 
             loginTxt.Font = new Font("Times New Roman", 14.25F);
-            loginTxt.Location = new Point(179, 75);
+            loginTxt.Location = new Point(179, 52);
             loginTxt.Name = "loginTxt";
             loginTxt.Size = new Size(298, 29);
             loginTxt.TabIndex = 2;
@@ -71,8 +72,9 @@
             // label2
             // 
             label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
             label2.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(57, 149);
+            label2.Location = new Point(57, 95);
             label2.Name = "label2";
             label2.Size = new Size(73, 21);
             label2.TabIndex = 3;
@@ -81,7 +83,7 @@
             // passTxt
             // 
             passTxt.Font = new Font("Times New Roman", 14.25F);
-            passTxt.Location = new Point(179, 141);
+            passTxt.Location = new Point(179, 87);
             passTxt.Name = "passTxt";
             passTxt.Size = new Size(298, 29);
             passTxt.TabIndex = 4;
@@ -91,7 +93,7 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Times New Roman", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            label3.Location = new Point(352, 9);
+            label3.Location = new Point(240, 9);
             label3.Name = "label3";
             label3.Size = new Size(71, 31);
             label3.TabIndex = 5;
@@ -100,12 +102,13 @@
             // passCheck
             // 
             passCheck.AutoSize = true;
-            passCheck.Location = new Point(358, 192);
+            passCheck.BackColor = Color.Transparent;
+            passCheck.Location = new Point(224, 122);
             passCheck.Name = "passCheck";
             passCheck.Size = new Size(119, 19);
             passCheck.TabIndex = 6;
             passCheck.Text = "Показать пароль";
-            passCheck.UseVisualStyleBackColor = true;
+            passCheck.UseVisualStyleBackColor = false;
             passCheck.CheckedChanged += passCheck_CheckedChanged;
             // 
             // AutorisationForm
@@ -123,6 +126,7 @@
             Controls.Add(label1);
             Controls.Add(entryBtn);
             DoubleBuffered = true;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "AutorisationForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Авторизация";
