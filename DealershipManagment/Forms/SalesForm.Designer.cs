@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SalesForm));
             groupBox1 = new GroupBox();
+            applyFilterBtn = new Button();
             clrFltrBtn = new Button();
             filterCmb = new ComboBox();
             salesDgv = new DataGridView();
@@ -40,7 +41,6 @@
             searchTxt = new TextBox();
             searchBtn = new Button();
             closeBtn = new Button();
-            applyFilterBtn = new Button();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)salesDgv).BeginInit();
             groupBox2.SuspendLayout();
@@ -62,6 +62,19 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Фильтрация по менеджерам";
             // 
+            // applyFilterBtn
+            // 
+            applyFilterBtn.BackColor = SystemColors.ControlLightLight;
+            applyFilterBtn.Font = new Font("Times New Roman", 14.25F);
+            applyFilterBtn.Location = new Point(62, 126);
+            applyFilterBtn.Margin = new Padding(4);
+            applyFilterBtn.Name = "applyFilterBtn";
+            applyFilterBtn.Size = new Size(152, 39);
+            applyFilterBtn.TabIndex = 10;
+            applyFilterBtn.Text = "Применить";
+            applyFilterBtn.UseVisualStyleBackColor = false;
+            applyFilterBtn.Click += applyFilterBtn_Click;
+            // 
             // clrFltrBtn
             // 
             clrFltrBtn.BackColor = SystemColors.ControlLightLight;
@@ -77,6 +90,7 @@
             // 
             // filterCmb
             // 
+            filterCmb.DropDownStyle = ComboBoxStyle.DropDownList;
             filterCmb.FormattingEnabled = true;
             filterCmb.Location = new Point(9, 79);
             filterCmb.Margin = new Padding(4);
@@ -94,6 +108,7 @@
             salesDgv.Margin = new Padding(4);
             salesDgv.Name = "salesDgv";
             salesDgv.ReadOnly = true;
+            salesDgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             salesDgv.Size = new Size(954, 438);
             salesDgv.TabIndex = 8;
             // 
@@ -185,19 +200,6 @@
             closeBtn.Text = "Назад";
             closeBtn.UseVisualStyleBackColor = false;
             closeBtn.Click += closeBtn_Click;
-            // 
-            // applyFilterBtn
-            // 
-            applyFilterBtn.BackColor = SystemColors.ControlLightLight;
-            applyFilterBtn.Font = new Font("Times New Roman", 14.25F);
-            applyFilterBtn.Location = new Point(62, 126);
-            applyFilterBtn.Margin = new Padding(4);
-            applyFilterBtn.Name = "applyFilterBtn";
-            applyFilterBtn.Size = new Size(152, 39);
-            applyFilterBtn.TabIndex = 10;
-            applyFilterBtn.Text = "Применить";
-            applyFilterBtn.UseVisualStyleBackColor = false;
-            applyFilterBtn.Click += applyFilterBtn_Click;
             // 
             // SalesForm
             // 

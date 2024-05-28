@@ -29,9 +29,10 @@ namespace DealershipManagment
             dt.Columns.Add("idWorker");
             foreach (var item in Enum.GetValues(typeof(StatusesWorkers)))
             {
-                filterCmb.Items.Add(item);
-                statusCmb.Items.Add(item);
+                filterCmb.Items.Add(item.ToString());
+                statusCmb.Items.Add(item.ToString());
             }
+            filterCmb.SelectedIndex = 0;
         }
 
         private void UpdateDgv()
@@ -82,13 +83,24 @@ namespace DealershipManagment
 
         private void statusBtn_Click(object sender, EventArgs e)
         {
-            using (DbDealershipManagmentContext db = new DbDealershipManagmentContext())
+            if (staffDgv.SelectedRows.Count == 1)
             {
-                var worker = db.Workers.FirstOrDefault(x => x.IdWorker == Guid.Parse(staffDgv[5, staffDgv.SelectedRows[0].Index].Value.ToString()));
-                worker.Status = statusCmb.SelectedIndex;
-                db.SaveChanges();
+                using (DbDealershipManagmentContext db = new DbDealershipManagmentContext())
+                {
+                    var worker = db.Workers.FirstOrDefault(x => x.IdWorker == Guid.Parse(staffDgv[5, staffDgv.SelectedRows[0].Index].Value.ToString()));
+                    worker.Status = statusCmb.SelectedIndex;
+                    db.SaveChanges();
+                }
+                UpdateDgv();
             }
-            UpdateDgv();
+            else if (staffDgv.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Выберете только одну строку!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show("Не была выбрана строка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void addBtn_Click(object sender, EventArgs e)
@@ -104,27 +116,49 @@ namespace DealershipManagment
 
         private void editBtn_Click(object sender, EventArgs e)
         {
-            AddEditWorkersForm editCar = new AddEditWorkersForm(Guid.Parse(staffDgv[5, staffDgv.SelectedRows[0].Index].Value.ToString()));
-            Hide();
-            if (editCar.ShowDialog() == DialogResult.OK)
+            if (staffDgv.SelectedRows.Count == 1)
             {
-                UpdateDgv();
+                AddEditWorkersForm editCar = new AddEditWorkersForm(Guid.Parse(staffDgv[5, staffDgv.SelectedRows[0].Index].Value.ToString()));
+                Hide();
+                if (editCar.ShowDialog() == DialogResult.OK)
+                {
+                    UpdateDgv();
+                }
+                Show();
             }
-            Show();
+            else if (staffDgv.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Выберете только одну строку!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show("Не была выбрана строка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void delBtn_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Вы действительно хотите удалить эту машину?", "Удаление",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (staffDgv.SelectedRows.Count == 1)
             {
-                using (DbDealershipManagmentContext db = new DbDealershipManagmentContext())
+                if (MessageBox.Show("Вы действительно хотите удалить эту машину?", "Удаление",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    db.Workers.Remove(db.Workers.FirstOrDefault(x => x.IdWorker == Guid.Parse(staffDgv[5,
-                    staffDgv.SelectedRows[0].Index].Value.ToString())));
-                    db.SaveChanges();
+                    using (DbDealershipManagmentContext db = new DbDealershipManagmentContext())
+                    {
+                        db.Workers.Remove(db.Workers.FirstOrDefault(x => x.IdWorker == Guid.Parse(staffDgv[5,
+                        staffDgv.SelectedRows[0].Index].Value.ToString())));
+                        db.SaveChanges();
+                    }
+                    UpdateDgv();
                 }
-                UpdateDgv();
+            }
+            else if (staffDgv.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Выберете только одну строку!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show("Не была выбрана строка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -176,6 +210,16 @@ namespace DealershipManagment
             {
                 MessageBox.Show("Пустое поле ввода!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void staffDgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            statusCmb.SelectedItem = staffDgv.Rows[staffDgv.SelectedRows[0].Index].Cells[4].Value;
+        }
+
+        private void staffDgv_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            statusCmb.SelectedItem = staffDgv.Rows[staffDgv.SelectedRows[0].Index].Cells[4].Value;
         }
     }
 }

@@ -94,6 +94,7 @@
             // 
             // filterCmb
             // 
+            filterCmb.DropDownStyle = ComboBoxStyle.DropDownList;
             filterCmb.FormattingEnabled = true;
             filterCmb.Location = new Point(27, 40);
             filterCmb.Margin = new Padding(4);
@@ -111,8 +112,11 @@
             staffDgv.Margin = new Padding(4);
             staffDgv.Name = "staffDgv";
             staffDgv.ReadOnly = true;
+            staffDgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             staffDgv.Size = new Size(954, 576);
             staffDgv.TabIndex = 8;
+            staffDgv.CellClick += staffDgv_CellClick;
+            staffDgv.CellContentClick += staffDgv_CellContentClick;
             // 
             // delBtn
             // 
@@ -233,6 +237,7 @@
             // 
             // statusCmb
             // 
+            statusCmb.DropDownStyle = ComboBoxStyle.DropDownList;
             statusCmb.FormattingEnabled = true;
             statusCmb.Location = new Point(30, 30);
             statusCmb.Margin = new Padding(4);

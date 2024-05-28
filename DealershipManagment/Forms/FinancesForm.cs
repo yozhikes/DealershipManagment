@@ -29,8 +29,9 @@ namespace DealershipManagment
             dt.Columns.Add("idFinance");
             using (DbDealershipManagmentContext db = new DbDealershipManagmentContext())
             {
-                filterCmb.DataSource = db.Reports.Select(x => x.HoursWork).ToList();
+                filterCmb.DataSource = db.Reports.Select(x => x.HoursWork).Distinct().ToList();
             }
+            filterCmb.SelectedIndex = 0;
         }
 
         private void UpdateDgv()
@@ -60,6 +61,7 @@ namespace DealershipManagment
         private void FinancesForm_Load(object sender, EventArgs e)
         {
             UpdateDgv();
+            filterCmb.SelectedIndex = 0;
             financesDgv.Columns[6].Visible = false;
             financesDgv.Sort(financesDgv.Columns[6], ListSortDirection.Ascending);
         }
@@ -71,33 +73,64 @@ namespace DealershipManagment
             if (addReport.ShowDialog() == DialogResult.OK)
             {
                 UpdateDgv();
+                using (var db = new DbDealershipManagmentContext())
+                {
+                    filterCmb.DataSource = db.Reports.Select(x => x.HoursWork).Distinct().ToList();
+                }
             }
             Show();
         }
 
         private void editBtn_Click(object sender, EventArgs e)
         {
-            AddEditReportsForm editReport = new AddEditReportsForm(Guid.Parse(financesDgv[6, financesDgv.SelectedRows[0].Index].Value.ToString()));
-            Hide();
-            if (editReport.ShowDialog() == DialogResult.OK)
+            if (financesDgv.SelectedRows.Count == 1)
             {
-                UpdateDgv();
+                AddEditReportsForm editReport = new AddEditReportsForm(Guid.Parse(financesDgv[6, financesDgv.SelectedRows[0].Index].Value.ToString()));
+                Hide();
+                if (editReport.ShowDialog() == DialogResult.OK)
+                {
+                    UpdateDgv();
+                    using (var db = new DbDealershipManagmentContext())
+                    {
+                        filterCmb.DataSource = db.Reports.Select(x => x.HoursWork).Distinct().ToList();
+                    }
+                }
+                Show();
             }
-            Show();
+            else if (financesDgv.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Выберете только одну строку!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show("Не была выбрана строка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void delBtn_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Вы действительно хотите удалить этот отчёт?", "Удаление",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (financesDgv.SelectedRows.Count == 1)
             {
-                using (var db = new DbDealershipManagmentContext())
+                if (MessageBox.Show("Вы действительно хотите удалить этот отчёт?", "Удаление",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    db.Reports.Remove(db.Reports.FirstOrDefault(x => x.IdReport == Guid.Parse(financesDgv[6,
-                    financesDgv.SelectedRows[0].Index].Value.ToString())));
-                    db.SaveChanges();
+                    using (var db = new DbDealershipManagmentContext())
+                    {
+                        db.Reports.Remove(db.Reports.FirstOrDefault(x => x.IdReport == Guid.Parse(financesDgv[6,
+                        financesDgv.SelectedRows[0].Index].Value.ToString())));
+                        db.SaveChanges();
+                        filterCmb.DataSource = db.Reports.Select(x => x.HoursWork).Distinct().ToList();
+                    }
+                    UpdateDgv();
                 }
-                UpdateDgv();
+            }
+            else if (financesDgv.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Выберете только одну строку!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show("Не была выбрана строка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

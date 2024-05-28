@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FinancesForm));
             groupBox1 = new GroupBox();
+            applyFilterBtn = new Button();
             clrFltrBtn = new Button();
             filterCmb = new ComboBox();
             financesDgv = new DataGridView();
@@ -40,7 +41,6 @@
             searchTxt = new TextBox();
             searchBtn = new Button();
             closeBtn = new Button();
-            applyFilterBtn = new Button();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)financesDgv).BeginInit();
             groupBox2.SuspendLayout();
@@ -62,6 +62,19 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Фильтрация по часам";
             // 
+            // applyFilterBtn
+            // 
+            applyFilterBtn.BackColor = SystemColors.ControlLightLight;
+            applyFilterBtn.Font = new Font("Times New Roman", 14.25F);
+            applyFilterBtn.Location = new Point(62, 89);
+            applyFilterBtn.Margin = new Padding(4);
+            applyFilterBtn.Name = "applyFilterBtn";
+            applyFilterBtn.Size = new Size(152, 39);
+            applyFilterBtn.TabIndex = 10;
+            applyFilterBtn.Text = "Применить";
+            applyFilterBtn.UseVisualStyleBackColor = false;
+            applyFilterBtn.Click += applyFilterBtn_Click;
+            // 
             // clrFltrBtn
             // 
             clrFltrBtn.BackColor = SystemColors.ControlLightLight;
@@ -77,6 +90,7 @@
             // 
             // filterCmb
             // 
+            filterCmb.DropDownStyle = ComboBoxStyle.DropDownList;
             filterCmb.FormattingEnabled = true;
             filterCmb.Location = new Point(8, 28);
             filterCmb.Margin = new Padding(4);
@@ -94,6 +108,7 @@
             financesDgv.Margin = new Padding(4);
             financesDgv.Name = "financesDgv";
             financesDgv.ReadOnly = true;
+            financesDgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             financesDgv.Size = new Size(954, 400);
             financesDgv.TabIndex = 8;
             // 
@@ -185,19 +200,6 @@
             closeBtn.Text = "Назад";
             closeBtn.UseVisualStyleBackColor = false;
             closeBtn.Click += closeBtn_Click;
-            // 
-            // applyFilterBtn
-            // 
-            applyFilterBtn.BackColor = SystemColors.ControlLightLight;
-            applyFilterBtn.Font = new Font("Times New Roman", 14.25F);
-            applyFilterBtn.Location = new Point(62, 89);
-            applyFilterBtn.Margin = new Padding(4);
-            applyFilterBtn.Name = "applyFilterBtn";
-            applyFilterBtn.Size = new Size(152, 39);
-            applyFilterBtn.TabIndex = 10;
-            applyFilterBtn.Text = "Применить";
-            applyFilterBtn.UseVisualStyleBackColor = false;
-            applyFilterBtn.Click += applyFilterBtn_Click;
             // 
             // FinancesForm
             // 

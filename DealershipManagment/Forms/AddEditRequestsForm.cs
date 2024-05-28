@@ -18,6 +18,7 @@ namespace DealershipManagment
     {
         DbDealershipManagmentContext db = new DbDealershipManagmentContext();
         Guid requestId = Guid.Empty;
+        List<Car> cars = null;
         public AddEditRequestsForm()
         {
             InitializeComponent();
@@ -40,29 +41,58 @@ namespace DealershipManagment
             {
                 req = db.Requests.Include(x => x.Car).FirstOrDefault(x => x.IdRequest == requestId);
             }
-            req.CarId = db.Cars.FirstOrDefault(x => x.Model == carsCmb.Text).IdCar;
-            req.Notes = notesTxt.Text;
-            req.Price = decimal.Parse(priceTxt.Text);
-            if (addEditBtn.Text == "Добавить")
+            if (priceTxt.Text != string.Empty)
             {
-                req.IdRequest = Guid.NewGuid();
-                req.StatusZayavki = 0;
-                db.Requests.Add(req);
+                if(decimal.TryParse(priceTxt.Text, out decimal d))
+                {
+                    req.Price = decimal.Parse(priceTxt.Text);
+                    req.CarId = db.Cars.FirstOrDefault(x => x.IdCar == cars[carsCmb.SelectedIndex].IdCar).IdCar;
+                    req.Notes = notesTxt.Text;
+                    if (addEditBtn.Text == "Добавить")
+                    {
+                        req.IdRequest = Guid.NewGuid();
+                        req.StatusZayavki = 0;
+                        db.Requests.Add(req);
+                    }
+                    DialogResult = DialogResult.OK;
+                    db.SaveChanges();
+                    MessageBox.Show("Данные внесены", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Неверные данные!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
-            DialogResult = DialogResult.OK;
-            db.SaveChanges();
-            MessageBox.Show("Данные внесены", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+            {
+                req.CarId = db.Cars.FirstOrDefault(x => x.IdCar == cars[carsCmb.SelectedIndex].IdCar).IdCar;
+                req.Notes = notesTxt.Text;
+                if (addEditBtn.Text == "Добавить")
+                {
+                    req.IdRequest = Guid.NewGuid();
+                    req.StatusZayavki = 0;
+                    db.Requests.Add(req);
+                }
+                DialogResult = DialogResult.OK;
+                db.SaveChanges();
+                MessageBox.Show("Данные внесены", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            
         }
 
         private void AddEditRequestsForm_Load(object sender, EventArgs e)
         {
+            cars = db.Cars.Include(x => x.Mark).ToList();
             carsCmb.Items.Clear();
-            carsCmb.DataSource = db.Cars.Include(x => x.Mark).Select(x => x.Model).ToList();
+            foreach (var item in db.Cars.Include(x => x.Mark).ToList())
+            {
+                carsCmb.Items.Add($"{item.Mark.NameMark} {item.Model}");
+            }
             carsCmb.SelectedIndex = 0;
             if (Text == "Изменить")
             {
                 var req = db.Requests.Include(x => x.Car).FirstOrDefault(x => x.IdRequest == requestId);
-                carsCmb.SelectedItem = req.Car.Model;
+                carsCmb.SelectedIndex = cars.IndexOf(db.Cars.FirstOrDefault(x => x.IdCar == req.CarId));
                 notesTxt.Text = req.Notes;
                 priceTxt.Text = req.Price.ToString();
             }

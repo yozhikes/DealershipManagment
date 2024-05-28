@@ -44,7 +44,6 @@ namespace DealershipManagment
                 passTxt.Text = worker.Pass;
                 telnumTxt.Text = worker.TelNum;
                 loginTxt.Text = worker.Login;
-                passwordTxt.Text = worker.Password;
                 roleCmb.SelectedItem = worker.Role.NameRole;
             }
         }
@@ -77,26 +76,41 @@ namespace DealershipManagment
             {
                 worker = db.Workers.Include(x => x.Role).FirstOrDefault(x => x.IdWorker == workerId);
             }
-            worker.Fio = fioTxt.Text;
-            worker.Pass = passTxt.Text;
-            worker.TelNum = telnumTxt.Text;
-            worker.Login = loginTxt.Text;
-            worker.Password = HashWithSHA256(passwordTxt.Text);
-            worker.RoleId = db.Roles.FirstOrDefault(x => x.NameRole == roleCmb.SelectedItem).IdRole;
-            if (addEditBtn.Text == "Добавить")
+            if (fioTxt.Text != string.Empty && passTxt.Text != string.Empty && telnumTxt.Text.Length == 17
+                && passwordTxt.Text != string.Empty && passTxt.Text.Length == 10)
             {
-                worker.IdWorker = Guid.NewGuid();
-                worker.Status = 0;
-                db.Workers.Add(worker);
+                worker.Fio = fioTxt.Text;
+                worker.Pass = passTxt.Text;
+                worker.TelNum = telnumTxt.Text;
+                worker.Login = loginTxt.Text;
+                worker.Password = HashWithSHA256(passwordTxt.Text);
+                worker.RoleId = db.Roles.FirstOrDefault(x => x.NameRole == roleCmb.SelectedItem).IdRole;
+                if (addEditBtn.Text == "Добавить")
+                {
+                    worker.IdWorker = Guid.NewGuid();
+                    worker.Status = 0;
+                    db.Workers.Add(worker);
+                }
+                DialogResult = DialogResult.OK;
+                db.SaveChanges();
+                MessageBox.Show("Данные внесены", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            DialogResult = DialogResult.OK;
-            db.SaveChanges();
-            MessageBox.Show("Данные внесены", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+            {
+                MessageBox.Show("Неверные данные!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void closeBtn_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void passTxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar)) return;
+            else
+                e.Handled = true;
         }
     }
 }

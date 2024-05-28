@@ -68,20 +68,27 @@ namespace DealershipManagment
             {
                 report = db.Reports.Include(x => x.Worker).FirstOrDefault(x => x.IdReport == reportId);
             }
-            report.Salary = decimal.Parse(salaryTxt.Text);
-            report.HoursWork = int.Parse(hoursTxt.Value.ToString());
-            report.MonthReport = monthCmb.Text;
-            report.Prize = int.Parse(prizeTxt.Text);
-            report.WorkerId = db.Workers.FirstOrDefault(x => x.Fio == workersCmb.Text).IdWorker;
-            report.DateReport = DateTime.Now;
-            if (addEditBtn.Text == "Добавить")
+            if (decimal.TryParse(salaryTxt.Text,out decimal d)&& decimal.TryParse(prizeTxt.Text, out decimal f))
             {
-                report.IdReport = Guid.NewGuid();
-                db.Reports.Add(report);
+                report.Salary = decimal.Parse(salaryTxt.Text);
+                report.HoursWork = int.Parse(hoursTxt.Value.ToString());
+                report.MonthReport = monthCmb.Text;
+                report.Prize = decimal.Parse(prizeTxt.Text);
+                report.WorkerId = db.Workers.FirstOrDefault(x => x.Fio == workersCmb.Text).IdWorker;
+                report.DateReport = DateTime.Now;
+                if (addEditBtn.Text == "Добавить")
+                {
+                    report.IdReport = Guid.NewGuid();
+                    db.Reports.Add(report);
+                }
+                DialogResult = DialogResult.OK;
+                db.SaveChanges();
+                MessageBox.Show("Данные внесены", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            DialogResult = DialogResult.OK;
-            db.SaveChanges();
-            MessageBox.Show("Данные внесены", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+            {
+                MessageBox.Show("Неверные данные!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void closeBtn_Click(object sender, EventArgs e)

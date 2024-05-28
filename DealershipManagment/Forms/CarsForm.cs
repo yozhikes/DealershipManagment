@@ -33,14 +33,16 @@ namespace DealershipManagment
             dt.Columns.Add("Примечания");
             dt.Columns.Add("Статус");
             dt.Columns.Add("idCar");
+            foreach (var item in Enum.GetValues(typeof(Statuses)))
+            {
+                statusCmb.Items.Add(item.ToString());
+            }
+            statusCmb.SelectedIndex = 0;
             using (DbDealershipManagmentContext db = new DbDealershipManagmentContext())
             {
                 filterCmb.DataSource = db.Marks.Select(x => x.NameMark).ToList();
             }
-            foreach (var item in Enum.GetValues(typeof(Statuses)))
-            {
-                statusCmb.Items.Add(item);
-            }
+            filterCmb.SelectedIndex = 0;
         }
 
         private void searchBtn_Click(object sender, EventArgs e)
@@ -219,34 +221,66 @@ namespace DealershipManagment
             if (addCar.ShowDialog() == DialogResult.OK)
             {
                 UpdateDgv();
+                using (DbDealershipManagmentContext db = new DbDealershipManagmentContext())
+                {
+                    filterCmb.DataSource = db.Marks.Select(x => x.NameMark).ToList();
+                }
             }
             Show();
         }
 
         private void editBtn_Click(object sender, EventArgs e)
         {
-            AddEditCarsForm editCar = new AddEditCarsForm(Guid.Parse(carsDgv[11, carsDgv.SelectedRows[0].Index].Value.ToString()));
-            Hide();
-            if (editCar.ShowDialog() == DialogResult.OK)
+            if (carsDgv.SelectedRows.Count == 1)
             {
-                UpdateDgv();
+                AddEditCarsForm editCar = new AddEditCarsForm(Guid.Parse(carsDgv[11, carsDgv.SelectedRows[0].Index].Value.ToString()));
+                Hide();
+                if (editCar.ShowDialog() == DialogResult.OK)
+                {
+                    UpdateDgv();
+                    using (DbDealershipManagmentContext db = new DbDealershipManagmentContext())
+                    {
+                        filterCmb.DataSource = db.Marks.Select(x => x.NameMark).ToList();
+                    }
+                }
+                Show();
             }
-            Show();
+            else if (carsDgv.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Выберете только одну строку!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show("Не была выбрана строка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void delBtn_Click(object sender, EventArgs e)
         {
-            using(DbDealershipManagmentContext db = new DbDealershipManagmentContext())
+            if (carsDgv.SelectedRows.Count == 1)
             {
-                if (MessageBox.Show("Вы действительно хотите удалить эту машину?", "Удаление",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                using (DbDealershipManagmentContext db = new DbDealershipManagmentContext())
                 {
-                    db.Cars.Remove(db.Cars.FirstOrDefault(x => x.IdCar == Guid.Parse(carsDgv[11,
-                        carsDgv.SelectedRows[0].Index].Value.ToString())));
-                    db.SaveChanges();
-                    UpdateDgv();
+                    if (MessageBox.Show("Вы действительно хотите удалить эту машину?", "Удаление",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        db.Cars.Remove(db.Cars.FirstOrDefault(x => x.IdCar == Guid.Parse(carsDgv[11,
+                            carsDgv.SelectedRows[0].Index].Value.ToString())));
+                        db.SaveChanges();
+                        UpdateDgv();
+                        filterCmb.DataSource = db.Marks.Select(x => x.NameMark).ToList();
+                    }
                 }
             }
+            else if (carsDgv.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Выберете только одну строку!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show("Не была выбрана строка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
         }
 
         private void closeBtn_Click(object sender, EventArgs e)
@@ -256,13 +290,34 @@ namespace DealershipManagment
 
         private void statusBtn_Click(object sender, EventArgs e)
         {
-            using (var db = new DbDealershipManagmentContext())
+            if (carsDgv.SelectedRows.Count == 1)
             {
-                var car = db.Cars.FirstOrDefault(x => x.IdCar == Guid.Parse(carsDgv[11, carsDgv.SelectedRows[0].Index].Value.ToString()));
-                car.Status = statusCmb.SelectedIndex;
-                db.SaveChanges();
-                UpdateDgv();
+                using (var db = new DbDealershipManagmentContext())
+                {
+                    var car = db.Cars.FirstOrDefault(x => x.IdCar == Guid.Parse(carsDgv[11, carsDgv.SelectedRows[0].Index].Value.ToString()));
+                    car.Status = statusCmb.SelectedIndex;
+                    db.SaveChanges();
+                    UpdateDgv();
+                }
             }
+            else if (carsDgv.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Выберете только одну строку!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show("Не была выбрана строка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void carsDgv_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            statusCmb.SelectedItem = carsDgv.Rows[carsDgv.SelectedRows[0].Index].Cells[10].Value;
+        }
+
+        private void carsDgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            statusCmb.SelectedItem = carsDgv.Rows[carsDgv.SelectedRows[0].Index].Cells[10].Value;
         }
     }
 }

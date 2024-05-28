@@ -94,6 +94,7 @@
             // 
             // filterCmb
             // 
+            filterCmb.DropDownStyle = ComboBoxStyle.DropDownList;
             filterCmb.FormattingEnabled = true;
             filterCmb.Location = new Point(8, 37);
             filterCmb.Margin = new Padding(4);
@@ -111,8 +112,11 @@
             serviceDgv.Margin = new Padding(4);
             serviceDgv.Name = "serviceDgv";
             serviceDgv.ReadOnly = true;
+            serviceDgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             serviceDgv.Size = new Size(954, 537);
             serviceDgv.TabIndex = 8;
+            serviceDgv.CellClick += serviceDgv_CellClick;
+            serviceDgv.CellContentClick += serviceDgv_CellContentClick;
             // 
             // delBtn
             // 
@@ -233,6 +237,7 @@
             // 
             // statusCmb
             // 
+            statusCmb.DropDownStyle = ComboBoxStyle.DropDownList;
             statusCmb.FormattingEnabled = true;
             statusCmb.Location = new Point(10, 28);
             statusCmb.Margin = new Padding(4);

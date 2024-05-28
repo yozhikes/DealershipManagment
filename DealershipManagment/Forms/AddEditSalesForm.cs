@@ -44,20 +44,27 @@ namespace DealershipManagment
             {
                 sale = db.Sales.FirstOrDefault(x=>x.IdSale== saleId);
             }
-            sale.CarId = db.Cars.FirstOrDefault(x => x.IdCar == cars[carsCmb.SelectedIndex].IdCar).IdCar;
-            sale.Total = decimal.Parse(priceTxt.Text);
-            sale.ClientId = db.Clients.FirstOrDefault(x => x.Fio == clientCmb.SelectedItem).IdClient;
-            sale.WorkerId = db.Workers.FirstOrDefault(x => x.Fio == workerCmb.SelectedItem).IdWorker;
-            sale.Notes = notesTxt.Text;
-            if (addEditBtn.Text == "Добавить")
+            if (decimal.TryParse(priceTxt.Text,out decimal d))
             {
-                sale.IdSale=Guid.NewGuid();
-                sale.DateSale = DateTime.Now;
-                db.Sales.Add(sale);
+                sale.CarId = db.Cars.FirstOrDefault(x => x.IdCar == cars[carsCmb.SelectedIndex].IdCar).IdCar;
+                sale.Total = decimal.Parse(priceTxt.Text);
+                sale.ClientId = db.Clients.FirstOrDefault(x => x.Fio == clientCmb.SelectedItem).IdClient;
+                sale.WorkerId = db.Workers.FirstOrDefault(x => x.Fio == workerCmb.SelectedItem).IdWorker;
+                sale.Notes = notesTxt.Text;
+                if (addEditBtn.Text == "Добавить")
+                {
+                    sale.IdSale = Guid.NewGuid();
+                    sale.DateSale = DateTime.Now;
+                    db.Sales.Add(sale);
+                }
+                DialogResult = DialogResult.OK;
+                db.SaveChanges();
+                MessageBox.Show("Данные внесены", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            DialogResult = DialogResult.OK;
-            db.SaveChanges();
-            MessageBox.Show("Данные внесены", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+            {
+                MessageBox.Show("Неверные данные!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void AddEditSalesForm_Load(object sender, EventArgs e)

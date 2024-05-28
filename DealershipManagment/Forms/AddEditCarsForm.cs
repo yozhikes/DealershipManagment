@@ -78,25 +78,32 @@ namespace DealershipManagment
 
         private void addEditBtn_Click(object sender, EventArgs e)
         {
-            car.MarkId = db.Marks.FirstOrDefault(x => x.NameMark == marksCmb.Text).IdMark;
-            car.Model = modelTxt.Text;
-            car.Drive = driveCmb.SelectedIndex;
-            car.Transmission = transmissionCmb.SelectedIndex;
-            car.BodyType = bodyCmb.SelectedIndex;
-            car.EngineType = engineCmb.SelectedIndex;
-            car.ReleaseYear = int.Parse(yearTxt.Text);
-            car.Vin = vinTxt.Text;
-            car.Price = decimal.Parse(priceTxt.Text);
-            car.Notes = notesTxt.Text;
-            if (addEditBtn.Text == "Добавить")
+            if (modelTxt.Text!=string.Empty && vinTxt.Text != string.Empty && decimal.TryParse(priceTxt.Text, out decimal d))
             {
-                car.IdCar = Guid.NewGuid();
-                car.Status = 0;
-                db.Cars.Add(car);
+                car.MarkId = db.Marks.FirstOrDefault(x => x.NameMark == marksCmb.Text).IdMark;
+                car.Model = modelTxt.Text;
+                car.Drive = driveCmb.SelectedIndex;
+                car.Transmission = transmissionCmb.SelectedIndex;
+                car.BodyType = bodyCmb.SelectedIndex;
+                car.EngineType = engineCmb.SelectedIndex;
+                car.ReleaseYear = int.Parse(yearTxt.Text);
+                car.Vin = vinTxt.Text;
+                car.Price = decimal.Parse(priceTxt.Text);
+                car.Notes = notesTxt.Text;
+                if (addEditBtn.Text == "Добавить")
+                {
+                    car.IdCar = Guid.NewGuid();
+                    car.Status = 0;
+                    db.Cars.Add(car);
+                }
+                db.SaveChanges();
+                MessageBox.Show("Данные внесены", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult = DialogResult.OK;
             }
-            db.SaveChanges();
-            MessageBox.Show("Данные внесены", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            DialogResult = DialogResult.OK;
+            else
+            {
+                MessageBox.Show("Неверные данные!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void closeBtn_Click(object sender, EventArgs e)

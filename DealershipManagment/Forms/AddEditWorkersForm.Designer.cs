@@ -35,7 +35,6 @@
             label3 = new Label();
             label2 = new Label();
             passTxt = new TextBox();
-            telnumTxt = new TextBox();
             passwordTxt = new TextBox();
             loginTxt = new TextBox();
             roleCmb = new ComboBox();
@@ -43,6 +42,7 @@
             addEditBtn = new Button();
             fioTxt = new TextBox();
             closeBtn = new Button();
+            telnumTxt = new MaskedTextBox();
             SuspendLayout();
             // 
             // label10
@@ -109,17 +109,9 @@
             passTxt.Location = new Point(168, 67);
             passTxt.Margin = new Padding(4);
             passTxt.Name = "passTxt";
-            passTxt.Size = new Size(287, 29);
+            passTxt.Size = new Size(291, 29);
             passTxt.TabIndex = 42;
-            // 
-            // telnumTxt
-            // 
-            telnumTxt.Font = new Font("Times New Roman", 14.25F);
-            telnumTxt.Location = new Point(168, 112);
-            telnumTxt.Margin = new Padding(4);
-            telnumTxt.Name = "telnumTxt";
-            telnumTxt.Size = new Size(291, 29);
-            telnumTxt.TabIndex = 41;
+            passTxt.KeyPress += passTxt_KeyPress;
             // 
             // passwordTxt
             // 
@@ -195,6 +187,14 @@
             closeBtn.UseVisualStyleBackColor = false;
             closeBtn.Click += closeBtn_Click;
             // 
+            // telnumTxt
+            // 
+            telnumTxt.Location = new Point(168, 115);
+            telnumTxt.Mask = "+7 (999) 000-0000";
+            telnumTxt.Name = "telnumTxt";
+            telnumTxt.Size = new Size(291, 23);
+            telnumTxt.TabIndex = 54;
+            // 
             // AddEditWorkersForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -202,6 +202,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(908, 350);
+            Controls.Add(telnumTxt);
             Controls.Add(closeBtn);
             Controls.Add(fioTxt);
             Controls.Add(label10);
@@ -210,7 +211,6 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(passTxt);
-            Controls.Add(telnumTxt);
             Controls.Add(passwordTxt);
             Controls.Add(loginTxt);
             Controls.Add(roleCmb);
@@ -231,7 +231,6 @@
         private Label label3;
         private Label label2;
         private TextBox passTxt;
-        private TextBox telnumTxt;
         private TextBox passwordTxt;
         private TextBox loginTxt;
         private ComboBox roleCmb;
@@ -239,5 +238,6 @@
         private Button addEditBtn;
         private TextBox fioTxt;
         private Button closeBtn;
+        private MaskedTextBox telnumTxt;
     }
 }

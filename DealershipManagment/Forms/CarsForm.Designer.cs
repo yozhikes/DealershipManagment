@@ -42,8 +42,8 @@
             groupBox2 = new GroupBox();
             closeBtn = new Button();
             groupBox3 = new GroupBox();
-            statusCmb = new ComboBox();
             statusBtn = new Button();
+            statusCmb = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)carsDgv).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -60,11 +60,15 @@
             carsDgv.Margin = new Padding(4);
             carsDgv.Name = "carsDgv";
             carsDgv.ReadOnly = true;
+            carsDgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             carsDgv.Size = new Size(954, 586);
             carsDgv.TabIndex = 0;
+            carsDgv.CellClick += carsDgv_CellClick;
+            carsDgv.CellContentClick += carsDgv_CellContentClick;
             // 
             // filterCmb
             // 
+            filterCmb.DropDownStyle = ComboBoxStyle.DropDownList;
             filterCmb.FormattingEnabled = true;
             filterCmb.Location = new Point(8, 49);
             filterCmb.Margin = new Padding(4);
@@ -218,15 +222,6 @@
             groupBox3.TabStop = false;
             groupBox3.Text = "Статус";
             // 
-            // statusCmb
-            // 
-            statusCmb.FormattingEnabled = true;
-            statusCmb.Location = new Point(10, 28);
-            statusCmb.Margin = new Padding(4);
-            statusCmb.Name = "statusCmb";
-            statusCmb.Size = new Size(289, 39);
-            statusCmb.TabIndex = 8;
-            // 
             // statusBtn
             // 
             statusBtn.BackColor = SystemColors.ControlLightLight;
@@ -239,6 +234,16 @@
             statusBtn.Text = "Применить";
             statusBtn.UseVisualStyleBackColor = false;
             statusBtn.Click += statusBtn_Click;
+            // 
+            // statusCmb
+            // 
+            statusCmb.DropDownStyle = ComboBoxStyle.DropDownList;
+            statusCmb.FormattingEnabled = true;
+            statusCmb.Location = new Point(10, 28);
+            statusCmb.Margin = new Padding(4);
+            statusCmb.Name = "statusCmb";
+            statusCmb.Size = new Size(289, 39);
+            statusCmb.TabIndex = 8;
             // 
             // CarsForm
             // 

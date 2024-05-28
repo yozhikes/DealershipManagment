@@ -29,9 +29,11 @@ namespace DealershipManagment
             dt.Columns.Add("idService");
             foreach (var item in Enum.GetValues(typeof(StatusesRequest)))
             {
-                filterCmb.Items.Add(item);
-                statusCmb.Items.Add(item);
+                filterCmb.Items.Add(item.ToString());
+                statusCmb.Items.Add(item.ToString());
             }
+            filterCmb.SelectedIndex = 0;
+            statusCmb.SelectedIndex = 0;
         }
 
         private void UpdateDgv()
@@ -90,27 +92,49 @@ namespace DealershipManagment
 
         private void editBtn_Click(object sender, EventArgs e)
         {
-            AddEditRequestsForm editRequest = new AddEditRequestsForm(Guid.Parse(serviceDgv[6, serviceDgv.SelectedRows[0].Index].Value.ToString()));
-            Hide();
-            if (editRequest.ShowDialog() == DialogResult.OK)
+            if (serviceDgv.SelectedRows.Count == 1)
             {
-                UpdateDgv();
+                AddEditRequestsForm editRequest = new AddEditRequestsForm(Guid.Parse(serviceDgv[6, serviceDgv.SelectedRows[0].Index].Value.ToString()));
+                Hide();
+                if (editRequest.ShowDialog() == DialogResult.OK)
+                {
+                    UpdateDgv();
+                }
+                Show();
             }
-            Show();
+            else if (serviceDgv.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Выберете только одну строку!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show("Не была выбрана строка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void delBtn_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Вы действительно хотите удалить этот запрос?", "Удаление",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (serviceDgv.SelectedRows.Count == 1)
             {
-                using (var db = new DbDealershipManagmentContext())
+                if (MessageBox.Show("Вы действительно хотите удалить этот запрос?", "Удаление",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    db.Requests.Remove(db.Requests.FirstOrDefault(x => x.IdRequest == Guid.Parse(serviceDgv[6,
-                    serviceDgv.SelectedRows[0].Index].Value.ToString())));
-                    db.SaveChanges();
+                    using (var db = new DbDealershipManagmentContext())
+                    {
+                        db.Requests.Remove(db.Requests.FirstOrDefault(x => x.IdRequest == Guid.Parse(serviceDgv[6,
+                        serviceDgv.SelectedRows[0].Index].Value.ToString())));
+                        db.SaveChanges();
+                    }
+                    UpdateDgv();
                 }
-                UpdateDgv();
+            }
+            else if (serviceDgv.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Выберете только одну строку!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show("Не была выбрана строка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -121,23 +145,35 @@ namespace DealershipManagment
 
         private void statusBtn_Click(object sender, EventArgs e)
         {
-            using (var db = new DbDealershipManagmentContext())
+            if (serviceDgv.SelectedRows.Count == 1)
             {
-                var service = db.Requests.FirstOrDefault(x => x.IdRequest ==
-            Guid.Parse(serviceDgv[6, serviceDgv.SelectedRows[0].Index].Value.ToString()));
-                service.StatusZayavki = statusCmb.SelectedIndex;
-                switch (statusCmb.SelectedIndex)
+                using (var db = new DbDealershipManagmentContext())
                 {
-                    case 1:
-                        service.DateStartRepair = DateTime.Now;
-                        break;
-                    case 2:
-                        service.DateEndRepair = DateTime.Now;
-                        break;
+                    var service = db.Requests.FirstOrDefault(x => x.IdRequest ==
+                Guid.Parse(serviceDgv[6, serviceDgv.SelectedRows[0].Index].Value.ToString()));
+                    service.StatusZayavki = statusCmb.SelectedIndex;
+                    switch (statusCmb.SelectedIndex)
+                    {
+                        case 1:
+                            service.DateStartRepair = DateTime.Now;
+                            break;
+                        case 2:
+                            service.DateEndRepair = DateTime.Now;
+                            break;
+                    }
+                    db.SaveChanges();
                 }
-                db.SaveChanges();
+                UpdateDgv();
             }
-            UpdateDgv();
+            else if (serviceDgv.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Выберете только одну строку!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show("Не была выбрана строка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
         }
 
         private void clrFltrBtn_Click(object sender, EventArgs e)
@@ -188,6 +224,16 @@ namespace DealershipManagment
             {
                 MessageBox.Show("Пустое поле ввода!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void serviceDgv_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            statusCmb.SelectedItem = serviceDgv.Rows[serviceDgv.SelectedRows[0].Index].Cells[1].Value;
+        }
+
+        private void serviceDgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            statusCmb.SelectedItem = serviceDgv.Rows[serviceDgv.SelectedRows[0].Index].Cells[1].Value;
         }
     }
 }

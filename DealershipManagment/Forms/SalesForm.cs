@@ -28,8 +28,9 @@ namespace DealershipManagment
             dt.Columns.Add("idSale");
             using (DbDealershipManagmentContext db = new DbDealershipManagmentContext())
             {
-                filterCmb.DataSource = db.Sales.Include(x=>x.Worker).Select(x => x.Worker.Fio).Distinct().ToList();
+                filterCmb.DataSource = db.Sales.Include(x => x.Worker).Select(x => x.Worker.Fio).Distinct().ToList();
             }
+            filterCmb.SelectedIndex = 0;
         }
 
         private void UpdateDgv()
@@ -62,6 +63,7 @@ namespace DealershipManagment
         private void SalesForm_Load(object sender, EventArgs e)
         {
             UpdateDgv();
+            filterCmb.SelectedIndex = 0;
             salesDgv.Columns[6].Visible = false;
             salesDgv.Sort(salesDgv.Columns[6], ListSortDirection.Ascending);
         }
@@ -78,34 +80,67 @@ namespace DealershipManagment
             if (addSale.ShowDialog() == DialogResult.OK)
             {
                 UpdateDgv();
+                using (var db = new DbDealershipManagmentContext())
+                {
+                    filterCmb.DataSource = db.Sales.Include(x=>x.Worker).Select(x => x.Worker.Fio).Distinct().ToList();
+                }
             }
             Show();
         }
 
         private void editBtn_Click(object sender, EventArgs e)
         {
-            AddEditSalesForm editSale = new AddEditSalesForm(Guid.Parse(salesDgv[6, salesDgv.SelectedRows[0].Index].Value.ToString()));
-            Hide();
-            if (editSale.ShowDialog() == DialogResult.OK)
+            if (salesDgv.SelectedRows.Count == 1)
             {
-                UpdateDgv();
+                AddEditSalesForm editSale = new AddEditSalesForm(Guid.Parse(salesDgv[6, salesDgv.SelectedRows[0].Index].Value.ToString()));
+                Hide();
+                if (editSale.ShowDialog() == DialogResult.OK)
+                {
+                    UpdateDgv();
+                    using (var db = new DbDealershipManagmentContext())
+                    {
+                        filterCmb.DataSource = db.Sales.Include(x => x.Worker).Select(x => x.Worker.Fio).Distinct().ToList();
+                    }
+                }
+                Show();
             }
-            Show();
+            else if (salesDgv.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Выберете только одну строку!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show("Не была выбрана строка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
 
         private void delBtn_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Вы действительно хотите удалить эту машину?", "Удаление",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (salesDgv.SelectedRows.Count == 1)
             {
-                using (var db = new DbDealershipManagmentContext())
+                if (MessageBox.Show("Вы действительно хотите удалить эту машину?", "Удаление",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    db.Sales.Remove(db.Sales.FirstOrDefault(x => x.IdSale == Guid.Parse(salesDgv[6,
-                    salesDgv.SelectedRows[0].Index].Value.ToString())));
-                    db.SaveChanges();
+                    using (var db = new DbDealershipManagmentContext())
+                    {
+                        db.Sales.Remove(db.Sales.FirstOrDefault(x => x.IdSale == Guid.Parse(salesDgv[6,
+                        salesDgv.SelectedRows[0].Index].Value.ToString())));
+                        db.SaveChanges();
+                        filterCmb.DataSource = db.Sales.Include(x => x.Worker).Select(x => x.Worker.Fio).Distinct().ToList();
+                    }
+                    UpdateDgv();
                 }
-                UpdateDgv();
             }
+            else if (salesDgv.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Выберете только одну строку!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show("Не была выбрана строка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
 
         private void clrFltrBtn_Click(object sender, EventArgs e)
