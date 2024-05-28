@@ -42,6 +42,7 @@
             label1 = new Label();
             addEditBtn = new Button();
             fioTxt = new TextBox();
+            closeBtn = new Button();
             SuspendLayout();
             // 
             // label10
@@ -140,6 +141,7 @@
             // 
             // roleCmb
             // 
+            roleCmb.DropDownStyle = ComboBoxStyle.DropDownList;
             roleCmb.FormattingEnabled = true;
             roleCmb.Location = new Point(576, 24);
             roleCmb.Margin = new Padding(4);
@@ -180,6 +182,19 @@
             fioTxt.Size = new Size(291, 29);
             fioTxt.TabIndex = 52;
             // 
+            // closeBtn
+            // 
+            closeBtn.BackColor = SystemColors.ControlLightLight;
+            closeBtn.Font = new Font("Times New Roman", 14.25F);
+            closeBtn.Location = new Point(378, 289);
+            closeBtn.Margin = new Padding(4);
+            closeBtn.Name = "closeBtn";
+            closeBtn.Size = new Size(152, 39);
+            closeBtn.TabIndex = 53;
+            closeBtn.Text = "Отмена";
+            closeBtn.UseVisualStyleBackColor = false;
+            closeBtn.Click += closeBtn_Click;
+            // 
             // AddEditWorkersForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -187,6 +202,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(908, 350);
+            Controls.Add(closeBtn);
             Controls.Add(fioTxt);
             Controls.Add(label10);
             Controls.Add(label8);
@@ -222,5 +238,6 @@
         private Label label1;
         private Button addEditBtn;
         private TextBox fioTxt;
+        private Button closeBtn;
     }
 }

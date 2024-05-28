@@ -29,103 +29,39 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddEditSalesForm));
-            yearTxt = new NumericUpDown();
-            label10 = new Label();
-            label9 = new Label();
             label8 = new Label();
-            label7 = new Label();
-            label6 = new Label();
             label5 = new Label();
             label4 = new Label();
-            label3 = new Label();
             label2 = new Label();
-            modelTxt = new TextBox();
             notesTxt = new TextBox();
             priceTxt = new TextBox();
-            vinTxt = new TextBox();
-            driveCmb = new ComboBox();
-            transmissionCmb = new ComboBox();
-            engineCmb = new ComboBox();
-            bodyCmb = new ComboBox();
+            workerCmb = new ComboBox();
+            clientCmb = new ComboBox();
             label1 = new Label();
             addEditBtn = new Button();
-            marksCmb = new ComboBox();
-            ((System.ComponentModel.ISupportInitialize)yearTxt).BeginInit();
+            carsCmb = new ComboBox();
+            closeBtn = new Button();
             SuspendLayout();
-            // 
-            // yearTxt
-            // 
-            yearTxt.Font = new Font("Times New Roman", 14.25F);
-            yearTxt.Location = new Point(661, 128);
-            yearTxt.Maximum = new decimal(new int[] { 2100, 0, 0, 0 });
-            yearTxt.Name = "yearTxt";
-            yearTxt.Size = new Size(291, 29);
-            yearTxt.TabIndex = 52;
-            yearTxt.Value = new decimal(new int[] { 2000, 0, 0, 0 });
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.BackColor = Color.Transparent;
-            label10.Font = new Font("Times New Roman", 14.25F);
-            label10.Location = new Point(31, 159);
-            label10.Name = "label10";
-            label10.Size = new Size(151, 21);
-            label10.TabIndex = 51;
-            label10.Text = "Коробка передач:";
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.BackColor = Color.Transparent;
-            label9.Font = new Font("Times New Roman", 14.25F);
-            label9.Location = new Point(537, 29);
-            label9.Name = "label9";
-            label9.Size = new Size(104, 21);
-            label9.TabIndex = 50;
-            label9.Text = "Тип кузова:";
             // 
             // label8
             // 
             label8.AutoSize = true;
             label8.BackColor = Color.Transparent;
-            label8.Font = new Font("Times New Roman", 14.25F);
-            label8.Location = new Point(526, 76);
+            label8.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold);
+            label8.Location = new Point(59, 114);
             label8.Name = "label8";
-            label8.Size = new Size(115, 21);
+            label8.Size = new Size(80, 22);
             label8.TabIndex = 49;
-            label8.Text = "Тип топлива:";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.BackColor = Color.Transparent;
-            label7.Font = new Font("Times New Roman", 14.25F);
-            label7.Location = new Point(526, 128);
-            label7.Name = "label7";
-            label7.Size = new Size(114, 21);
-            label7.TabIndex = 48;
-            label7.Text = "Год выпуска:";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.BackColor = Color.Transparent;
-            label6.Font = new Font("Times New Roman", 14.25F);
-            label6.Location = new Point(592, 176);
-            label6.Name = "label6";
-            label6.Size = new Size(46, 21);
-            label6.TabIndex = 47;
-            label6.Text = "VIN:";
+            label8.Text = "Клиент:";
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.BackColor = Color.Transparent;
-            label5.Font = new Font("Times New Roman", 14.25F);
-            label5.Location = new Point(516, 226);
+            label5.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold);
+            label5.Location = new Point(78, 70);
             label5.Name = "label5";
-            label5.Size = new Size(53, 21);
+            label5.Size = new Size(59, 22);
             label5.TabIndex = 46;
             label5.Text = "Цена:";
             // 
@@ -133,48 +69,28 @@
             // 
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
-            label4.Font = new Font("Times New Roman", 14.25F);
-            label4.Location = new Point(490, 266);
+            label4.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold);
+            label4.Location = new Point(553, 70);
             label4.Name = "label4";
-            label4.Size = new Size(79, 21);
+            label4.Size = new Size(88, 22);
             label4.TabIndex = 45;
             label4.Text = "Заметки:";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Times New Roman", 14.25F);
-            label3.Location = new Point(107, 69);
-            label3.Name = "label3";
-            label3.Size = new Size(75, 21);
-            label3.TabIndex = 44;
-            label3.Text = "Модель:";
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Times New Roman", 14.25F);
-            label2.Location = new Point(107, 117);
+            label2.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold);
+            label2.Location = new Point(542, 26);
             label2.Name = "label2";
-            label2.Size = new Size(75, 21);
+            label2.Size = new Size(99, 22);
             label2.TabIndex = 43;
-            label2.Text = "Привод:";
-            // 
-            // modelTxt
-            // 
-            modelTxt.Font = new Font("Times New Roman", 14.25F);
-            modelTxt.Location = new Point(204, 69);
-            modelTxt.Margin = new Padding(4);
-            modelTxt.Name = "modelTxt";
-            modelTxt.Size = new Size(287, 29);
-            modelTxt.TabIndex = 42;
+            label2.Text = "Работник:";
             // 
             // notesTxt
             // 
             notesTxt.Font = new Font("Times New Roman", 14.25F);
-            notesTxt.Location = new Point(592, 266);
+            notesTxt.Location = new Point(648, 63);
             notesTxt.Margin = new Padding(4);
             notesTxt.Name = "notesTxt";
             notesTxt.Size = new Size(291, 29);
@@ -183,88 +99,78 @@
             // priceTxt
             // 
             priceTxt.Font = new Font("Times New Roman", 14.25F);
-            priceTxt.Location = new Point(592, 223);
+            priceTxt.Location = new Point(144, 68);
             priceTxt.Margin = new Padding(4);
             priceTxt.Name = "priceTxt";
             priceTxt.Size = new Size(291, 29);
             priceTxt.TabIndex = 40;
             // 
-            // vinTxt
+            // workerCmb
             // 
-            vinTxt.Font = new Font("Times New Roman", 14.25F);
-            vinTxt.Location = new Point(661, 176);
-            vinTxt.Margin = new Padding(4);
-            vinTxt.Name = "vinTxt";
-            vinTxt.Size = new Size(291, 29);
-            vinTxt.TabIndex = 39;
+            workerCmb.DropDownStyle = ComboBoxStyle.DropDownList;
+            workerCmb.FormattingEnabled = true;
+            workerCmb.Location = new Point(648, 25);
+            workerCmb.Margin = new Padding(4);
+            workerCmb.Name = "workerCmb";
+            workerCmb.Size = new Size(289, 23);
+            workerCmb.TabIndex = 38;
             // 
-            // driveCmb
+            // clientCmb
             // 
-            driveCmb.FormattingEnabled = true;
-            driveCmb.Location = new Point(204, 115);
-            driveCmb.Margin = new Padding(4);
-            driveCmb.Name = "driveCmb";
-            driveCmb.Size = new Size(289, 23);
-            driveCmb.TabIndex = 38;
-            // 
-            // transmissionCmb
-            // 
-            transmissionCmb.FormattingEnabled = true;
-            transmissionCmb.Location = new Point(204, 159);
-            transmissionCmb.Margin = new Padding(4);
-            transmissionCmb.Name = "transmissionCmb";
-            transmissionCmb.Size = new Size(289, 23);
-            transmissionCmb.TabIndex = 37;
-            // 
-            // engineCmb
-            // 
-            engineCmb.FormattingEnabled = true;
-            engineCmb.Location = new Point(663, 77);
-            engineCmb.Margin = new Padding(4);
-            engineCmb.Name = "engineCmb";
-            engineCmb.Size = new Size(289, 23);
-            engineCmb.TabIndex = 36;
-            // 
-            // bodyCmb
-            // 
-            bodyCmb.FormattingEnabled = true;
-            bodyCmb.Location = new Point(661, 30);
-            bodyCmb.Margin = new Padding(4);
-            bodyCmb.Name = "bodyCmb";
-            bodyCmb.Size = new Size(289, 23);
-            bodyCmb.TabIndex = 35;
+            clientCmb.DropDownStyle = ComboBoxStyle.DropDownList;
+            clientCmb.FormattingEnabled = true;
+            clientCmb.Location = new Point(146, 114);
+            clientCmb.Margin = new Padding(4);
+            clientCmb.Name = "clientCmb";
+            clientCmb.Size = new Size(289, 23);
+            clientCmb.TabIndex = 36;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Times New Roman", 14.25F);
-            label1.Location = new Point(117, 29);
+            label1.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold);
+            label1.Location = new Point(47, 26);
             label1.Name = "label1";
-            label1.Size = new Size(65, 21);
+            label1.Size = new Size(90, 22);
             label1.TabIndex = 34;
-            label1.Text = "Марка:";
+            label1.Text = "Машина:";
             // 
             // addEditBtn
             // 
             addEditBtn.BackColor = SystemColors.ControlLightLight;
             addEditBtn.Font = new Font("Times New Roman", 14.25F);
-            addEditBtn.Location = new Point(454, 363);
+            addEditBtn.Location = new Point(405, 283);
             addEditBtn.Margin = new Padding(4);
             addEditBtn.Name = "addEditBtn";
             addEditBtn.Size = new Size(152, 39);
             addEditBtn.TabIndex = 33;
             addEditBtn.Text = "Применить";
             addEditBtn.UseVisualStyleBackColor = false;
+            addEditBtn.Click += addEditBtn_Click;
             // 
-            // marksCmb
+            // carsCmb
             // 
-            marksCmb.FormattingEnabled = true;
-            marksCmb.Location = new Point(204, 27);
-            marksCmb.Margin = new Padding(4);
-            marksCmb.Name = "marksCmb";
-            marksCmb.Size = new Size(289, 23);
-            marksCmb.TabIndex = 32;
+            carsCmb.DropDownStyle = ComboBoxStyle.DropDownList;
+            carsCmb.FormattingEnabled = true;
+            carsCmb.Location = new Point(144, 25);
+            carsCmb.Margin = new Padding(4);
+            carsCmb.Name = "carsCmb";
+            carsCmb.Size = new Size(289, 23);
+            carsCmb.TabIndex = 32;
+            // 
+            // closeBtn
+            // 
+            closeBtn.BackColor = SystemColors.ControlLightLight;
+            closeBtn.Font = new Font("Times New Roman", 14.25F);
+            closeBtn.Location = new Point(405, 330);
+            closeBtn.Margin = new Padding(4);
+            closeBtn.Name = "closeBtn";
+            closeBtn.Size = new Size(152, 39);
+            closeBtn.TabIndex = 54;
+            closeBtn.Text = "Отмена";
+            closeBtn.UseVisualStyleBackColor = false;
+            closeBtn.Click += closeBtn_Click;
             // 
             // AddEditSalesForm
             // 
@@ -272,58 +178,39 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1051, 519);
-            Controls.Add(yearTxt);
-            Controls.Add(label10);
-            Controls.Add(label9);
+            ClientSize = new Size(962, 439);
+            Controls.Add(closeBtn);
             Controls.Add(label8);
-            Controls.Add(label7);
-            Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
-            Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(modelTxt);
             Controls.Add(notesTxt);
             Controls.Add(priceTxt);
-            Controls.Add(vinTxt);
-            Controls.Add(driveCmb);
-            Controls.Add(transmissionCmb);
-            Controls.Add(engineCmb);
-            Controls.Add(bodyCmb);
+            Controls.Add(workerCmb);
+            Controls.Add(clientCmb);
             Controls.Add(label1);
             Controls.Add(addEditBtn);
-            Controls.Add(marksCmb);
+            Controls.Add(carsCmb);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "AddEditSalesForm";
             Text = "AddEditSalesForm";
-            ((System.ComponentModel.ISupportInitialize)yearTxt).EndInit();
+            Load += AddEditSalesForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private NumericUpDown yearTxt;
-        private Label label10;
-        private Label label9;
         private Label label8;
-        private Label label7;
-        private Label label6;
         private Label label5;
         private Label label4;
-        private Label label3;
         private Label label2;
-        private TextBox modelTxt;
         private TextBox notesTxt;
         private TextBox priceTxt;
-        private TextBox vinTxt;
-        private ComboBox driveCmb;
-        private ComboBox transmissionCmb;
-        private ComboBox engineCmb;
-        private ComboBox bodyCmb;
+        private ComboBox workerCmb;
+        private ComboBox clientCmb;
         private Label label1;
         private Button addEditBtn;
-        private ComboBox marksCmb;
+        private ComboBox carsCmb;
+        private Button closeBtn;
     }
 }

@@ -17,7 +17,7 @@ public partial class Report
 
     public Guid WorkerId { get; set; }
 
-    public DateOnly DateReport { get; set; }
+    public DateTime DateReport { get; set; }
 
     public virtual Worker Worker { get; set; } = null!;
 }

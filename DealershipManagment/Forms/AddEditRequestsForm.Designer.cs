@@ -29,63 +29,44 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddEditRequestsForm));
-            label3 = new Label();
             label2 = new Label();
             notesTxt = new TextBox();
-            statusCmb = new ComboBox();
             label1 = new Label();
             addEditBtn = new Button();
             carsCmb = new ComboBox();
+            closeBtn = new Button();
+            label4 = new Label();
+            priceTxt = new TextBox();
             SuspendLayout();
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Times New Roman", 14.25F);
-            label3.Location = new Point(70, 69);
-            label3.Name = "label3";
-            label3.Size = new Size(127, 21);
-            label3.TabIndex = 44;
-            label3.Text = "Статус заявки:";
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Times New Roman", 14.25F);
-            label2.Location = new Point(83, 114);
+            label2.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold);
+            label2.Location = new Point(196, 82);
             label2.Name = "label2";
-            label2.Size = new Size(114, 21);
+            label2.Size = new Size(125, 22);
             label2.TabIndex = 43;
             label2.Text = "Примечания:";
             // 
             // notesTxt
             // 
             notesTxt.Font = new Font("Times New Roman", 14.25F);
-            notesTxt.Location = new Point(206, 111);
+            notesTxt.Location = new Point(328, 80);
             notesTxt.Margin = new Padding(4);
             notesTxt.Name = "notesTxt";
             notesTxt.Size = new Size(287, 29);
             notesTxt.TabIndex = 42;
             // 
-            // statusCmb
-            // 
-            statusCmb.FormattingEnabled = true;
-            statusCmb.Location = new Point(204, 69);
-            statusCmb.Margin = new Padding(4);
-            statusCmb.Name = "statusCmb";
-            statusCmb.Size = new Size(289, 23);
-            statusCmb.TabIndex = 38;
-            // 
             // label1
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Times New Roman", 14.25F);
-            label1.Location = new Point(117, 29);
+            label1.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold);
+            label1.Location = new Point(17, 30);
             label1.Name = "label1";
-            label1.Size = new Size(80, 21);
+            label1.Size = new Size(90, 22);
             label1.TabIndex = 34;
             label1.Text = "Машина:";
             // 
@@ -93,7 +74,7 @@
             // 
             addEditBtn.BackColor = SystemColors.ControlLightLight;
             addEditBtn.Font = new Font("Times New Roman", 14.25F);
-            addEditBtn.Location = new Point(181, 308);
+            addEditBtn.Location = new Point(370, 221);
             addEditBtn.Margin = new Padding(4);
             addEditBtn.Name = "addEditBtn";
             addEditBtn.Size = new Size(152, 39);
@@ -104,12 +85,46 @@
             // 
             // carsCmb
             // 
+            carsCmb.DropDownStyle = ComboBoxStyle.DropDownList;
             carsCmb.FormattingEnabled = true;
-            carsCmb.Location = new Point(204, 27);
+            carsCmb.Location = new Point(114, 29);
             carsCmb.Margin = new Padding(4);
             carsCmb.Name = "carsCmb";
             carsCmb.Size = new Size(289, 23);
             carsCmb.TabIndex = 32;
+            // 
+            // closeBtn
+            // 
+            closeBtn.BackColor = SystemColors.ControlLightLight;
+            closeBtn.Font = new Font("Times New Roman", 14.25F);
+            closeBtn.Location = new Point(370, 268);
+            closeBtn.Margin = new Padding(4);
+            closeBtn.Name = "closeBtn";
+            closeBtn.Size = new Size(152, 39);
+            closeBtn.TabIndex = 54;
+            closeBtn.Text = "Отмена";
+            closeBtn.UseVisualStyleBackColor = false;
+            closeBtn.Click += closeBtn_Click;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = Color.Transparent;
+            label4.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold);
+            label4.Location = new Point(506, 30);
+            label4.Name = "label4";
+            label4.Size = new Size(59, 22);
+            label4.TabIndex = 56;
+            label4.Text = "Цена:";
+            // 
+            // priceTxt
+            // 
+            priceTxt.Font = new Font("Times New Roman", 14.25F);
+            priceTxt.Location = new Point(572, 27);
+            priceTxt.Margin = new Padding(4);
+            priceTxt.Name = "priceTxt";
+            priceTxt.Size = new Size(287, 29);
+            priceTxt.TabIndex = 55;
             // 
             // AddEditRequestsForm
             // 
@@ -117,11 +132,12 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(524, 395);
-            Controls.Add(label3);
+            ClientSize = new Size(882, 348);
+            Controls.Add(label4);
+            Controls.Add(priceTxt);
+            Controls.Add(closeBtn);
             Controls.Add(label2);
             Controls.Add(notesTxt);
-            Controls.Add(statusCmb);
             Controls.Add(label1);
             Controls.Add(addEditBtn);
             Controls.Add(carsCmb);
@@ -134,12 +150,13 @@
         }
 
         #endregion
-        private Label label3;
         private Label label2;
         private TextBox notesTxt;
-        private ComboBox statusCmb;
         private Label label1;
         private Button addEditBtn;
         private ComboBox carsCmb;
+        private Button closeBtn;
+        private Label label4;
+        private TextBox priceTxt;
     }
 }

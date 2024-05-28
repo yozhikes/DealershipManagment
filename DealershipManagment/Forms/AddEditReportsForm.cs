@@ -34,7 +34,22 @@ namespace DealershipManagment
 
         private void AddEditReportsForm_Load(object sender, EventArgs e)
         {
+            monthCmb.Items.Clear();
+            monthCmb.Items.Add("Январь " +  DateTime.Now.Year);
+            monthCmb.Items.Add("Февраль " +  DateTime.Now.Year);
+            monthCmb.Items.Add("Март " +  DateTime.Now.Year);
+            monthCmb.Items.Add("Апрель " +  DateTime.Now.Year);
+            monthCmb.Items.Add("Май " +  DateTime.Now.Year);
+            monthCmb.Items.Add("Июнь " +  DateTime.Now.Year);
+            monthCmb.Items.Add("Июль " +  DateTime.Now.Year);
+            monthCmb.Items.Add("Август " +  DateTime.Now.Year);
+            monthCmb.Items.Add("Сентябрь " +  DateTime.Now.Year);
+            monthCmb.Items.Add("Октябрь " +  DateTime.Now.Year);
+            monthCmb.Items.Add("Ноябрь " +  DateTime.Now.Year);
+            monthCmb.Items.Add("Декабрь " +  DateTime.Now.Year);
             workersCmb.DataSource = db.Workers.Select(x => x.Fio).ToList();
+            monthCmb.SelectedIndex = 0;
+            workersCmb.SelectedIndex = 0;
             if (Text == "Изменить")
             {
                 var report = db.Reports.Include(x => x.Worker).FirstOrDefault(x => x.IdReport == reportId);
@@ -51,22 +66,27 @@ namespace DealershipManagment
             var report = new Report();
             if (addEditBtn.Text == "Изменить")
             {
-                report = db.Reports.FirstOrDefault(x => x.IdReport == reportId);
+                report = db.Reports.Include(x => x.Worker).FirstOrDefault(x => x.IdReport == reportId);
             }
             report.Salary = decimal.Parse(salaryTxt.Text);
             report.HoursWork = int.Parse(hoursTxt.Value.ToString());
             report.MonthReport = monthCmb.Text;
             report.Prize = int.Parse(prizeTxt.Text);
             report.WorkerId = db.Workers.FirstOrDefault(x => x.Fio == workersCmb.Text).IdWorker;
+            report.DateReport = DateTime.Now;
             if (addEditBtn.Text == "Добавить")
             {
                 report.IdReport = Guid.NewGuid();
-                report.DateReport = DateOnly.FromDateTime(DateTime.Now);
                 db.Reports.Add(report);
             }
             DialogResult = DialogResult.OK;
             db.SaveChanges();
             MessageBox.Show("Данные внесены", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void closeBtn_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

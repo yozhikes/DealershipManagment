@@ -18,7 +18,7 @@ namespace DealershipManagment
     public partial class AddEditCarsForm : Form
     {
         DbDealershipManagmentContext db = new DbDealershipManagmentContext();
-        Guid carId = Guid.Empty;
+        Car car = new Car();
         public AddEditCarsForm()
         {
             InitializeComponent();
@@ -31,7 +31,7 @@ namespace DealershipManagment
             InitializeComponent();
             Text = "Изменить";
             addEditBtn.Text = "Изменить";
-            carId = i;
+            car = db.Cars.Include(x => x.Mark).FirstOrDefault(x => x.IdCar == i);
         }
 
         private void AddEditCarsForm_Load(object sender, EventArgs e)
@@ -57,9 +57,12 @@ namespace DealershipManagment
             {
                 engineCmb.Items.Add(item);
             }
+            driveCmb.SelectedIndex = 0;
+            transmissionCmb.SelectedIndex = 0;
+            bodyCmb.SelectedIndex = 0;
+            engineCmb.SelectedIndex = 0;
             if (Text == "Изменить")
             {
-                var car = db.Cars.Include(x => x.Mark).FirstOrDefault(x => x.IdCar == carId);
                 modelTxt.Text = car.Model;
                 yearTxt.Text = car.ReleaseYear.ToString();
                 vinTxt.Text = car.Vin;
@@ -75,11 +78,6 @@ namespace DealershipManagment
 
         private void addEditBtn_Click(object sender, EventArgs e)
         {
-            var car = new Car();
-            if (addEditBtn.Text == "Изменить")
-            {
-                car = db.Cars.FirstOrDefault(x => x.IdCar == carId);
-            }
             car.MarkId = db.Marks.FirstOrDefault(x => x.NameMark == marksCmb.Text).IdMark;
             car.Model = modelTxt.Text;
             car.Drive = driveCmb.SelectedIndex;
@@ -90,15 +88,20 @@ namespace DealershipManagment
             car.Vin = vinTxt.Text;
             car.Price = decimal.Parse(priceTxt.Text);
             car.Notes = notesTxt.Text;
-            if(addEditBtn.Text == "Добавить")
+            if (addEditBtn.Text == "Добавить")
             {
                 car.IdCar = Guid.NewGuid();
                 car.Status = 0;
                 db.Cars.Add(car);
             }
-            DialogResult = DialogResult.OK;
             db.SaveChanges();
             MessageBox.Show("Данные внесены", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            DialogResult = DialogResult.OK;
+        }
+
+        private void closeBtn_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

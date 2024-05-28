@@ -36,6 +36,7 @@
             passTxt = new TextBox();
             label3 = new Label();
             passCheck = new CheckBox();
+            closeBtn = new Button();
             SuspendLayout();
             // 
             // entryBtn
@@ -111,6 +112,19 @@
             passCheck.UseVisualStyleBackColor = false;
             passCheck.CheckedChanged += passCheck_CheckedChanged;
             // 
+            // closeBtn
+            // 
+            closeBtn.BackColor = SystemColors.ControlLightLight;
+            closeBtn.Font = new Font("Times New Roman", 14.25F);
+            closeBtn.Location = new Point(224, 262);
+            closeBtn.Margin = new Padding(4);
+            closeBtn.Name = "closeBtn";
+            closeBtn.Size = new Size(99, 39);
+            closeBtn.TabIndex = 54;
+            closeBtn.Text = "Выход";
+            closeBtn.UseVisualStyleBackColor = false;
+            closeBtn.Click += closeBtn_Click;
+            // 
             // AutorisationForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -118,6 +132,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(549, 324);
+            Controls.Add(closeBtn);
             Controls.Add(passCheck);
             Controls.Add(label3);
             Controls.Add(passTxt);
@@ -143,5 +158,6 @@
         private TextBox passTxt;
         private Label label3;
         private CheckBox passCheck;
+        private Button closeBtn;
     }
 }

@@ -14,7 +14,6 @@ namespace DealershipManagment
 {
     public partial class ServiceForm : Form
     {
-        DbDealershipManagmentContext db = new DbDealershipManagmentContext();
         DataTable dt = new DataTable();
         public ServiceForm()
         {
@@ -26,35 +25,47 @@ namespace DealershipManagment
             dt.Columns.Add("Примечания");
             dt.Columns.Add("Дата начала починки");
             dt.Columns.Add("Дата окончания починки");
+            dt.Columns.Add("Цена ремонта");
+            dt.Columns.Add("idService");
+            foreach (var item in Enum.GetValues(typeof(StatusesRequest)))
+            {
+                filterCmb.Items.Add(item);
+                statusCmb.Items.Add(item);
+            }
         }
 
         private void UpdateDgv()
         {
             dt.Clear();
-            var services = db.Requests
+            using (var db = new DbDealershipManagmentContext())
+            {
+                var services = db.Requests
                 .Include(x => x.Car)
                 .Include(x => x.Car.Mark)
                 .ToList();
-            foreach (var s in services)
-            {
-                DataRow dataRow = dt.NewRow();
-                dataRow[0] = $"{s.Car.Mark.NameMark} {s.Car.Model}";
-                switch (s.StatusZayavki)
+                foreach (var s in services)
                 {
-                    case 0:
-                        dataRow[1] = StatusesRequest.Обработка;
-                        break;
-                    case 1:
-                        dataRow[1] = StatusesRequest.Ремонт;
-                        break;
-                    case 2:
-                        dataRow[1] = StatusesRequest.Готово;
-                        break;
+                    DataRow dataRow = dt.NewRow();
+                    dataRow[0] = $"{s.Car.Mark.NameMark} {s.Car.Model}";
+                    switch (s.StatusZayavki)
+                    {
+                        case 0:
+                            dataRow[1] = StatusesRequest.Обработка;
+                            break;
+                        case 1:
+                            dataRow[1] = StatusesRequest.Ремонт;
+                            break;
+                        case 2:
+                            dataRow[1] = StatusesRequest.Готово;
+                            break;
+                    }
+                    dataRow[2] = s.Notes;
+                    dataRow[3] = s.DateStartRepair;
+                    dataRow[4] = s.DateEndRepair;
+                    dataRow[5] = s.Price?.ToString("G29");
+                    dataRow[6] = s.IdRequest;
+                    dt.Rows.Add(dataRow);
                 }
-                dataRow[2] = s.Notes;
-                dataRow[3] = s.DateStartRepair;
-                dataRow[4] = s.DateEndRepair;
-                dt.Rows.Add(dataRow);
             }
             serviceDgv.DataSource = dt;
         }
@@ -62,8 +73,8 @@ namespace DealershipManagment
         private void ServiceForm_Load(object sender, EventArgs e)
         {
             UpdateDgv();
-            serviceDgv.Columns[5].Visible = false;
-            serviceDgv.Sort(serviceDgv.Columns[5], ListSortDirection.Ascending);
+            serviceDgv.Columns[6].Visible = false;
+            serviceDgv.Sort(serviceDgv.Columns[6], ListSortDirection.Ascending);
         }
 
         private void addBtn_Click(object sender, EventArgs e)
@@ -73,19 +84,19 @@ namespace DealershipManagment
             if (addRequest.ShowDialog() == DialogResult.OK)
             {
                 UpdateDgv();
-                Show();
             }
+            Show();
         }
 
         private void editBtn_Click(object sender, EventArgs e)
         {
-            AddEditRequestsForm editRequest = new AddEditRequestsForm(Guid.Parse(serviceDgv[5, serviceDgv.SelectedRows[0].Index].Value.ToString()));
+            AddEditRequestsForm editRequest = new AddEditRequestsForm(Guid.Parse(serviceDgv[6, serviceDgv.SelectedRows[0].Index].Value.ToString()));
             Hide();
             if (editRequest.ShowDialog() == DialogResult.OK)
             {
                 UpdateDgv();
-                Show();
             }
+            Show();
         }
 
         private void delBtn_Click(object sender, EventArgs e)
@@ -93,10 +104,89 @@ namespace DealershipManagment
             if (MessageBox.Show("Вы действительно хотите удалить этот запрос?", "Удаление",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                db.Cars.Remove(db.Cars.FirstOrDefault(x => x.IdCar == Guid.Parse(serviceDgv[5,
+                using (var db = new DbDealershipManagmentContext())
+                {
+                    db.Requests.Remove(db.Requests.FirstOrDefault(x => x.IdRequest == Guid.Parse(serviceDgv[6,
                     serviceDgv.SelectedRows[0].Index].Value.ToString())));
-                db.SaveChanges();
+                    db.SaveChanges();
+                }
                 UpdateDgv();
+            }
+        }
+
+        private void closeBtn_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void statusBtn_Click(object sender, EventArgs e)
+        {
+            using (var db = new DbDealershipManagmentContext())
+            {
+                var service = db.Requests.FirstOrDefault(x => x.IdRequest ==
+            Guid.Parse(serviceDgv[6, serviceDgv.SelectedRows[0].Index].Value.ToString()));
+                service.StatusZayavki = statusCmb.SelectedIndex;
+                switch (statusCmb.SelectedIndex)
+                {
+                    case 1:
+                        service.DateStartRepair = DateTime.Now;
+                        break;
+                    case 2:
+                        service.DateEndRepair = DateTime.Now;
+                        break;
+                }
+                db.SaveChanges();
+            }
+            UpdateDgv();
+        }
+
+        private void clrFltrBtn_Click(object sender, EventArgs e)
+        {
+            UpdateDgv();
+        }
+
+        private void applyFilterBtn_Click(object sender, EventArgs e)
+        {
+            UpdateDgv();
+            for (int i = dt.Rows.Count - 1; i >= 0; i--)
+            {
+                if (dt.Rows[i][1].ToString() != filterCmb.Text)
+                {
+                    dt.Rows.Remove(dt.Rows[i]);
+                }
+            }
+        }
+
+        private void searchBtn_Click(object sender, EventArgs e)
+        {
+            serviceDgv.ClearSelection();
+            var quantity = 0;
+            if (searchTxt.Text != string.Empty)
+            {
+                for (int i = 0; i <= serviceDgv.Rows.Count - 1; i++)
+                {
+                    for (int j = 0; j <= serviceDgv.ColumnCount - 2; j++)
+                    {
+                        if (serviceDgv.Rows[i].Cells[j].Value != null && serviceDgv.Rows[i].Cells[j].Value
+                            .ToString().ToUpper().Contains(searchTxt.Text.ToUpper()))
+                        {
+                            serviceDgv.Rows[i].Cells[j].Selected = true;
+                            quantity++;
+                        }
+                    }
+                }
+                if (quantity != 0)
+                {
+                    MessageBox.Show($"Найдено {quantity} совпадений", "Поиск", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Ничего не найдено!", "Поиск", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Пустое поле ввода!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

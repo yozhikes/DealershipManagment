@@ -40,9 +40,14 @@
             editBtn = new Button();
             delBtn = new Button();
             groupBox2 = new GroupBox();
+            closeBtn = new Button();
+            groupBox3 = new GroupBox();
+            statusCmb = new ComboBox();
+            statusBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)carsDgv).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
             SuspendLayout();
             // 
             // carsDgv
@@ -55,7 +60,7 @@
             carsDgv.Margin = new Padding(4);
             carsDgv.Name = "carsDgv";
             carsDgv.ReadOnly = true;
-            carsDgv.Size = new Size(954, 511);
+            carsDgv.Size = new Size(954, 586);
             carsDgv.TabIndex = 0;
             // 
             // filterCmb
@@ -135,7 +140,7 @@
             // 
             addBtn.BackColor = Color.Transparent;
             addBtn.Font = new Font("Times New Roman", 14.25F);
-            addBtn.Location = new Point(60, 555);
+            addBtn.Location = new Point(60, 620);
             addBtn.Margin = new Padding(4);
             addBtn.Name = "addBtn";
             addBtn.Size = new Size(243, 73);
@@ -148,7 +153,7 @@
             // 
             editBtn.BackColor = Color.Transparent;
             editBtn.Font = new Font("Times New Roman", 14.25F);
-            editBtn.Location = new Point(420, 555);
+            editBtn.Location = new Point(420, 620);
             editBtn.Margin = new Padding(4);
             editBtn.Name = "editBtn";
             editBtn.Size = new Size(243, 73);
@@ -161,7 +166,7 @@
             // 
             delBtn.BackColor = Color.Transparent;
             delBtn.Font = new Font("Times New Roman", 14.25F);
-            delBtn.Location = new Point(771, 555);
+            delBtn.Location = new Point(771, 620);
             delBtn.Margin = new Padding(4);
             delBtn.Name = "delBtn";
             delBtn.Size = new Size(243, 73);
@@ -185,13 +190,65 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Поиск:";
             // 
+            // closeBtn
+            // 
+            closeBtn.BackColor = SystemColors.ControlLightLight;
+            closeBtn.Font = new Font("Times New Roman", 14.25F);
+            closeBtn.Location = new Point(1035, 562);
+            closeBtn.Margin = new Padding(4);
+            closeBtn.Name = "closeBtn";
+            closeBtn.Size = new Size(305, 39);
+            closeBtn.TabIndex = 54;
+            closeBtn.Text = "Назад";
+            closeBtn.UseVisualStyleBackColor = false;
+            closeBtn.Click += closeBtn_Click;
+            // 
+            // groupBox3
+            // 
+            groupBox3.BackColor = Color.Transparent;
+            groupBox3.Controls.Add(statusBtn);
+            groupBox3.Controls.Add(statusCmb);
+            groupBox3.Font = new Font("Times New Roman", 20.25F);
+            groupBox3.Location = new Point(1035, 375);
+            groupBox3.Margin = new Padding(4);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Padding = new Padding(4);
+            groupBox3.Size = new Size(305, 144);
+            groupBox3.TabIndex = 12;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Статус";
+            // 
+            // statusCmb
+            // 
+            statusCmb.FormattingEnabled = true;
+            statusCmb.Location = new Point(10, 28);
+            statusCmb.Margin = new Padding(4);
+            statusCmb.Name = "statusCmb";
+            statusCmb.Size = new Size(289, 39);
+            statusCmb.TabIndex = 8;
+            // 
+            // statusBtn
+            // 
+            statusBtn.BackColor = SystemColors.ControlLightLight;
+            statusBtn.Font = new Font("Times New Roman", 14.25F);
+            statusBtn.Location = new Point(81, 84);
+            statusBtn.Margin = new Padding(4);
+            statusBtn.Name = "statusBtn";
+            statusBtn.Size = new Size(152, 52);
+            statusBtn.TabIndex = 9;
+            statusBtn.Text = "Применить";
+            statusBtn.UseVisualStyleBackColor = false;
+            statusBtn.Click += statusBtn_Click;
+            // 
             // CarsForm
             // 
             AutoScaleDimensions = new SizeF(9F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1347, 641);
+            ClientSize = new Size(1347, 718);
+            Controls.Add(groupBox3);
+            Controls.Add(closeBtn);
             Controls.Add(groupBox2);
             Controls.Add(delBtn);
             Controls.Add(editBtn);
@@ -208,6 +265,7 @@
             groupBox1.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            groupBox3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -224,5 +282,9 @@
         private Button editBtn;
         private Button delBtn;
         private GroupBox groupBox2;
+        private Button closeBtn;
+        private GroupBox groupBox3;
+        private Button statusBtn;
+        private ComboBox statusCmb;
     }
 }

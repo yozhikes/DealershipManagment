@@ -1,3 +1,6 @@
+using System.Security.Cryptography;
+using System.Text;
+
 namespace DealershipManagment
 {
     public partial class AutorisationForm : Form
@@ -9,6 +12,27 @@ namespace DealershipManagment
             passTxt.UseSystemPasswordChar = true;
         }
 
+        public static string HashWithSHA256(string input)
+        {
+            // Создаем экземпляр SHA256 хэш-алгоритма
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                // Преобразуем входную строку в байты
+                byte[] bytes = Encoding.UTF8.GetBytes(input);
+
+                // Вычисляем хэш
+                byte[] hash = sha256.ComputeHash(bytes);
+
+                // Преобразуем хэш в строку
+                StringBuilder sb = new StringBuilder();
+                foreach (byte b in hash)
+                {
+                    sb.Append(b.ToString("x2"));
+                }
+                return sb.ToString();
+            }
+        }
+
         private void entryBtn_Click(object sender, EventArgs e)
         {
             if (loginTxt.Text == string.Empty && passTxt.Text == string.Empty)
@@ -17,7 +41,7 @@ namespace DealershipManagment
             }
             else
             {
-                var worker = db.Workers.FirstOrDefault(x => x.Login == loginTxt.Text && x.Password == passTxt.Text);
+                var worker = db.Workers.FirstOrDefault(x => x.Login == loginTxt.Text && x.Password == HashWithSHA256(passTxt.Text));
                 if (worker != null)
                 {
                     var role = worker.RoleId;
@@ -26,32 +50,52 @@ namespace DealershipManagment
                         case 2:
                             CarsForm cars = new CarsForm();
                             Hide();
-                            cars.ShowDialog();
-                            Show();
+                            if (cars.ShowDialog() == DialogResult.Cancel)
+                            {
+                                loginTxt.Text = string.Empty;
+                                passTxt.Text = string.Empty;
+                                Show();
+                            }
                             break;
                         case 3:
                             FinancesForm finances = new FinancesForm();
                             Hide();
-                            finances.ShowDialog();
-                            Show();
+                            if (finances.ShowDialog() == DialogResult.Cancel)
+                            {
+                                loginTxt.Text = string.Empty;
+                                passTxt.Text = string.Empty;
+                                Show();
+                            }
                             break;
                         case 4:
                             SalesForm sales = new SalesForm();
                             Hide();
-                            sales.ShowDialog();
-                            Show();
+                            if (sales.ShowDialog() == DialogResult.Cancel)
+                            {
+                                loginTxt.Text = string.Empty;
+                                passTxt.Text = string.Empty;
+                                Show();
+                            }
                             break;
                         case 5:
                             ServiceForm service = new ServiceForm();
                             Hide();
-                            service.ShowDialog();
-                            Show();
+                            if (service.ShowDialog() == DialogResult.Cancel)
+                            {
+                                loginTxt.Text = string.Empty;
+                                passTxt.Text = string.Empty;
+                                Show();
+                            }
                             break;
                         case 6:
                             StaffForm staff = new StaffForm();
                             Hide();
-                            staff.ShowDialog();
-                            Show();
+                            if (staff.ShowDialog() == DialogResult.Cancel)
+                            {
+                                loginTxt.Text = string.Empty;
+                                passTxt.Text = string.Empty;
+                                Show();
+                            }
                             break;
                     }
                 }
@@ -65,6 +109,11 @@ namespace DealershipManagment
         private void passCheck_CheckedChanged(object sender, EventArgs e)
         {
             passTxt.UseSystemPasswordChar = !passCheck.Checked;
+        }
+
+        private void closeBtn_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

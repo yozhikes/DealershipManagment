@@ -15,7 +15,6 @@ namespace DealershipManagment
 {
     public partial class CarsForm : Form
     {
-        DbDealershipManagmentContext db = new DbDealershipManagmentContext();
         DataTable dt = new DataTable();
         public CarsForm()
         {
@@ -34,7 +33,14 @@ namespace DealershipManagment
             dt.Columns.Add("Примечания");
             dt.Columns.Add("Статус");
             dt.Columns.Add("idCar");
-            filterCmb.DataSource = db.Marks.Select(x => x.NameMark).ToList();
+            using (DbDealershipManagmentContext db = new DbDealershipManagmentContext())
+            {
+                filterCmb.DataSource = db.Marks.Select(x => x.NameMark).ToList();
+            }
+            foreach (var item in Enum.GetValues(typeof(Statuses)))
+            {
+                statusCmb.Items.Add(item);
+            }
         }
 
         private void searchBtn_Click(object sender, EventArgs e)
@@ -45,9 +51,10 @@ namespace DealershipManagment
             {
                 for (int i = 0; i <= carsDgv.Rows.Count - 1; i++)
                 {
-                    for (int j = 0; j <= carsDgv.ColumnCount - 1; j++)
+                    for (int j = 0; j <= carsDgv.ColumnCount - 2; j++)
                     {
-                        if (carsDgv.Rows[i].Cells[j].Value != null && carsDgv.Rows[i].Cells[j].Value.ToString().Contains(searchTxt.Text))
+                        if (carsDgv.Rows[i].Cells[j].Value != null && carsDgv.Rows[i].Cells[j].Value.ToString()
+                            .ToUpper().Contains(searchTxt.Text.ToUpper()))
                         {
                             carsDgv.Rows[i].Cells[j].Selected = true;
                             quantity++;
@@ -73,113 +80,117 @@ namespace DealershipManagment
         {
             UpdateDgv();
             carsDgv.Columns[11].Visible = false;
-            carsDgv.Sort(carsDgv.Columns[11],ListSortDirection.Ascending);
+            carsDgv.Sort(carsDgv.Columns[11], ListSortDirection.Ascending);
         }
 
         private void UpdateDgv()
         {
             dt.Clear();
-            var cars = db.Cars
+            using (DbDealershipManagmentContext db = new DbDealershipManagmentContext())
+            {
+                var cars = db.Cars
                 .Include(x => x.Mark)
                 .ToList();
-            foreach (var c in cars)
-            {
-                DataRow dataRow = dt.NewRow();
-                dataRow[0] = c.Mark.NameMark;
-                dataRow[1] = c.Model;
-                switch (c.Drive)
+
+                foreach (var c in cars)
                 {
-                    case 0:
-                        dataRow[2] = Drives.Передний;
-                        break;
-                    case 1:
-                        dataRow[2] = Drives.Задний;
-                        break;
-                    case 2:
-                        dataRow[2] = Drives.Полный;
-                        break;
+                    DataRow dataRow = dt.NewRow();
+                    dataRow[0] = c.Mark.NameMark;
+                    dataRow[1] = c.Model;
+                    switch (c.Drive)
+                    {
+                        case 0:
+                            dataRow[2] = Drives.Передний;
+                            break;
+                        case 1:
+                            dataRow[2] = Drives.Задний;
+                            break;
+                        case 2:
+                            dataRow[2] = Drives.Полный;
+                            break;
+                    }
+                    switch (c.Transmission)
+                    {
+                        case 0:
+                            dataRow[3] = Transmissions.Механическая;
+                            break;
+                        case 1:
+                            dataRow[3] = Transmissions.Автоматическая;
+                            break;
+                        case 2:
+                            dataRow[3] = Transmissions.Робот;
+                            break;
+                        case 3:
+                            dataRow[3] = Transmissions.Вариативная;
+                            break;
+                    }
+                    switch (c.BodyType)
+                    {
+                        case 0:
+                            dataRow[4] = BodyTypes.Хэтчбек;
+                            break;
+                        case 1:
+                            dataRow[4] = BodyTypes.Седан;
+                            break;
+                        case 2:
+                            dataRow[4] = BodyTypes.Лифтбек;
+                            break;
+                        case 3:
+                            dataRow[4] = BodyTypes.Универсал;
+                            break;
+                        case 4:
+                            dataRow[4] = BodyTypes.Купе;
+                            break;
+                        case 5:
+                            dataRow[4] = BodyTypes.Кроссовер;
+                            break;
+                        case 6:
+                            dataRow[4] = BodyTypes.Внедорожник;
+                            break;
+                        case 7:
+                            dataRow[4] = BodyTypes.Минивэн;
+                            break;
+                    }
+                    switch (c.EngineType)
+                    {
+                        case 0:
+                            dataRow[5] = EngineTypes.Бензин;
+                            break;
+                        case 1:
+                            dataRow[5] = EngineTypes.Дизель;
+                            break;
+                        case 2:
+                            dataRow[5] = EngineTypes.Газ;
+                            break;
+                        case 3:
+                            dataRow[5] = EngineTypes.Водород;
+                            break;
+                        case 4:
+                            dataRow[5] = EngineTypes.Электричество;
+                            break;
+                    }
+                    dataRow[6] = c.ReleaseYear;
+                    dataRow[7] = c.Vin;
+                    dataRow[8] = c.Price.ToString("G29");
+                    dataRow[9] = c.Notes;
+                    switch (c.Status)
+                    {
+                        case 0:
+                            dataRow[10] = Statuses.Новая;
+                            break;
+                        case 1:
+                            dataRow[10] = Statuses.Резерв;
+                            break;
+                        case 2:
+                            dataRow[10] = Statuses.Продана;
+                            break;
+                        case 3:
+                            dataRow[10] = Statuses.Ремонт;
+                            break;
+                    }
+                    dataRow[11] = c.IdCar;
+                    dt.Rows.Add(dataRow);
                 }
-                switch (c.Transmission)
-                {
-                    case 0:
-                        dataRow[3] = Transmissions.Механическая;
-                        break;
-                    case 1:
-                        dataRow[3] = Transmissions.Автоматическая;
-                        break;
-                    case 2:
-                        dataRow[3] = Transmissions.Робот;
-                        break;
-                    case 3:
-                        dataRow[3] = Transmissions.Вариативная;
-                        break;
-                }
-                switch (c.BodyType)
-                {
-                    case 0:
-                        dataRow[4] = BodyTypes.Хэтчбек;
-                        break;
-                    case 1:
-                        dataRow[4] = BodyTypes.Седан;
-                        break;
-                    case 2:
-                        dataRow[4] = BodyTypes.Лифтбек;
-                        break;
-                    case 3:
-                        dataRow[4] = BodyTypes.Универсал;
-                        break;
-                    case 4:
-                        dataRow[4] = BodyTypes.Купе;
-                        break;
-                    case 5:
-                        dataRow[4] = BodyTypes.Кроссовер;
-                        break;
-                    case 6:
-                        dataRow[4] = BodyTypes.Внедорожник;
-                        break;
-                    case 7:
-                        dataRow[4] = BodyTypes.Минивэн;
-                        break;
-                }
-                switch (c.EngineType)
-                {
-                    case 0:
-                        dataRow[5] = EngineTypes.Бензин;
-                        break;
-                    case 1:
-                        dataRow[5] = EngineTypes.Дизель;
-                        break;
-                    case 2:
-                        dataRow[5] = EngineTypes.Газ;
-                        break;
-                    case 3:
-                        dataRow[5] = EngineTypes.Водород;
-                        break;
-                    case 4:
-                        dataRow[5] = EngineTypes.Электричество;
-                        break;
-                }
-                dataRow[6] = c.ReleaseYear;
-                dataRow[7] = c.Vin;
-                dataRow[8] = c.Price;
-                dataRow[9] = c.Notes;
-                switch (c.Status)
-                {
-                    case 0:
-                        dataRow[10] = Statuses.Новая;
-                        break;
-                    case 1:
-                        dataRow[10] = Statuses.Резерв;
-                        break;
-                    case 2:
-                        dataRow[10] = Statuses.Продана;
-                        break;
-                    case 3:
-                        dataRow[10] = Statuses.Ремонт;
-                        break;
-                }
-                dataRow[11] = c.IdCar;
-                dt.Rows.Add(dataRow);
             }
             carsDgv.DataSource = dt;
         }
@@ -208,8 +219,8 @@ namespace DealershipManagment
             if (addCar.ShowDialog() == DialogResult.OK)
             {
                 UpdateDgv();
-                Show();
             }
+            Show();
         }
 
         private void editBtn_Click(object sender, EventArgs e)
@@ -219,17 +230,36 @@ namespace DealershipManagment
             if (editCar.ShowDialog() == DialogResult.OK)
             {
                 UpdateDgv();
-                Show();
             }
+            Show();
         }
 
         private void delBtn_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("Вы действительно хотите удалить эту машину?", "Удаление",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question)==DialogResult.Yes)
+            using(DbDealershipManagmentContext db = new DbDealershipManagmentContext())
             {
-                db.Cars.Remove(db.Cars.FirstOrDefault(x => x.IdCar == Guid.Parse(carsDgv[11,
-                    carsDgv.SelectedRows[0].Index].Value.ToString())));
+                if (MessageBox.Show("Вы действительно хотите удалить эту машину?", "Удаление",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    db.Cars.Remove(db.Cars.FirstOrDefault(x => x.IdCar == Guid.Parse(carsDgv[11,
+                        carsDgv.SelectedRows[0].Index].Value.ToString())));
+                    db.SaveChanges();
+                    UpdateDgv();
+                }
+            }
+        }
+
+        private void closeBtn_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void statusBtn_Click(object sender, EventArgs e)
+        {
+            using (var db = new DbDealershipManagmentContext())
+            {
+                var car = db.Cars.FirstOrDefault(x => x.IdCar == Guid.Parse(carsDgv[11, carsDgv.SelectedRows[0].Index].Value.ToString()));
+                car.Status = statusCmb.SelectedIndex;
                 db.SaveChanges();
                 UpdateDgv();
             }

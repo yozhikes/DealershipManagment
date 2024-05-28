@@ -17,5 +17,7 @@ public partial class Request
 
     public DateTime? DateEndRepair { get; set; }
 
+    public decimal? Price { get; set; }
+
     public virtual Car Car { get; set; } = null!;
 }

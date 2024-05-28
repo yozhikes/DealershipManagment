@@ -39,6 +39,8 @@
             groupBox2 = new GroupBox();
             searchTxt = new TextBox();
             searchBtn = new Button();
+            closeBtn = new Button();
+            applyFilterBtn = new Button();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)salesDgv).BeginInit();
             groupBox2.SuspendLayout();
@@ -47,6 +49,7 @@
             // groupBox1
             // 
             groupBox1.BackColor = Color.Transparent;
+            groupBox1.Controls.Add(applyFilterBtn);
             groupBox1.Controls.Add(clrFltrBtn);
             groupBox1.Controls.Add(filterCmb);
             groupBox1.Font = new Font("Times New Roman", 20.25F);
@@ -54,27 +57,28 @@
             groupBox1.Margin = new Padding(4);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(4);
-            groupBox1.Size = new Size(275, 118);
+            groupBox1.Size = new Size(275, 223);
             groupBox1.TabIndex = 9;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Фильтрация";
+            groupBox1.Text = "Фильтрация по менеджерам";
             // 
             // clrFltrBtn
             // 
             clrFltrBtn.BackColor = SystemColors.ControlLightLight;
             clrFltrBtn.Font = new Font("Times New Roman", 14.25F);
-            clrFltrBtn.Location = new Point(78, 71);
+            clrFltrBtn.Location = new Point(62, 173);
             clrFltrBtn.Margin = new Padding(4);
             clrFltrBtn.Name = "clrFltrBtn";
-            clrFltrBtn.Size = new Size(99, 39);
+            clrFltrBtn.Size = new Size(152, 39);
             clrFltrBtn.TabIndex = 8;
             clrFltrBtn.Text = "Сброс";
             clrFltrBtn.UseVisualStyleBackColor = false;
+            clrFltrBtn.Click += clrFltrBtn_Click;
             // 
             // filterCmb
             // 
             filterCmb.FormattingEnabled = true;
-            filterCmb.Location = new Point(8, 28);
+            filterCmb.Location = new Point(9, 79);
             filterCmb.Margin = new Padding(4);
             filterCmb.Name = "filterCmb";
             filterCmb.Size = new Size(259, 39);
@@ -90,44 +94,47 @@
             salesDgv.Margin = new Padding(4);
             salesDgv.Name = "salesDgv";
             salesDgv.ReadOnly = true;
-            salesDgv.Size = new Size(954, 400);
+            salesDgv.Size = new Size(954, 438);
             salesDgv.TabIndex = 8;
             // 
             // delBtn
             // 
             delBtn.BackColor = Color.Transparent;
             delBtn.Font = new Font("Times New Roman", 14.25F);
-            delBtn.Location = new Point(744, 445);
+            delBtn.Location = new Point(742, 474);
             delBtn.Margin = new Padding(4);
             delBtn.Name = "delBtn";
             delBtn.Size = new Size(243, 73);
             delBtn.TabIndex = 15;
             delBtn.Text = "Удалить";
             delBtn.UseVisualStyleBackColor = false;
+            delBtn.Click += delBtn_Click;
             // 
             // editBtn
             // 
             editBtn.BackColor = Color.Transparent;
             editBtn.Font = new Font("Times New Roman", 14.25F);
-            editBtn.Location = new Point(393, 445);
+            editBtn.Location = new Point(391, 474);
             editBtn.Margin = new Padding(4);
             editBtn.Name = "editBtn";
             editBtn.Size = new Size(243, 73);
             editBtn.TabIndex = 14;
             editBtn.Text = "Изменить";
             editBtn.UseVisualStyleBackColor = false;
+            editBtn.Click += editBtn_Click;
             // 
             // addBtn
             // 
             addBtn.BackColor = Color.Transparent;
             addBtn.Font = new Font("Times New Roman", 14.25F);
-            addBtn.Location = new Point(33, 445);
+            addBtn.Location = new Point(31, 474);
             addBtn.Margin = new Padding(4);
             addBtn.Name = "addBtn";
             addBtn.Size = new Size(243, 73);
             addBtn.TabIndex = 13;
             addBtn.Text = "Добавить";
             addBtn.UseVisualStyleBackColor = false;
+            addBtn.Click += addBtn_Click;
             // 
             // groupBox2
             // 
@@ -135,7 +142,7 @@
             groupBox2.Controls.Add(searchTxt);
             groupBox2.Controls.Add(searchBtn);
             groupBox2.Font = new Font("Times New Roman", 20.25F);
-            groupBox2.Location = new Point(1022, 152);
+            groupBox2.Location = new Point(1022, 246);
             groupBox2.Margin = new Padding(4);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(4);
@@ -164,6 +171,33 @@
             searchBtn.TabIndex = 7;
             searchBtn.Text = "Найти";
             searchBtn.UseVisualStyleBackColor = false;
+            searchBtn.Click += searchBtn_Click;
+            // 
+            // closeBtn
+            // 
+            closeBtn.BackColor = SystemColors.ControlLightLight;
+            closeBtn.Font = new Font("Times New Roman", 14.25F);
+            closeBtn.Location = new Point(1022, 414);
+            closeBtn.Margin = new Padding(4);
+            closeBtn.Name = "closeBtn";
+            closeBtn.Size = new Size(275, 39);
+            closeBtn.TabIndex = 55;
+            closeBtn.Text = "Назад";
+            closeBtn.UseVisualStyleBackColor = false;
+            closeBtn.Click += closeBtn_Click;
+            // 
+            // applyFilterBtn
+            // 
+            applyFilterBtn.BackColor = SystemColors.ControlLightLight;
+            applyFilterBtn.Font = new Font("Times New Roman", 14.25F);
+            applyFilterBtn.Location = new Point(62, 126);
+            applyFilterBtn.Margin = new Padding(4);
+            applyFilterBtn.Name = "applyFilterBtn";
+            applyFilterBtn.Size = new Size(152, 39);
+            applyFilterBtn.TabIndex = 10;
+            applyFilterBtn.Text = "Применить";
+            applyFilterBtn.UseVisualStyleBackColor = false;
+            applyFilterBtn.Click += applyFilterBtn_Click;
             // 
             // SalesForm
             // 
@@ -171,7 +205,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1315, 545);
+            ClientSize = new Size(1315, 568);
+            Controls.Add(closeBtn);
             Controls.Add(groupBox2);
             Controls.Add(delBtn);
             Controls.Add(editBtn);
@@ -202,5 +237,7 @@
         private GroupBox groupBox2;
         private TextBox searchTxt;
         private Button searchBtn;
+        private Button closeBtn;
+        private Button applyFilterBtn;
     }
 }

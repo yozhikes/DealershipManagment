@@ -39,6 +39,8 @@
             groupBox2 = new GroupBox();
             searchTxt = new TextBox();
             searchBtn = new Button();
+            closeBtn = new Button();
+            applyFilterBtn = new Button();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)financesDgv).BeginInit();
             groupBox2.SuspendLayout();
@@ -47,6 +49,7 @@
             // groupBox1
             // 
             groupBox1.BackColor = Color.Transparent;
+            groupBox1.Controls.Add(applyFilterBtn);
             groupBox1.Controls.Add(clrFltrBtn);
             groupBox1.Controls.Add(filterCmb);
             groupBox1.Font = new Font("Times New Roman", 20.25F);
@@ -54,7 +57,7 @@
             groupBox1.Margin = new Padding(4);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(4);
-            groupBox1.Size = new Size(275, 118);
+            groupBox1.Size = new Size(275, 183);
             groupBox1.TabIndex = 9;
             groupBox1.TabStop = false;
             groupBox1.Text = "Фильтрация по часам";
@@ -63,13 +66,14 @@
             // 
             clrFltrBtn.BackColor = SystemColors.ControlLightLight;
             clrFltrBtn.Font = new Font("Times New Roman", 14.25F);
-            clrFltrBtn.Location = new Point(78, 71);
+            clrFltrBtn.Location = new Point(62, 136);
             clrFltrBtn.Margin = new Padding(4);
             clrFltrBtn.Name = "clrFltrBtn";
-            clrFltrBtn.Size = new Size(99, 39);
+            clrFltrBtn.Size = new Size(152, 39);
             clrFltrBtn.TabIndex = 8;
             clrFltrBtn.Text = "Сброс";
             clrFltrBtn.UseVisualStyleBackColor = false;
+            clrFltrBtn.Click += clrFltrBtn_Click;
             // 
             // filterCmb
             // 
@@ -138,7 +142,7 @@
             groupBox2.Controls.Add(searchTxt);
             groupBox2.Controls.Add(searchBtn);
             groupBox2.Font = new Font("Times New Roman", 20.25F);
-            groupBox2.Location = new Point(1043, 168);
+            groupBox2.Location = new Point(1043, 219);
             groupBox2.Margin = new Padding(4);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(4);
@@ -167,6 +171,33 @@
             searchBtn.TabIndex = 7;
             searchBtn.Text = "Найти";
             searchBtn.UseVisualStyleBackColor = false;
+            searchBtn.Click += searchBtn_Click;
+            // 
+            // closeBtn
+            // 
+            closeBtn.BackColor = SystemColors.ControlLightLight;
+            closeBtn.Font = new Font("Times New Roman", 14.25F);
+            closeBtn.Location = new Point(1043, 389);
+            closeBtn.Margin = new Padding(4);
+            closeBtn.Name = "closeBtn";
+            closeBtn.Size = new Size(275, 39);
+            closeBtn.TabIndex = 55;
+            closeBtn.Text = "Назад";
+            closeBtn.UseVisualStyleBackColor = false;
+            closeBtn.Click += closeBtn_Click;
+            // 
+            // applyFilterBtn
+            // 
+            applyFilterBtn.BackColor = SystemColors.ControlLightLight;
+            applyFilterBtn.Font = new Font("Times New Roman", 14.25F);
+            applyFilterBtn.Location = new Point(62, 89);
+            applyFilterBtn.Margin = new Padding(4);
+            applyFilterBtn.Name = "applyFilterBtn";
+            applyFilterBtn.Size = new Size(152, 39);
+            applyFilterBtn.TabIndex = 10;
+            applyFilterBtn.Text = "Применить";
+            applyFilterBtn.UseVisualStyleBackColor = false;
+            applyFilterBtn.Click += applyFilterBtn_Click;
             // 
             // FinancesForm
             // 
@@ -175,6 +206,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1337, 568);
+            Controls.Add(closeBtn);
             Controls.Add(groupBox2);
             Controls.Add(delBtn);
             Controls.Add(editBtn);
@@ -205,5 +237,7 @@
         private GroupBox groupBox2;
         private TextBox searchTxt;
         private Button searchBtn;
+        private Button closeBtn;
+        private Button applyFilterBtn;
     }
 }
