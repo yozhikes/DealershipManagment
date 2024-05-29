@@ -83,7 +83,7 @@ namespace DealershipManagment
             }
             foreach (var item in db.Workers.ToList())
             {
-                if (item.RoleId == 4)
+                if (item.RoleId == 2)
                 {
                     workerCmb.Items.Add($"{item.Fio}");
                 }
