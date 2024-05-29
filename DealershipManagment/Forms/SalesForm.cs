@@ -119,7 +119,7 @@ namespace DealershipManagment
         {
             if (salesDgv.SelectedRows.Count == 1)
             {
-                if (MessageBox.Show("Вы действительно хотите удалить эту машину?", "Удаление",
+                if (MessageBox.Show("Вы действительно хотите удалить эту продажу?", "Удаление",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     using (var db = new DbDealershipManagmentContext())

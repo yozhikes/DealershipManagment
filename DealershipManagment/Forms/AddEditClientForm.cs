@@ -33,7 +33,7 @@ namespace DealershipManagment.Forms
         private void addEditBtn_Click(object sender, EventArgs e)
         {
             if (fioTxt.Text != string.Empty && passTxt.Text != string.Empty
-                && passTxt.Text.Length == 10 && telnumTxt.Text.Length == 17)
+                && passTxt.Text.Length == 10 && telnumTxt.Text.Length == 16)
             {
                     client.Fio = fioTxt.Text;
                     client.Pass = passTxt.Text;

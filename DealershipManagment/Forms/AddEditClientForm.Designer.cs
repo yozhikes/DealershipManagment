@@ -123,7 +123,7 @@
             // telnumTxt
             // 
             telnumTxt.Location = new Point(179, 97);
-            telnumTxt.Mask = "+7 (999) 000-0000";
+            telnumTxt.Mask = "+7(999)000-00-00";
             telnumTxt.Name = "telnumTxt";
             telnumTxt.Size = new Size(287, 23);
             telnumTxt.TabIndex = 65;

@@ -94,7 +94,7 @@ namespace DealershipManagment.Forms
                     if (db.Sales.FirstOrDefault(x => x.ClientId == Guid.Parse(clientsDgv[0,
                             clientsDgv.SelectedRows[0].Index].Value.ToString())) == null)
                     {
-                        if (MessageBox.Show("Вы действительно хотите удалить этот отчёт?", "Удаление",
+                        if (MessageBox.Show("Вы действительно хотите удалить этого клиента?", "Удаление",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
                             db.Clients.Remove(db.Clients.FirstOrDefault(x => x.IdClient == Guid.Parse(clientsDgv[0,

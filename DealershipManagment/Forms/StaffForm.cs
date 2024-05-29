@@ -146,7 +146,7 @@ namespace DealershipManagment
                             && db.Reports.FirstOrDefault(x => x.WorkerId == Guid.Parse(staffDgv[5,
                             staffDgv.SelectedRows[0].Index].Value.ToString())) == null)
                     {
-                        if (MessageBox.Show("Вы действительно хотите удалить эту машину?", "Удаление",
+                        if (MessageBox.Show("Вы действительно хотите удалить этого работника?", "Удаление",
                                         MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
                             db.Workers.Remove(db.Workers.FirstOrDefault(x => x.IdWorker == Guid.Parse(staffDgv[5,

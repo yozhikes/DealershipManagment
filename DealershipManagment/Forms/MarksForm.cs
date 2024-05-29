@@ -66,7 +66,7 @@ namespace DealershipManagment.Forms
                     if (db.Cars.FirstOrDefault(x=>x.MarkId== Guid.Parse(marksDgv[0,
                             marksDgv.SelectedRows[0].Index].Value.ToString()))==null)
                     {
-                        if (MessageBox.Show("Вы действительно хотите удалить этот отчёт?", "Удаление",
+                        if (MessageBox.Show("Вы действительно хотите удалить эту марку?", "Удаление",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
 

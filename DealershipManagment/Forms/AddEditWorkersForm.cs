@@ -79,7 +79,7 @@ namespace DealershipManagment
             {
                 worker = db.Workers.FirstOrDefault(x => x.IdWorker == workerId);
             }
-            if (fioTxt.Text != string.Empty && passTxt.Text != string.Empty && telnumTxt.Text.Length == 17
+            if (fioTxt.Text != string.Empty && passTxt.Text != string.Empty && telnumTxt.Text.Length == 16
                 && passwordTxt.Text != string.Empty && passTxt.Text.Length == 10)
             {
                 worker.Fio = fioTxt.Text;
