@@ -261,15 +261,26 @@ namespace DealershipManagment
             {
                 using (DbDealershipManagmentContext db = new DbDealershipManagmentContext())
                 {
-                    if (MessageBox.Show("Вы действительно хотите удалить эту машину?", "Удаление",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    if (db.Sales.FirstOrDefault(x => x.CarId == Guid.Parse(carsDgv[11,
+                            carsDgv.SelectedRows[0].Index].Value.ToString())) == null
+                            && db.Requests.FirstOrDefault(x => x.CarId == Guid.Parse(carsDgv[11,
+                            carsDgv.SelectedRows[0].Index].Value.ToString())) == null)
                     {
-                        db.Cars.Remove(db.Cars.FirstOrDefault(x => x.IdCar == Guid.Parse(carsDgv[11,
-                            carsDgv.SelectedRows[0].Index].Value.ToString())));
-                        db.SaveChanges();
-                        UpdateDgv();
-                        filterCmb.DataSource = db.Marks.Select(x => x.NameMark).ToList();
+                        if (MessageBox.Show("Вы действительно хотите удалить эту машину?", "Удаление",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            db.Cars.Remove(db.Cars.FirstOrDefault(x => x.IdCar == Guid.Parse(carsDgv[11,
+                                carsDgv.SelectedRows[0].Index].Value.ToString())));
+                            db.SaveChanges();
+                            UpdateDgv();
+                            filterCmb.DataSource = db.Marks.Select(x => x.NameMark).ToList();
+                        }
                     }
+                    else
+                    {
+                        MessageBox.Show("Эта машина уже была использована!", "Невозможно удалить", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
                 }
             }
             else if (carsDgv.SelectedRows.Count > 1)

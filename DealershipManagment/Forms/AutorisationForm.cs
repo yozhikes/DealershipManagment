@@ -1,3 +1,4 @@
+using DealershipManagment.Forms;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -47,7 +48,7 @@ namespace DealershipManagment
                     var role = worker.RoleId;
                     switch (role)
                     {
-                        case 2:
+                        case 0:
                             CarsForm cars = new CarsForm();
                             Hide();
                             if (cars.ShowDialog() == DialogResult.Cancel)
@@ -57,7 +58,7 @@ namespace DealershipManagment
                                 Show();
                             }
                             break;
-                        case 3:
+                        case 1:
                             FinancesForm finances = new FinancesForm();
                             Hide();
                             if (finances.ShowDialog() == DialogResult.Cancel)
@@ -67,17 +68,17 @@ namespace DealershipManagment
                                 Show();
                             }
                             break;
-                        case 4:
-                            SalesForm sales = new SalesForm();
+                        case 2:
+                            MainManagerForm manager = new MainManagerForm();
                             Hide();
-                            if (sales.ShowDialog() == DialogResult.Cancel)
+                            if (manager.ShowDialog() == DialogResult.Cancel)
                             {
                                 loginTxt.Text = string.Empty;
                                 passTxt.Text = string.Empty;
                                 Show();
                             }
                             break;
-                        case 5:
+                        case 3:
                             ServiceForm service = new ServiceForm();
                             Hide();
                             if (service.ShowDialog() == DialogResult.Cancel)
@@ -87,10 +88,20 @@ namespace DealershipManagment
                                 Show();
                             }
                             break;
-                        case 6:
+                        case 4:
                             StaffForm staff = new StaffForm();
                             Hide();
                             if (staff.ShowDialog() == DialogResult.Cancel)
+                            {
+                                loginTxt.Text = string.Empty;
+                                passTxt.Text = string.Empty;
+                                Show();
+                            }
+                            break;
+                        case 5:
+                            MarksForm marksForm = new MarksForm();
+                            Hide();
+                            if (marksForm.ShowDialog() == DialogResult.Cancel)
                             {
                                 loginTxt.Text = string.Empty;
                                 passTxt.Text = string.Empty;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DealershipManagment.Tables;
+namespace DealershipManagment;
 
 public partial class Worker
 {
@@ -22,8 +22,6 @@ public partial class Worker
     public string Password { get; set; } = null!;
 
     public virtual ICollection<Report> Reports { get; set; } = new List<Report>();
-
-    public virtual Role Role { get; set; } = null!;
 
     public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DealershipManagment.Tables;
+namespace DealershipManagment;
 
 public partial class Mark
 {

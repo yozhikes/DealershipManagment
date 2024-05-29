@@ -142,7 +142,7 @@
             // 
             // addBtn
             // 
-            addBtn.BackColor = Color.Transparent;
+            addBtn.BackColor = SystemColors.ControlLightLight;
             addBtn.Font = new Font("Times New Roman", 14.25F);
             addBtn.Location = new Point(60, 620);
             addBtn.Margin = new Padding(4);
@@ -155,7 +155,7 @@
             // 
             // editBtn
             // 
-            editBtn.BackColor = Color.Transparent;
+            editBtn.BackColor = SystemColors.ControlLightLight;
             editBtn.Font = new Font("Times New Roman", 14.25F);
             editBtn.Location = new Point(420, 620);
             editBtn.Margin = new Padding(4);
@@ -168,7 +168,7 @@
             // 
             // delBtn
             // 
-            delBtn.BackColor = Color.Transparent;
+            delBtn.BackColor = SystemColors.ControlLightLight;
             delBtn.Font = new Font("Times New Roman", 14.25F);
             delBtn.Location = new Point(771, 620);
             delBtn.Margin = new Padding(4);

@@ -41,7 +41,6 @@ namespace DealershipManagment
             using (DbDealershipManagmentContext db = new DbDealershipManagmentContext())
             {
                 var staff = db.Workers
-                .Include(x => x.Role)
                 .ToList();
                 foreach (var s in staff)
                 {
@@ -49,7 +48,7 @@ namespace DealershipManagment
                     dataRow[0] = s.Fio;
                     dataRow[1] = s.Pass;
                     dataRow[2] = s.TelNum;
-                    dataRow[3] = s.Role.NameRole;
+                    dataRow[3] = (Roles)s.RoleId;
                     switch (s.Status)
                     {
                         case 0:
@@ -140,17 +139,27 @@ namespace DealershipManagment
         {
             if (staffDgv.SelectedRows.Count == 1)
             {
-                if (MessageBox.Show("Вы действительно хотите удалить эту машину?", "Удаление",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                using (var db = new DbDealershipManagmentContext())
                 {
-                    using (DbDealershipManagmentContext db = new DbDealershipManagmentContext())
+                    if (db.Sales.FirstOrDefault(x => x.WorkerId == Guid.Parse(staffDgv[5,
+                            staffDgv.SelectedRows[0].Index].Value.ToString())) == null
+                            && db.Reports.FirstOrDefault(x => x.WorkerId == Guid.Parse(staffDgv[5,
+                            staffDgv.SelectedRows[0].Index].Value.ToString())) == null)
                     {
-                        db.Workers.Remove(db.Workers.FirstOrDefault(x => x.IdWorker == Guid.Parse(staffDgv[5,
-                        staffDgv.SelectedRows[0].Index].Value.ToString())));
-                        db.SaveChanges();
+                        if (MessageBox.Show("Вы действительно хотите удалить эту машину?", "Удаление",
+                                        MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            db.Workers.Remove(db.Workers.FirstOrDefault(x => x.IdWorker == Guid.Parse(staffDgv[5,
+                            staffDgv.SelectedRows[0].Index].Value.ToString())));
+                            db.SaveChanges();
+                            UpdateDgv();
+                        }
                     }
-                    UpdateDgv();
-                }
+                    else
+                    {
+                        MessageBox.Show("Этот клиент уже был использован!", "Невозможно удалить", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                } 
             }
             else if (staffDgv.SelectedRows.Count > 1)
             {

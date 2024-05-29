@@ -35,16 +35,19 @@ namespace DealershipManagment
 
         private void AddEditWorkersForm_Load(object sender, EventArgs e)
         {
-            roleCmb.DataSource = db.Roles.Select(x => x.NameRole).ToList();
+            foreach (var item in Enum.GetValues(typeof(Roles)))
+            {
+                roleCmb.Items.Add(item.ToString());
+            }
             roleCmb.SelectedIndex = 0;
             if (Text == "Изменить")
             {
-                var worker = db.Workers.Include(x => x.Role).FirstOrDefault(x => x.IdWorker == workerId);
+                var worker = db.Workers.FirstOrDefault(x => x.IdWorker == workerId);
                 fioTxt.Text = worker.Fio;
                 passTxt.Text = worker.Pass;
                 telnumTxt.Text = worker.TelNum;
                 loginTxt.Text = worker.Login;
-                roleCmb.SelectedItem = worker.Role.NameRole;
+                roleCmb.SelectedIndex = worker.RoleId;
             }
         }
 
@@ -74,7 +77,7 @@ namespace DealershipManagment
             var worker = new Worker();
             if (addEditBtn.Text == "Изменить")
             {
-                worker = db.Workers.Include(x => x.Role).FirstOrDefault(x => x.IdWorker == workerId);
+                worker = db.Workers.FirstOrDefault(x => x.IdWorker == workerId);
             }
             if (fioTxt.Text != string.Empty && passTxt.Text != string.Empty && telnumTxt.Text.Length == 17
                 && passwordTxt.Text != string.Empty && passTxt.Text.Length == 10)
@@ -84,7 +87,7 @@ namespace DealershipManagment
                 worker.TelNum = telnumTxt.Text;
                 worker.Login = loginTxt.Text;
                 worker.Password = HashWithSHA256(passwordTxt.Text);
-                worker.RoleId = db.Roles.FirstOrDefault(x => x.NameRole == roleCmb.SelectedItem).IdRole;
+                worker.RoleId = roleCmb.SelectedIndex;
                 if (addEditBtn.Text == "Добавить")
                 {
                     worker.IdWorker = Guid.NewGuid();

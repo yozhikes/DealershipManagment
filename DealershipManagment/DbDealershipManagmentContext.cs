@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using DealershipManagment.Tables;
 using Microsoft.EntityFrameworkCore;
 
 namespace DealershipManagment;
@@ -25,8 +24,6 @@ public partial class DbDealershipManagmentContext : DbContext
     public virtual DbSet<Report> Reports { get; set; }
 
     public virtual DbSet<Request> Requests { get; set; }
-
-    public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<Sale> Sales { get; set; }
 
@@ -83,7 +80,7 @@ public partial class DbDealershipManagmentContext : DbContext
                 .HasMaxLength(10)
                 .HasColumnName("pass");
             entity.Property(e => e.TelNum)
-                .HasMaxLength(12)
+                .HasMaxLength(17)
                 .HasColumnName("tel_num");
         });
 
@@ -106,7 +103,9 @@ public partial class DbDealershipManagmentContext : DbContext
             entity.Property(e => e.IdReport)
                 .ValueGeneratedNever()
                 .HasColumnName("id_report");
-            entity.Property(e => e.DateReport).HasColumnName("date_report");
+            entity.Property(e => e.DateReport)
+                .HasColumnType("datetime")
+                .HasColumnName("date_report");
             entity.Property(e => e.HoursWork).HasColumnName("hoursWork");
             entity.Property(e => e.MonthReport)
                 .HasMaxLength(20)
@@ -140,24 +139,15 @@ public partial class DbDealershipManagmentContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("dateStartRepair");
             entity.Property(e => e.Notes).HasColumnName("notes");
+            entity.Property(e => e.Price)
+                .HasColumnType("money")
+                .HasColumnName("price");
             entity.Property(e => e.StatusZayavki).HasColumnName("status_zayavki");
 
             entity.HasOne(d => d.Car).WithMany(p => p.Requests)
                 .HasForeignKey(d => d.CarId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Requests_Cars");
-        });
-
-        modelBuilder.Entity<Role>(entity =>
-        {
-            entity.HasKey(e => e.IdRole);
-
-            entity.Property(e => e.IdRole)
-                .ValueGeneratedNever()
-                .HasColumnName("id_role");
-            entity.Property(e => e.NameRole)
-                .HasMaxLength(40)
-                .HasColumnName("name_role");
         });
 
         modelBuilder.Entity<Sale>(entity =>
@@ -204,19 +194,20 @@ public partial class DbDealershipManagmentContext : DbContext
             entity.Property(e => e.Fio)
                 .HasMaxLength(75)
                 .HasColumnName("fio");
+            entity.Property(e => e.Login)
+                .HasMaxLength(50)
+                .HasColumnName("login");
             entity.Property(e => e.Pass)
                 .HasMaxLength(10)
                 .HasColumnName("pass");
+            entity.Property(e => e.Password)
+                .HasMaxLength(256)
+                .HasColumnName("password");
             entity.Property(e => e.RoleId).HasColumnName("role_id");
             entity.Property(e => e.Status).HasColumnName("status");
             entity.Property(e => e.TelNum)
-                .HasMaxLength(12)
+                .HasMaxLength(17)
                 .HasColumnName("tel_num");
-
-            entity.HasOne(d => d.Role).WithMany(p => p.Workers)
-                .HasForeignKey(d => d.RoleId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Workers_Roles");
         });
 
         OnModelCreatingPartial(modelBuilder);
