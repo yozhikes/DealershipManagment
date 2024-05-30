@@ -27,6 +27,8 @@ namespace DealershipManagment
             dt.Columns.Add("Коробка передач");
             dt.Columns.Add("Тип кузова");
             dt.Columns.Add("Тип топлива");
+            dt.Columns.Add("Цвет");
+            dt.Columns.Add("Мощность двигателя, л.с.");
             dt.Columns.Add("Год выпуска");
             dt.Columns.Add("VIN");
             dt.Columns.Add("Цена");
@@ -36,12 +38,9 @@ namespace DealershipManagment
             foreach (var item in Enum.GetValues(typeof(Statuses)))
             {
                 statusCmb.Items.Add(item.ToString());
+                filterCmb.Items.Add(item.ToString());
             }
             statusCmb.SelectedIndex = 0;
-            using (DbDealershipManagmentContext db = new DbDealershipManagmentContext())
-            {
-                filterCmb.DataSource = db.Marks.Select(x => x.NameMark).ToList();
-            }
             filterCmb.SelectedIndex = 0;
         }
 
@@ -81,8 +80,8 @@ namespace DealershipManagment
         private void CarsForm_Load(object sender, EventArgs e)
         {
             UpdateDgv();
-            carsDgv.Columns[11].Visible = false;
-            carsDgv.Sort(carsDgv.Columns[11], ListSortDirection.Ascending);
+            carsDgv.Columns[13].Visible = false;
+            carsDgv.Sort(carsDgv.Columns[13], ListSortDirection.Ascending);
         }
 
         private void UpdateDgv()
@@ -171,30 +170,34 @@ namespace DealershipManagment
                             dataRow[5] = EngineTypes.Электричество;
                             break;
                     }
-                    dataRow[6] = c.ReleaseYear;
-                    dataRow[7] = c.Vin;
-                    dataRow[8] = c.Price.ToString("G29");
-                    dataRow[9] = c.Notes;
+                    dataRow[6] = c.Color;
+                    dataRow[7] = c.Power;
+                    dataRow[8] = c.ReleaseYear;
+                    dataRow[9] = c.Vin;
+                    dataRow[10] = c.Price.ToString("G29");
+                    dataRow[11] = c.Notes;
                     switch (c.Status)
                     {
                         case 0:
-                            dataRow[10] = Statuses.Новая;
+                            dataRow[12] = Statuses.Новая;
                             break;
                         case 1:
-                            dataRow[10] = Statuses.Резерв;
+                            dataRow[12] = Statuses.Резерв;
                             break;
                         case 2:
-                            dataRow[10] = Statuses.Продана;
+                            dataRow[12] = Statuses.Продана;
                             break;
                         case 3:
-                            dataRow[10] = Statuses.Ремонт;
+                            dataRow[12] = Statuses.Ремонт;
                             break;
                     }
-                    dataRow[11] = c.IdCar;
+                    dataRow[13] = c.IdCar;
                     dt.Rows.Add(dataRow);
                 }
             }
             carsDgv.DataSource = dt;
+            carsTS.Text = carsDgv.Rows.Count.ToString();
+            filterTS.Text = "0";
         }
 
         private void applyFilterBtn_Click(object sender, EventArgs e)
@@ -202,11 +205,12 @@ namespace DealershipManagment
             UpdateDgv();
             for (int i = dt.Rows.Count - 1; i >= 0; i--)
             {
-                if (dt.Rows[i][0].ToString() != filterCmb.Text)
+                if (dt.Rows[i][12].ToString() != filterCmb.Text)
                 {
                     dt.Rows.Remove(dt.Rows[i]);
                 }
             }
+            filterTS.Text = carsDgv.Rows.Count.ToString();
         }
 
         private void clrFltrBtn_Click(object sender, EventArgs e)
@@ -221,10 +225,6 @@ namespace DealershipManagment
             if (addCar.ShowDialog() == DialogResult.OK)
             {
                 UpdateDgv();
-                using (DbDealershipManagmentContext db = new DbDealershipManagmentContext())
-                {
-                    filterCmb.DataSource = db.Marks.Select(x => x.NameMark).ToList();
-                }
             }
             Show();
         }
@@ -233,15 +233,11 @@ namespace DealershipManagment
         {
             if (carsDgv.SelectedRows.Count == 1)
             {
-                AddEditCarsForm editCar = new AddEditCarsForm(Guid.Parse(carsDgv[11, carsDgv.SelectedRows[0].Index].Value.ToString()));
+                AddEditCarsForm editCar = new AddEditCarsForm(Guid.Parse(carsDgv[13, carsDgv.SelectedRows[0].Index].Value.ToString()));
                 Hide();
                 if (editCar.ShowDialog() == DialogResult.OK)
                 {
                     UpdateDgv();
-                    using (DbDealershipManagmentContext db = new DbDealershipManagmentContext())
-                    {
-                        filterCmb.DataSource = db.Marks.Select(x => x.NameMark).ToList();
-                    }
                 }
                 Show();
             }
@@ -261,19 +257,18 @@ namespace DealershipManagment
             {
                 using (DbDealershipManagmentContext db = new DbDealershipManagmentContext())
                 {
-                    if (db.Sales.FirstOrDefault(x => x.CarId == Guid.Parse(carsDgv[11,
+                    if (db.Sales.FirstOrDefault(x => x.CarId == Guid.Parse(carsDgv[13,
                             carsDgv.SelectedRows[0].Index].Value.ToString())) == null
-                            && db.Requests.FirstOrDefault(x => x.CarId == Guid.Parse(carsDgv[11,
+                            && db.Requests.FirstOrDefault(x => x.CarId == Guid.Parse(carsDgv[13,
                             carsDgv.SelectedRows[0].Index].Value.ToString())) == null)
                     {
                         if (MessageBox.Show("Вы действительно хотите удалить эту машину?", "Удаление",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
-                            db.Cars.Remove(db.Cars.FirstOrDefault(x => x.IdCar == Guid.Parse(carsDgv[11,
+                            db.Cars.Remove(db.Cars.FirstOrDefault(x => x.IdCar == Guid.Parse(carsDgv[13,
                                 carsDgv.SelectedRows[0].Index].Value.ToString())));
                             db.SaveChanges();
                             UpdateDgv();
-                            filterCmb.DataSource = db.Marks.Select(x => x.NameMark).ToList();
                         }
                     }
                     else
@@ -305,7 +300,7 @@ namespace DealershipManagment
             {
                 using (var db = new DbDealershipManagmentContext())
                 {
-                    var car = db.Cars.FirstOrDefault(x => x.IdCar == Guid.Parse(carsDgv[11, carsDgv.SelectedRows[0].Index].Value.ToString()));
+                    var car = db.Cars.FirstOrDefault(x => x.IdCar == Guid.Parse(carsDgv[13, carsDgv.SelectedRows[0].Index].Value.ToString()));
                     car.Status = statusCmb.SelectedIndex;
                     db.SaveChanges();
                     UpdateDgv();
@@ -323,12 +318,12 @@ namespace DealershipManagment
 
         private void carsDgv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            statusCmb.SelectedItem = carsDgv.Rows[carsDgv.SelectedRows[0].Index].Cells[10].Value;
+            statusCmb.SelectedItem = carsDgv.Rows[carsDgv.SelectedRows[0].Index].Cells[12].Value;
         }
 
         private void carsDgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            statusCmb.SelectedItem = carsDgv.Rows[carsDgv.SelectedRows[0].Index].Cells[10].Value;
+            statusCmb.SelectedItem = carsDgv.Rows[carsDgv.SelectedRows[0].Index].Cells[12].Value;
         }
     }
 }

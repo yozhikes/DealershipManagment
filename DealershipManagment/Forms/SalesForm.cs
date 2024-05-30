@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DealershipManagment.Enums;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Office.Interop.Word;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,11 +15,11 @@ namespace DealershipManagment
 {
     public partial class SalesForm : Form
     {
-        DataTable dt = new DataTable();
+        System.Data.DataTable dt = new System.Data.DataTable();
         public SalesForm()
         {
             InitializeComponent();
-            salesDgv.DefaultCellStyle.Font = new Font("Times New Roman", 14);
+            salesDgv.DefaultCellStyle.Font = new System.Drawing.Font("Times New Roman", 14);
             salesDgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dt.Columns.Add("Машина");
             dt.Columns.Add("Клиент");
@@ -58,6 +60,8 @@ namespace DealershipManagment
                 }
             }
             salesDgv.DataSource = dt;
+            salesTS.Text = salesDgv.Rows.Count.ToString();
+            filterTS.Text = "0";
         }
 
         private void SalesForm_Load(object sender, EventArgs e)
@@ -82,7 +86,7 @@ namespace DealershipManagment
                 UpdateDgv();
                 using (var db = new DbDealershipManagmentContext())
                 {
-                    filterCmb.DataSource = db.Sales.Include(x=>x.Worker).Select(x => x.Worker.Fio).Distinct().ToList();
+                    filterCmb.DataSource = db.Sales.Include(x => x.Worker).Select(x => x.Worker.Fio).Distinct().ToList();
                 }
             }
             Show();
@@ -112,7 +116,7 @@ namespace DealershipManagment
             {
                 MessageBox.Show("Не была выбрана строка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            
+
         }
 
         private void delBtn_Click(object sender, EventArgs e)
@@ -140,7 +144,7 @@ namespace DealershipManagment
             {
                 MessageBox.Show("Не была выбрана строка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            
+
         }
 
         private void clrFltrBtn_Click(object sender, EventArgs e)
@@ -158,6 +162,7 @@ namespace DealershipManagment
                     dt.Rows.Remove(dt.Rows[i]);
                 }
             }
+            filterTS.Text = salesDgv.Rows.Count.ToString();
         }
 
         private void searchBtn_Click(object sender, EventArgs e)
@@ -191,6 +196,64 @@ namespace DealershipManagment
             {
                 MessageBox.Show("Пустое поле ввода!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void documentBtn_Click(object sender, EventArgs e)
+        {
+            if (salesDgv.SelectedRows.Count == 1)
+            {
+                using (var db = new DbDealershipManagmentContext())
+                {
+                    var sale = db.Sales
+                        .Include(x=>x.Car)
+                        .Include(x=>x.Worker)
+                        .Include(x=>x.Client)
+                        .Include(x=>x.Car.Mark)
+                        .FirstOrDefault(x => x.IdSale == Guid.Parse(salesDgv[6,salesDgv.SelectedRows[0].Index].Value.ToString()));
+                // Создаем новый Word-документ
+                Microsoft.Office.Interop.Word.Application wordApp = new Microsoft.Office.Interop.Word.Application();
+                Microsoft.Office.Interop.Word.Document wordDoc = wordApp.Documents.Add();
+
+                // Получаем шаблон Word-документа
+                string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "templateDogovor.docx");
+                wordDoc = wordApp.Documents.Open(templatePath);
+
+                // Заполняем данные из DataGridView в шаблон
+
+                // Замените плейсхолдеры в шаблоне на соответствующие данные
+                wordDoc.Bookmarks["dateSale"].Range.Text = sale.DateSale.ToShortDateString();
+                wordDoc.Bookmarks["worker"].Range.Text = sale.Worker.Fio;
+                wordDoc.Bookmarks["client"].Range.Text = sale.Client.Fio;
+                wordDoc.Bookmarks["VIN"].Range.Text = sale.Car.Vin;
+                wordDoc.Bookmarks["markModel"].Range.Text = $"{sale.Car.Mark.NameMark} {sale.Car.Model}";
+                wordDoc.Bookmarks["year"].Range.Text = sale.Car.ReleaseYear.ToString();
+                wordDoc.Bookmarks["color"].Range.Text = sale.Car.Color;
+                wordDoc.Bookmarks["power"].Range.Text = sale.Car.Power.ToString();
+                wordDoc.Bookmarks["transmission"].Range.Text = Enum.GetName((Transmissions)sale.Car.Transmission);
+                wordDoc.Bookmarks["drive"].Range.Text = Enum.GetName((Drives)sale.Car.Transmission);
+                wordDoc.Bookmarks["bodyType"].Range.Text = Enum.GetName((BodyTypes)sale.Car.Transmission);
+                wordDoc.Bookmarks["engineType"].Range.Text = Enum.GetName((EngineTypes)sale.Car.Transmission);
+                wordDoc.Bookmarks["total"].Range.Text = sale.Total.ToString("G29");
+                wordDoc.Bookmarks["clientFio"].Range.Text = sale.Client.Fio;
+                wordDoc.Bookmarks["seriyaPass"].Range.Text = sale.Client.Pass.Substring(0,4);
+                wordDoc.Bookmarks["numberPass"].Range.Text = sale.Client.Pass.Substring(4, 6);
+                wordDoc.Bookmarks["clientFio2"].Range.Text = sale.Client.Fio;
+                wordDoc.Bookmarks["worker2"].Range.Text = sale.Worker.Fio;
+                string savePath = "Договор.docx";
+                wordDoc.SaveAs2(savePath);
+                wordApp.Visible = true;
+
+                }
+            }
+            else if (salesDgv.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Выберете только одну строку!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show("Не была выбрана строка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
     }
 }

@@ -29,6 +29,10 @@ public partial class Car
 
     public string Model { get; set; } = null!;
 
+    public string Color { get; set; } = null!;
+
+    public int Power { get; set; }
+
     public virtual Mark Mark { get; set; } = null!;
 
     public virtual ICollection<Request> Requests { get; set; } = new List<Request>();

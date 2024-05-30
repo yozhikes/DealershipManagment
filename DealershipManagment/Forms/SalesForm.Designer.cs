@@ -41,9 +41,17 @@
             searchTxt = new TextBox();
             searchBtn = new Button();
             closeBtn = new Button();
+            toolStrip1 = new ToolStrip();
+            toolStripLabel1 = new ToolStripLabel();
+            salesTS = new ToolStripLabel();
+            toolStripSeparator1 = new ToolStripSeparator();
+            toolStripLabel3 = new ToolStripLabel();
+            filterTS = new ToolStripLabel();
+            documentBtn = new Button();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)salesDgv).BeginInit();
             groupBox2.SuspendLayout();
+            toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -52,7 +60,7 @@
             groupBox1.Controls.Add(applyFilterBtn);
             groupBox1.Controls.Add(clrFltrBtn);
             groupBox1.Controls.Add(filterCmb);
-            groupBox1.Font = new Font("Times New Roman", 20.25F);
+            groupBox1.Font = new Font("Times New Roman", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox1.Location = new Point(1022, 15);
             groupBox1.Margin = new Padding(4);
             groupBox1.Name = "groupBox1";
@@ -65,7 +73,7 @@
             // applyFilterBtn
             // 
             applyFilterBtn.BackColor = SystemColors.ControlLightLight;
-            applyFilterBtn.Font = new Font("Times New Roman", 14.25F);
+            applyFilterBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             applyFilterBtn.Location = new Point(62, 126);
             applyFilterBtn.Margin = new Padding(4);
             applyFilterBtn.Name = "applyFilterBtn";
@@ -78,7 +86,7 @@
             // clrFltrBtn
             // 
             clrFltrBtn.BackColor = SystemColors.ControlLightLight;
-            clrFltrBtn.Font = new Font("Times New Roman", 14.25F);
+            clrFltrBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             clrFltrBtn.Location = new Point(62, 173);
             clrFltrBtn.Margin = new Padding(4);
             clrFltrBtn.Name = "clrFltrBtn";
@@ -115,7 +123,7 @@
             // delBtn
             // 
             delBtn.BackColor = SystemColors.ControlLightLight;
-            delBtn.Font = new Font("Times New Roman", 14.25F);
+            delBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             delBtn.Location = new Point(742, 474);
             delBtn.Margin = new Padding(4);
             delBtn.Name = "delBtn";
@@ -128,7 +136,7 @@
             // editBtn
             // 
             editBtn.BackColor = SystemColors.ControlLightLight;
-            editBtn.Font = new Font("Times New Roman", 14.25F);
+            editBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             editBtn.Location = new Point(391, 474);
             editBtn.Margin = new Padding(4);
             editBtn.Name = "editBtn";
@@ -141,7 +149,7 @@
             // addBtn
             // 
             addBtn.BackColor = SystemColors.ControlLightLight;
-            addBtn.Font = new Font("Times New Roman", 14.25F);
+            addBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             addBtn.Location = new Point(31, 474);
             addBtn.Margin = new Padding(4);
             addBtn.Name = "addBtn";
@@ -156,7 +164,7 @@
             groupBox2.BackColor = Color.Transparent;
             groupBox2.Controls.Add(searchTxt);
             groupBox2.Controls.Add(searchBtn);
-            groupBox2.Font = new Font("Times New Roman", 20.25F);
+            groupBox2.Font = new Font("Times New Roman", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox2.Location = new Point(1022, 246);
             groupBox2.Margin = new Padding(4);
             groupBox2.Name = "groupBox2";
@@ -168,7 +176,7 @@
             // 
             // searchTxt
             // 
-            searchTxt.Font = new Font("Times New Roman", 14.25F);
+            searchTxt.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             searchTxt.Location = new Point(10, 42);
             searchTxt.Margin = new Padding(4);
             searchTxt.Name = "searchTxt";
@@ -178,7 +186,7 @@
             // searchBtn
             // 
             searchBtn.BackColor = SystemColors.ControlLightLight;
-            searchBtn.Font = new Font("Times New Roman", 14.25F);
+            searchBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             searchBtn.Location = new Point(62, 86);
             searchBtn.Margin = new Padding(4);
             searchBtn.Name = "searchBtn";
@@ -191,7 +199,7 @@
             // closeBtn
             // 
             closeBtn.BackColor = SystemColors.ControlLightLight;
-            closeBtn.Font = new Font("Times New Roman", 14.25F);
+            closeBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             closeBtn.Location = new Point(1022, 414);
             closeBtn.Margin = new Padding(4);
             closeBtn.Name = "closeBtn";
@@ -201,13 +209,67 @@
             closeBtn.UseVisualStyleBackColor = false;
             closeBtn.Click += closeBtn_Click;
             // 
+            // toolStrip1
+            // 
+            toolStrip1.Dock = DockStyle.Bottom;
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripLabel1, salesTS, toolStripSeparator1, toolStripLabel3, filterTS });
+            toolStrip1.Location = new Point(0, 563);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new Size(1315, 25);
+            toolStrip1.TabIndex = 56;
+            toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripLabel1
+            // 
+            toolStripLabel1.Name = "toolStripLabel1";
+            toolStripLabel1.Size = new Size(135, 22);
+            toolStripLabel1.Text = "Общее кол-во продаж:";
+            // 
+            // salesTS
+            // 
+            salesTS.Name = "salesTS";
+            salesTS.Size = new Size(86, 22);
+            salesTS.Text = "toolStripLabel2";
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(6, 25);
+            // 
+            // toolStripLabel3
+            // 
+            toolStripLabel3.Name = "toolStripLabel3";
+            toolStripLabel3.Size = new Size(205, 22);
+            toolStripLabel3.Text = "Продаж от выбранного менеджера:";
+            // 
+            // filterTS
+            // 
+            filterTS.Name = "filterTS";
+            filterTS.Size = new Size(86, 22);
+            filterTS.Text = "toolStripLabel4";
+            // 
+            // documentBtn
+            // 
+            documentBtn.BackColor = SystemColors.ControlLightLight;
+            documentBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            documentBtn.Location = new Point(1022, 474);
+            documentBtn.Margin = new Padding(4);
+            documentBtn.Name = "documentBtn";
+            documentBtn.Size = new Size(275, 73);
+            documentBtn.TabIndex = 57;
+            documentBtn.Text = "Сформировать договор продажи";
+            documentBtn.UseVisualStyleBackColor = false;
+            documentBtn.Click += documentBtn_Click;
+            // 
             // SalesForm
             // 
             AutoScaleDimensions = new SizeF(9F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1315, 568);
+            ClientSize = new Size(1315, 588);
+            Controls.Add(documentBtn);
+            Controls.Add(toolStrip1);
             Controls.Add(closeBtn);
             Controls.Add(groupBox2);
             Controls.Add(delBtn);
@@ -215,7 +277,7 @@
             Controls.Add(addBtn);
             Controls.Add(groupBox1);
             Controls.Add(salesDgv);
-            Font = new Font("Times New Roman", 12F);
+            Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             Name = "SalesForm";
@@ -225,7 +287,10 @@
             ((System.ComponentModel.ISupportInitialize)salesDgv).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -241,5 +306,12 @@
         private Button searchBtn;
         private Button closeBtn;
         private Button applyFilterBtn;
+        private ToolStrip toolStrip1;
+        private ToolStripLabel toolStripLabel1;
+        private ToolStripLabel salesTS;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripLabel toolStripLabel3;
+        private ToolStripLabel filterTS;
+        private Button documentBtn;
     }
 }

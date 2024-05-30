@@ -70,6 +70,8 @@ namespace DealershipManagment
                 }
             }
             serviceDgv.DataSource = dt;
+            serviceTS.Text = serviceDgv.Rows.Count.ToString();
+            filterTS.Text = "0";
         }
 
         private void ServiceForm_Load(object sender, EventArgs e)
@@ -191,6 +193,7 @@ namespace DealershipManagment
                     dt.Rows.Remove(dt.Rows[i]);
                 }
             }
+            filterTS.Text = serviceDgv.Rows.Count.ToString();
         }
 
         private void searchBtn_Click(object sender, EventArgs e)

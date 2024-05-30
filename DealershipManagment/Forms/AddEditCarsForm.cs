@@ -73,12 +73,14 @@ namespace DealershipManagment
                 transmissionCmb.SelectedIndex = car.Transmission;
                 bodyCmb.SelectedIndex = car.BodyType;
                 engineCmb.SelectedIndex = car.EngineType;
+                colorTxt.Text = car.Color;
+                powerTxt.Text = car.Power.ToString();
             }
         }
 
         private void addEditBtn_Click(object sender, EventArgs e)
         {
-            if (modelTxt.Text!=string.Empty && vinTxt.Text != string.Empty && decimal.TryParse(priceTxt.Text, out decimal d))
+            if (modelTxt.Text != string.Empty && vinTxt.Text != string.Empty && decimal.TryParse(priceTxt.Text, out decimal d))
             {
                 car.MarkId = db.Marks.FirstOrDefault(x => x.NameMark == marksCmb.Text).IdMark;
                 car.Model = modelTxt.Text;
@@ -90,6 +92,8 @@ namespace DealershipManagment
                 car.Vin = vinTxt.Text;
                 car.Price = decimal.Parse(priceTxt.Text);
                 car.Notes = notesTxt.Text;
+                car.Color = colorTxt.Text;
+                car.Power = int.Parse(powerTxt.Text);
                 if (addEditBtn.Text == "Добавить")
                 {
                     car.IdCar = Guid.NewGuid();
@@ -109,6 +113,13 @@ namespace DealershipManagment
         private void closeBtn_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void powerTxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar)) return;
+            else
+                e.Handled = true;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace DealershipManagment
             staffDgv.DefaultCellStyle.Font = new Font("Times New Roman", 14);
             staffDgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dt.Columns.Add("ФИО");
-            dt.Columns.Add("Пасспорт");
+            dt.Columns.Add("Паспорт");
             dt.Columns.Add("Номер телефона");
             dt.Columns.Add("Роль");
             dt.Columns.Add("Статус");
@@ -66,6 +66,8 @@ namespace DealershipManagment
                 }
             }
             staffDgv.DataSource = dt;
+            workersTS.Text = staffDgv.Rows.Count.ToString();
+            filterTS.Text = "0";
         }
 
         private void StaffForm_Load(object sender, EventArgs e)
@@ -186,6 +188,7 @@ namespace DealershipManagment
                     dt.Rows.Remove(dt.Rows[i]);
                 }
             }
+            filterTS.Text = staffDgv.Rows.Count.ToString();
         }
 
         private void searchBtn_Click(object sender, EventArgs e)

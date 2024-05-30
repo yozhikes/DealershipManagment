@@ -44,10 +44,17 @@
             groupBox3 = new GroupBox();
             statusBtn = new Button();
             statusCmb = new ComboBox();
+            toolStrip1 = new ToolStrip();
+            toolStripLabel1 = new ToolStripLabel();
+            workersTS = new ToolStripLabel();
+            toolStripSeparator1 = new ToolStripSeparator();
+            toolStripLabel3 = new ToolStripLabel();
+            filterTS = new ToolStripLabel();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)staffDgv).BeginInit();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
+            toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -56,7 +63,7 @@
             groupBox1.Controls.Add(applyFilterBtn);
             groupBox1.Controls.Add(clrFltrBtn);
             groupBox1.Controls.Add(filterCmb);
-            groupBox1.Font = new Font("Times New Roman", 20.25F);
+            groupBox1.Font = new Font("Times New Roman", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox1.Location = new Point(1015, 32);
             groupBox1.Margin = new Padding(4);
             groupBox1.Name = "groupBox1";
@@ -69,7 +76,7 @@
             // applyFilterBtn
             // 
             applyFilterBtn.BackColor = SystemColors.ControlLightLight;
-            applyFilterBtn.Font = new Font("Times New Roman", 14.25F);
+            applyFilterBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             applyFilterBtn.Location = new Point(81, 87);
             applyFilterBtn.Margin = new Padding(4);
             applyFilterBtn.Name = "applyFilterBtn";
@@ -82,7 +89,7 @@
             // clrFltrBtn
             // 
             clrFltrBtn.BackColor = SystemColors.ControlLightLight;
-            clrFltrBtn.Font = new Font("Times New Roman", 14.25F);
+            clrFltrBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             clrFltrBtn.Location = new Point(81, 134);
             clrFltrBtn.Margin = new Padding(4);
             clrFltrBtn.Name = "clrFltrBtn";
@@ -120,8 +127,8 @@
             // 
             // delBtn
             // 
-            delBtn.BackColor = Color.Transparent;
-            delBtn.Font = new Font("Times New Roman", 14.25F);
+            delBtn.BackColor = SystemColors.ControlLightLight;
+            delBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             delBtn.Location = new Point(750, 638);
             delBtn.Margin = new Padding(4);
             delBtn.Name = "delBtn";
@@ -133,8 +140,8 @@
             // 
             // editBtn
             // 
-            editBtn.BackColor = Color.Transparent;
-            editBtn.Font = new Font("Times New Roman", 14.25F);
+            editBtn.BackColor = SystemColors.ControlLightLight;
+            editBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             editBtn.Location = new Point(399, 638);
             editBtn.Margin = new Padding(4);
             editBtn.Name = "editBtn";
@@ -146,8 +153,8 @@
             // 
             // addBtn
             // 
-            addBtn.BackColor = Color.Transparent;
-            addBtn.Font = new Font("Times New Roman", 14.25F);
+            addBtn.BackColor = SystemColors.ControlLightLight;
+            addBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             addBtn.Location = new Point(39, 638);
             addBtn.Margin = new Padding(4);
             addBtn.Name = "addBtn";
@@ -162,7 +169,7 @@
             groupBox2.BackColor = Color.Transparent;
             groupBox2.Controls.Add(searchTxt);
             groupBox2.Controls.Add(searchBtn);
-            groupBox2.Font = new Font("Times New Roman", 20.25F);
+            groupBox2.Font = new Font("Times New Roman", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox2.Location = new Point(1015, 229);
             groupBox2.Margin = new Padding(4);
             groupBox2.Name = "groupBox2";
@@ -174,7 +181,7 @@
             // 
             // searchTxt
             // 
-            searchTxt.Font = new Font("Times New Roman", 14.25F);
+            searchTxt.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             searchTxt.Location = new Point(30, 40);
             searchTxt.Margin = new Padding(4);
             searchTxt.Name = "searchTxt";
@@ -184,7 +191,7 @@
             // searchBtn
             // 
             searchBtn.BackColor = SystemColors.ControlLightLight;
-            searchBtn.Font = new Font("Times New Roman", 14.25F);
+            searchBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             searchBtn.Location = new Point(82, 84);
             searchBtn.Margin = new Padding(4);
             searchBtn.Name = "searchBtn";
@@ -197,7 +204,7 @@
             // closeBtn
             // 
             closeBtn.BackColor = SystemColors.ControlLightLight;
-            closeBtn.Font = new Font("Times New Roman", 14.25F);
+            closeBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             closeBtn.Location = new Point(1015, 569);
             closeBtn.Margin = new Padding(4);
             closeBtn.Name = "closeBtn";
@@ -212,7 +219,7 @@
             groupBox3.BackColor = Color.Transparent;
             groupBox3.Controls.Add(statusBtn);
             groupBox3.Controls.Add(statusCmb);
-            groupBox3.Font = new Font("Times New Roman", 20.25F);
+            groupBox3.Font = new Font("Times New Roman", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox3.Location = new Point(1015, 402);
             groupBox3.Margin = new Padding(4);
             groupBox3.Name = "groupBox3";
@@ -225,7 +232,7 @@
             // statusBtn
             // 
             statusBtn.BackColor = SystemColors.ControlLightLight;
-            statusBtn.Font = new Font("Times New Roman", 14.25F);
+            statusBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             statusBtn.Location = new Point(82, 86);
             statusBtn.Margin = new Padding(4);
             statusBtn.Name = "statusBtn";
@@ -245,13 +252,53 @@
             statusCmb.Size = new Size(256, 39);
             statusCmb.TabIndex = 8;
             // 
+            // toolStrip1
+            // 
+            toolStrip1.Dock = DockStyle.Bottom;
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripLabel1, workersTS, toolStripSeparator1, toolStripLabel3, filterTS });
+            toolStrip1.Location = new Point(0, 723);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new Size(1335, 25);
+            toolStrip1.TabIndex = 57;
+            toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripLabel1
+            // 
+            toolStripLabel1.Name = "toolStripLabel1";
+            toolStripLabel1.Size = new Size(158, 22);
+            toolStripLabel1.Text = "Общее кол-во работников:";
+            // 
+            // workersTS
+            // 
+            workersTS.Name = "workersTS";
+            workersTS.Size = new Size(86, 22);
+            workersTS.Text = "toolStripLabel2";
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(6, 25);
+            // 
+            // toolStripLabel3
+            // 
+            toolStripLabel3.Name = "toolStripLabel3";
+            toolStripLabel3.Size = new Size(209, 22);
+            toolStripLabel3.Text = "Работников по выбранному статусу:";
+            // 
+            // filterTS
+            // 
+            filterTS.Name = "filterTS";
+            filterTS.Size = new Size(86, 22);
+            filterTS.Text = "toolStripLabel4";
+            // 
             // StaffForm
             // 
             AutoScaleDimensions = new SizeF(9F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1335, 724);
+            ClientSize = new Size(1335, 748);
+            Controls.Add(toolStrip1);
             Controls.Add(groupBox3);
             Controls.Add(closeBtn);
             Controls.Add(groupBox2);
@@ -260,7 +307,7 @@
             Controls.Add(addBtn);
             Controls.Add(groupBox1);
             Controls.Add(staffDgv);
-            Font = new Font("Times New Roman", 12F);
+            Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             Name = "StaffForm";
@@ -271,7 +318,10 @@
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             groupBox3.ResumeLayout(false);
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -290,5 +340,11 @@
         private Button statusBtn;
         private ComboBox statusCmb;
         private Button applyFilterBtn;
+        private ToolStrip toolStrip1;
+        private ToolStripLabel toolStripLabel1;
+        private ToolStripLabel workersTS;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripLabel toolStripLabel3;
+        private ToolStripLabel filterTS;
     }
 }

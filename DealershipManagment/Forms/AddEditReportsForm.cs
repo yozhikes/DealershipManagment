@@ -47,7 +47,13 @@ namespace DealershipManagment
             monthCmb.Items.Add("Октябрь " +  DateTime.Now.Year);
             monthCmb.Items.Add("Ноябрь " +  DateTime.Now.Year);
             monthCmb.Items.Add("Декабрь " +  DateTime.Now.Year);
-            workersCmb.DataSource = db.Workers.Select(x => x.Fio).ToList();
+            foreach (var item in db.Workers.ToList())
+            {
+                if (item.Status != 2)
+                {
+                    workersCmb.Items.Add($"{item.Fio}");
+                }
+            }
             monthCmb.SelectedIndex = 0;
             workersCmb.SelectedIndex = 0;
             if (Text == "Изменить")

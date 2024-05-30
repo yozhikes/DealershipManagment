@@ -30,8 +30,10 @@ namespace DealershipManagment
             using (DbDealershipManagmentContext db = new DbDealershipManagmentContext())
             {
                 filterCmb.DataSource = db.Reports.Select(x => x.HoursWork).Distinct().ToList();
+                expCmb.DataSource = db.Reports.Select(x=>x.MonthReport).Distinct().ToList();
             }
             filterCmb.SelectedIndex = 0;
+            expCmb.SelectedIndex = 0;
         }
 
         private void UpdateDgv()
@@ -62,6 +64,7 @@ namespace DealershipManagment
         {
             UpdateDgv();
             filterCmb.SelectedIndex = 0;
+            expCmb.SelectedIndex = 0;
             financesDgv.Columns[6].Visible = false;
             financesDgv.Sort(financesDgv.Columns[6], ListSortDirection.Ascending);
         }
@@ -76,6 +79,7 @@ namespace DealershipManagment
                 using (var db = new DbDealershipManagmentContext())
                 {
                     filterCmb.DataSource = db.Reports.Select(x => x.HoursWork).Distinct().ToList();
+                    expCmb.DataSource = db.Reports.Select(x => x.MonthReport).Distinct().ToList();
                 }
             }
             Show();
@@ -93,6 +97,7 @@ namespace DealershipManagment
                     using (var db = new DbDealershipManagmentContext())
                     {
                         filterCmb.DataSource = db.Reports.Select(x => x.HoursWork).Distinct().ToList();
+                        expCmb.DataSource = db.Reports.Select(x => x.MonthReport).Distinct().ToList();
                     }
                 }
                 Show();
@@ -120,6 +125,7 @@ namespace DealershipManagment
                         financesDgv.SelectedRows[0].Index].Value.ToString())));
                         db.SaveChanges();
                         filterCmb.DataSource = db.Reports.Select(x => x.HoursWork).Distinct().ToList();
+                        expCmb.DataSource = db.Reports.Select(x => x.MonthReport).Distinct().ToList();
                     }
                     UpdateDgv();
                 }
@@ -187,6 +193,39 @@ namespace DealershipManagment
             {
                 MessageBox.Show("Пустое поле ввода!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void expBtn_Click(object sender, EventArgs e)
+        {
+            var l = 2;
+            Microsoft.Office.Interop.Excel.Application ExcelApp = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel.Workbook ExcelWorkBook;
+            Microsoft.Office.Interop.Excel.Worksheet ExcelWorkSheet;
+            //Книга.
+            ExcelWorkBook = ExcelApp.Workbooks.Add(System.Reflection.Missing.Value);
+            ExcelWorkBook.SaveAs($"Отчёт за {expCmb.SelectedItem.ToString()}.xlsx");
+            //Таблица.
+            ExcelWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)ExcelWorkBook.Worksheets.get_Item(1);
+            for (int j = 1; j < financesDgv.ColumnCount - 1; j++)
+            {
+                ExcelApp.Cells[1, j] = financesDgv.Columns[j].HeaderText;
+                ExcelWorkSheet.Columns[j].ColumnWidth = 30;
+            }
+            for (int i = 0; i < financesDgv.Rows.Count; i++)
+            {
+                var goooool = financesDgv.Rows[i].Cells[0].Value;
+                if (financesDgv.Rows[i].Cells[0].Value.ToString() == expCmb.SelectedItem.ToString())
+                {
+                    for (int j = 0; j < financesDgv.ColumnCount - 2; j++)
+                    {
+                        ExcelApp.Cells[l, j + 1] = financesDgv.Rows[i].Cells[j+1].Value;
+                    }
+                    l++;
+                }
+            }
+            //Вызываем нашу созданную эксельку.
+            ExcelApp.Visible = true;
+            ExcelApp.UserControl = true;
         }
     }
 }

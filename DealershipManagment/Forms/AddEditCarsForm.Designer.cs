@@ -51,13 +51,18 @@
             label10 = new Label();
             yearTxt = new NumericUpDown();
             closeBtn = new Button();
+            label11 = new Label();
+            colorTxt = new TextBox();
+            label12 = new Label();
+            powerTxt = new TextBox();
+            label13 = new Label();
             ((System.ComponentModel.ISupportInitialize)yearTxt).BeginInit();
             SuspendLayout();
             // 
             // addEditBtn
             // 
             addEditBtn.BackColor = SystemColors.ControlLightLight;
-            addEditBtn.Font = new Font("Times New Roman", 14.25F);
+            addEditBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             addEditBtn.Location = new Point(422, 470);
             addEditBtn.Margin = new Padding(4);
             addEditBtn.Name = "addEditBtn";
@@ -81,7 +86,7 @@
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold);
+            label1.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             label1.Location = new Point(108, 28);
             label1.Name = "label1";
             label1.Size = new Size(74, 22);
@@ -122,7 +127,7 @@
             // 
             engineCmb.DropDownStyle = ComboBoxStyle.DropDownList;
             engineCmb.FormattingEnabled = true;
-            engineCmb.Location = new Point(672, 28);
+            engineCmb.Location = new Point(195, 253);
             engineCmb.Margin = new Padding(4);
             engineCmb.Name = "engineCmb";
             engineCmb.Size = new Size(289, 23);
@@ -130,8 +135,8 @@
             // 
             // vinTxt
             // 
-            vinTxt.Font = new Font("Times New Roman", 14.25F);
-            vinTxt.Location = new Point(670, 127);
+            vinTxt.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            vinTxt.Location = new Point(670, 163);
             vinTxt.Margin = new Padding(4);
             vinTxt.Name = "vinTxt";
             vinTxt.Size = new Size(291, 29);
@@ -139,8 +144,8 @@
             // 
             // priceTxt
             // 
-            priceTxt.Font = new Font("Times New Roman", 14.25F);
-            priceTxt.Location = new Point(670, 174);
+            priceTxt.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            priceTxt.Location = new Point(670, 210);
             priceTxt.Margin = new Padding(4);
             priceTxt.Name = "priceTxt";
             priceTxt.Size = new Size(291, 29);
@@ -148,8 +153,8 @@
             // 
             // notesTxt
             // 
-            notesTxt.Font = new Font("Times New Roman", 14.25F);
-            notesTxt.Location = new Point(670, 217);
+            notesTxt.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            notesTxt.Location = new Point(670, 253);
             notesTxt.Margin = new Padding(4);
             notesTxt.Name = "notesTxt";
             notesTxt.Size = new Size(291, 29);
@@ -157,7 +162,7 @@
             // 
             // modelTxt
             // 
-            modelTxt.Font = new Font("Times New Roman", 14.25F);
+            modelTxt.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             modelTxt.Location = new Point(195, 68);
             modelTxt.Margin = new Padding(4);
             modelTxt.Name = "modelTxt";
@@ -168,7 +173,7 @@
             // 
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold);
+            label2.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             label2.Location = new Point(98, 116);
             label2.Name = "label2";
             label2.Size = new Size(79, 22);
@@ -179,7 +184,7 @@
             // 
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold);
+            label3.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             label3.Location = new Point(98, 68);
             label3.Name = "label3";
             label3.Size = new Size(82, 22);
@@ -190,8 +195,8 @@
             // 
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
-            label4.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold);
-            label4.Location = new Point(568, 217);
+            label4.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.Location = new Point(568, 253);
             label4.Name = "label4";
             label4.Size = new Size(88, 22);
             label4.TabIndex = 24;
@@ -201,8 +206,8 @@
             // 
             label5.AutoSize = true;
             label5.BackColor = Color.Transparent;
-            label5.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold);
-            label5.Location = new Point(594, 177);
+            label5.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.Location = new Point(594, 213);
             label5.Name = "label5";
             label5.Size = new Size(59, 22);
             label5.TabIndex = 25;
@@ -212,8 +217,8 @@
             // 
             label6.AutoSize = true;
             label6.BackColor = Color.Transparent;
-            label6.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold);
-            label6.Location = new Point(601, 127);
+            label6.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.Location = new Point(601, 163);
             label6.Name = "label6";
             label6.Size = new Size(49, 22);
             label6.TabIndex = 26;
@@ -223,8 +228,8 @@
             // 
             label7.AutoSize = true;
             label7.BackColor = Color.Transparent;
-            label7.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold);
-            label7.Location = new Point(535, 79);
+            label7.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.Location = new Point(535, 115);
             label7.Name = "label7";
             label7.Size = new Size(123, 22);
             label7.TabIndex = 27;
@@ -234,8 +239,8 @@
             // 
             label8.AutoSize = true;
             label8.BackColor = Color.Transparent;
-            label8.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold);
-            label8.Location = new Point(535, 27);
+            label8.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label8.Location = new Point(58, 252);
             label8.Name = "label8";
             label8.Size = new Size(127, 22);
             label8.TabIndex = 28;
@@ -245,7 +250,7 @@
             // 
             label9.AutoSize = true;
             label9.BackColor = Color.Transparent;
-            label9.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold);
+            label9.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             label9.Location = new Point(69, 202);
             label9.Name = "label9";
             label9.Size = new Size(113, 22);
@@ -256,7 +261,7 @@
             // 
             label10.AutoSize = true;
             label10.BackColor = Color.Transparent;
-            label10.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold);
+            label10.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             label10.Location = new Point(22, 158);
             label10.Name = "label10";
             label10.Size = new Size(163, 22);
@@ -265,8 +270,8 @@
             // 
             // yearTxt
             // 
-            yearTxt.Font = new Font("Times New Roman", 14.25F);
-            yearTxt.Location = new Point(670, 79);
+            yearTxt.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            yearTxt.Location = new Point(670, 115);
             yearTxt.Maximum = new decimal(new int[] { 2100, 0, 0, 0 });
             yearTxt.Name = "yearTxt";
             yearTxt.Size = new Size(291, 29);
@@ -276,7 +281,7 @@
             // closeBtn
             // 
             closeBtn.BackColor = SystemColors.ControlLightLight;
-            closeBtn.Font = new Font("Times New Roman", 14.25F);
+            closeBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             closeBtn.Location = new Point(422, 517);
             closeBtn.Margin = new Padding(4);
             closeBtn.Name = "closeBtn";
@@ -286,6 +291,58 @@
             closeBtn.UseVisualStyleBackColor = false;
             closeBtn.Click += closeBtn_Click;
             // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.BackColor = Color.Transparent;
+            label11.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label11.Location = new Point(316, 284);
+            label11.Name = "label11";
+            label11.Size = new Size(49, 22);
+            label11.TabIndex = 56;
+            label11.Text = "VIN:";
+            // 
+            // colorTxt
+            // 
+            colorTxt.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            colorTxt.Location = new Point(670, 28);
+            colorTxt.Margin = new Padding(4);
+            colorTxt.Name = "colorTxt";
+            colorTxt.Size = new Size(291, 29);
+            colorTxt.TabIndex = 55;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.BackColor = Color.Transparent;
+            label12.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label12.Location = new Point(509, 70);
+            label12.Name = "label12";
+            label12.Size = new Size(147, 22);
+            label12.TabIndex = 58;
+            label12.Text = "Мощность, л.с.:";
+            // 
+            // powerTxt
+            // 
+            powerTxt.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            powerTxt.Location = new Point(670, 68);
+            powerTxt.Margin = new Padding(4);
+            powerTxt.Name = "powerTxt";
+            powerTxt.Size = new Size(291, 29);
+            powerTxt.TabIndex = 57;
+            powerTxt.KeyPress += powerTxt_KeyPress;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.BackColor = Color.Transparent;
+            label13.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label13.Location = new Point(601, 30);
+            label13.Name = "label13";
+            label13.Size = new Size(57, 22);
+            label13.TabIndex = 59;
+            label13.Text = "Цвет:";
+            // 
             // AddEditCarsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -293,6 +350,11 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(992, 597);
+            Controls.Add(label13);
+            Controls.Add(label12);
+            Controls.Add(powerTxt);
+            Controls.Add(label11);
+            Controls.Add(colorTxt);
             Controls.Add(closeBtn);
             Controls.Add(yearTxt);
             Controls.Add(label10);
@@ -348,5 +410,10 @@
         private Label label10;
         private NumericUpDown yearTxt;
         private Button closeBtn;
+        private Label label11;
+        private TextBox colorTxt;
+        private Label label12;
+        private TextBox powerTxt;
+        private Label label13;
     }
 }

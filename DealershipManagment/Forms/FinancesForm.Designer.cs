@@ -41,9 +41,13 @@
             searchTxt = new TextBox();
             searchBtn = new Button();
             closeBtn = new Button();
+            expBtn = new Button();
+            groupBox3 = new GroupBox();
+            expCmb = new ComboBox();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)financesDgv).BeginInit();
             groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -52,7 +56,7 @@
             groupBox1.Controls.Add(applyFilterBtn);
             groupBox1.Controls.Add(clrFltrBtn);
             groupBox1.Controls.Add(filterCmb);
-            groupBox1.Font = new Font("Times New Roman", 20.25F);
+            groupBox1.Font = new Font("Times New Roman", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox1.Location = new Point(1043, 28);
             groupBox1.Margin = new Padding(4);
             groupBox1.Name = "groupBox1";
@@ -65,7 +69,7 @@
             // applyFilterBtn
             // 
             applyFilterBtn.BackColor = SystemColors.ControlLightLight;
-            applyFilterBtn.Font = new Font("Times New Roman", 14.25F);
+            applyFilterBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             applyFilterBtn.Location = new Point(62, 89);
             applyFilterBtn.Margin = new Padding(4);
             applyFilterBtn.Name = "applyFilterBtn";
@@ -78,7 +82,7 @@
             // clrFltrBtn
             // 
             clrFltrBtn.BackColor = SystemColors.ControlLightLight;
-            clrFltrBtn.Font = new Font("Times New Roman", 14.25F);
+            clrFltrBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             clrFltrBtn.Location = new Point(62, 136);
             clrFltrBtn.Margin = new Padding(4);
             clrFltrBtn.Name = "clrFltrBtn";
@@ -109,14 +113,14 @@
             financesDgv.Name = "financesDgv";
             financesDgv.ReadOnly = true;
             financesDgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            financesDgv.Size = new Size(954, 400);
+            financesDgv.Size = new Size(954, 498);
             financesDgv.TabIndex = 8;
             // 
             // delBtn
             // 
-            delBtn.BackColor = Color.Transparent;
-            delBtn.Font = new Font("Times New Roman", 14.25F);
-            delBtn.Location = new Point(761, 453);
+            delBtn.BackColor = SystemColors.ControlLightLight;
+            delBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            delBtn.Location = new Point(762, 566);
             delBtn.Margin = new Padding(4);
             delBtn.Name = "delBtn";
             delBtn.Size = new Size(243, 73);
@@ -127,9 +131,9 @@
             // 
             // editBtn
             // 
-            editBtn.BackColor = Color.Transparent;
-            editBtn.Font = new Font("Times New Roman", 14.25F);
-            editBtn.Location = new Point(410, 453);
+            editBtn.BackColor = SystemColors.ControlLightLight;
+            editBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            editBtn.Location = new Point(411, 566);
             editBtn.Margin = new Padding(4);
             editBtn.Name = "editBtn";
             editBtn.Size = new Size(243, 73);
@@ -140,9 +144,9 @@
             // 
             // addBtn
             // 
-            addBtn.BackColor = Color.Transparent;
-            addBtn.Font = new Font("Times New Roman", 14.25F);
-            addBtn.Location = new Point(50, 453);
+            addBtn.BackColor = SystemColors.ControlLightLight;
+            addBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            addBtn.Location = new Point(51, 566);
             addBtn.Margin = new Padding(4);
             addBtn.Name = "addBtn";
             addBtn.Size = new Size(243, 73);
@@ -156,7 +160,7 @@
             groupBox2.BackColor = Color.Transparent;
             groupBox2.Controls.Add(searchTxt);
             groupBox2.Controls.Add(searchBtn);
-            groupBox2.Font = new Font("Times New Roman", 20.25F);
+            groupBox2.Font = new Font("Times New Roman", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox2.Location = new Point(1043, 219);
             groupBox2.Margin = new Padding(4);
             groupBox2.Name = "groupBox2";
@@ -168,7 +172,7 @@
             // 
             // searchTxt
             // 
-            searchTxt.Font = new Font("Times New Roman", 14.25F);
+            searchTxt.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             searchTxt.Location = new Point(10, 42);
             searchTxt.Margin = new Padding(4);
             searchTxt.Name = "searchTxt";
@@ -178,7 +182,7 @@
             // searchBtn
             // 
             searchBtn.BackColor = SystemColors.ControlLightLight;
-            searchBtn.Font = new Font("Times New Roman", 14.25F);
+            searchBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             searchBtn.Location = new Point(62, 86);
             searchBtn.Margin = new Padding(4);
             searchBtn.Name = "searchBtn";
@@ -191,15 +195,53 @@
             // closeBtn
             // 
             closeBtn.BackColor = SystemColors.ControlLightLight;
-            closeBtn.Font = new Font("Times New Roman", 14.25F);
-            closeBtn.Location = new Point(1043, 389);
+            closeBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            closeBtn.Location = new Point(1034, 566);
             closeBtn.Margin = new Padding(4);
             closeBtn.Name = "closeBtn";
-            closeBtn.Size = new Size(275, 39);
+            closeBtn.Size = new Size(275, 73);
             closeBtn.TabIndex = 55;
             closeBtn.Text = "Назад";
             closeBtn.UseVisualStyleBackColor = false;
             closeBtn.Click += closeBtn_Click;
+            // 
+            // expBtn
+            // 
+            expBtn.BackColor = SystemColors.ControlLightLight;
+            expBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            expBtn.Location = new Point(62, 89);
+            expBtn.Margin = new Padding(4);
+            expBtn.Name = "expBtn";
+            expBtn.Size = new Size(152, 54);
+            expBtn.TabIndex = 56;
+            expBtn.Text = "Экспорт в Excel";
+            expBtn.UseVisualStyleBackColor = false;
+            expBtn.Click += expBtn_Click;
+            // 
+            // groupBox3
+            // 
+            groupBox3.BackColor = Color.Transparent;
+            groupBox3.Controls.Add(expCmb);
+            groupBox3.Controls.Add(expBtn);
+            groupBox3.Font = new Font("Times New Roman", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            groupBox3.Location = new Point(1043, 375);
+            groupBox3.Margin = new Padding(4);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Padding = new Padding(4);
+            groupBox3.Size = new Size(275, 151);
+            groupBox3.TabIndex = 17;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Поиск:";
+            // 
+            // expCmb
+            // 
+            expCmb.DropDownStyle = ComboBoxStyle.DropDownList;
+            expCmb.FormattingEnabled = true;
+            expCmb.Location = new Point(10, 30);
+            expCmb.Margin = new Padding(4);
+            expCmb.Name = "expCmb";
+            expCmb.Size = new Size(259, 39);
+            expCmb.TabIndex = 57;
             // 
             // FinancesForm
             // 
@@ -207,7 +249,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1337, 568);
+            ClientSize = new Size(1337, 652);
+            Controls.Add(groupBox3);
             Controls.Add(closeBtn);
             Controls.Add(groupBox2);
             Controls.Add(delBtn);
@@ -215,7 +258,7 @@
             Controls.Add(addBtn);
             Controls.Add(groupBox1);
             Controls.Add(financesDgv);
-            Font = new Font("Times New Roman", 12F);
+            Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             Name = "FinancesForm";
@@ -225,6 +268,7 @@
             ((System.ComponentModel.ISupportInitialize)financesDgv).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            groupBox3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -241,5 +285,8 @@
         private Button searchBtn;
         private Button closeBtn;
         private Button applyFilterBtn;
+        private Button expBtn;
+        private GroupBox groupBox3;
+        private ComboBox expCmb;
     }
 }
