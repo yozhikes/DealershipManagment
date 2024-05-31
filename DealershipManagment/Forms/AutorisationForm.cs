@@ -6,7 +6,6 @@ namespace DealershipManagment
 {
     public partial class AutorisationForm : Form
     {
-        DbDealershipManagmentContext db = new DbDealershipManagmentContext();
         public AutorisationForm()
         {
             InitializeComponent();
@@ -42,77 +41,87 @@ namespace DealershipManagment
             }
             else
             {
-                var worker = db.Workers.FirstOrDefault(x => x.Login == loginTxt.Text && x.Password == HashWithSHA256(passTxt.Text));
-                if (worker != null)
+                using(DbDealershipManagmentContext db = new DbDealershipManagmentContext())
                 {
-                    var role = worker.RoleId;
-                    switch (role)
+                    var worker = db.Workers.FirstOrDefault(x => x.Login == loginTxt.Text && x.Password == HashWithSHA256(passTxt.Text));
+                    if (worker != null)
                     {
-                        case 0:
-                            CarsForm cars = new CarsForm();
-                            Hide();
-                            if (cars.ShowDialog() == DialogResult.Cancel)
+                        if (worker.Status != 2)
+                        {
+                            var role = worker.RoleId;
+                            switch (role)
                             {
-                                loginTxt.Text = string.Empty;
-                                passTxt.Text = string.Empty;
-                                Show();
+                                case 0:
+                                    CarsForm cars = new CarsForm();
+                                    Hide();
+                                    if (cars.ShowDialog() == DialogResult.Cancel)
+                                    {
+                                        loginTxt.Text = string.Empty;
+                                        passTxt.Text = string.Empty;
+                                        Show();
+                                    }
+                                    break;
+                                case 1:
+                                    FinancesForm finances = new FinancesForm();
+                                    Hide();
+                                    if (finances.ShowDialog() == DialogResult.Cancel)
+                                    {
+                                        loginTxt.Text = string.Empty;
+                                        passTxt.Text = string.Empty;
+                                        Show();
+                                    }
+                                    break;
+                                case 2:
+                                    MainManagerForm manager = new MainManagerForm();
+                                    Hide();
+                                    if (manager.ShowDialog() == DialogResult.Cancel)
+                                    {
+                                        loginTxt.Text = string.Empty;
+                                        passTxt.Text = string.Empty;
+                                        Show();
+                                    }
+                                    break;
+                                case 3:
+                                    ServiceForm service = new ServiceForm();
+                                    Hide();
+                                    if (service.ShowDialog() == DialogResult.Cancel)
+                                    {
+                                        loginTxt.Text = string.Empty;
+                                        passTxt.Text = string.Empty;
+                                        Show();
+                                    }
+                                    break;
+                                case 4:
+                                    StaffForm staff = new StaffForm();
+                                    Hide();
+                                    if (staff.ShowDialog() == DialogResult.Cancel)
+                                    {
+                                        loginTxt.Text = string.Empty;
+                                        passTxt.Text = string.Empty;
+                                        Show();
+                                    }
+                                    break;
+                                case 5:
+                                    MarksForm marksForm = new MarksForm();
+                                    Hide();
+                                    if (marksForm.ShowDialog() == DialogResult.Cancel)
+                                    {
+                                        loginTxt.Text = string.Empty;
+                                        passTxt.Text = string.Empty;
+                                        Show();
+                                    }
+                                    break;
                             }
-                            break;
-                        case 1:
-                            FinancesForm finances = new FinancesForm();
-                            Hide();
-                            if (finances.ShowDialog() == DialogResult.Cancel)
-                            {
-                                loginTxt.Text = string.Empty;
-                                passTxt.Text = string.Empty;
-                                Show();
-                            }
-                            break;
-                        case 2:
-                            MainManagerForm manager = new MainManagerForm();
-                            Hide();
-                            if (manager.ShowDialog() == DialogResult.Cancel)
-                            {
-                                loginTxt.Text = string.Empty;
-                                passTxt.Text = string.Empty;
-                                Show();
-                            }
-                            break;
-                        case 3:
-                            ServiceForm service = new ServiceForm();
-                            Hide();
-                            if (service.ShowDialog() == DialogResult.Cancel)
-                            {
-                                loginTxt.Text = string.Empty;
-                                passTxt.Text = string.Empty;
-                                Show();
-                            }
-                            break;
-                        case 4:
-                            StaffForm staff = new StaffForm();
-                            Hide();
-                            if (staff.ShowDialog() == DialogResult.Cancel)
-                            {
-                                loginTxt.Text = string.Empty;
-                                passTxt.Text = string.Empty;
-                                Show();
-                            }
-                            break;
-                        case 5:
-                            MarksForm marksForm = new MarksForm();
-                            Hide();
-                            if (marksForm.ShowDialog() == DialogResult.Cancel)
-                            {
-                                loginTxt.Text = string.Empty;
-                                passTxt.Text = string.Empty;
-                                Show();
-                            }
-                            break;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Данный работник уволен!", "Ошибка при входе", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Неверный логин и/или пароль", "Ошибка при входе", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    else
+                    {
+                        MessageBox.Show("Неверный логин и/или пароль", "Ошибка при входе", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
             }
         }
