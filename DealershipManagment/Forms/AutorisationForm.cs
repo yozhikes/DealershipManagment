@@ -102,9 +102,9 @@ namespace DealershipManagment
                                     }
                                     break;
                                 case 5:
-                                    MarksForm marksForm = new MarksForm();
+                                    MainAdminForm adminForm = new MainAdminForm();
                                     Hide();
-                                    if (marksForm.ShowDialog() == DialogResult.Cancel)
+                                    if (adminForm.ShowDialog() == DialogResult.Cancel)
                                     {
                                         loginTxt.Text = string.Empty;
                                         passTxt.Text = string.Empty;
