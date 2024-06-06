@@ -59,5 +59,15 @@ namespace DealershipManagment.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] templateDogovor {
+            get {
+                object obj = ResourceManager.GetObject("templateDogovor", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

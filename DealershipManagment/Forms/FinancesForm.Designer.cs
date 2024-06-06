@@ -231,7 +231,7 @@
             groupBox3.Size = new Size(275, 151);
             groupBox3.TabIndex = 17;
             groupBox3.TabStop = false;
-            groupBox3.Text = "Поиск:";
+            groupBox3.Text = "Период:";
             // 
             // expCmb
             // 

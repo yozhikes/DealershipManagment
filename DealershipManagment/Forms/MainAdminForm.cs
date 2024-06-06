@@ -30,14 +30,29 @@ namespace DealershipManagment.Forms
 
         private void rezervBtn_Click(object sender, EventArgs e)
         {
-            string backupFileName = $"Backup_{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}.bak";
-            string backupFilePath = Path.Combine(Application.StartupPath,"Backups",backupFileName);
-            using (var db = new DbDealershipManagmentContext())
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
-                // Создаем копию базы данных с помощью DbContext.Database.ExecuteSqlRaw()
-                db.Database.ExecuteSqlRaw($"BACKUP DATABASE [Db_DealershipManagment] TO DISK = '{backupFilePath}'");
+                saveFileDialog.Filter = "Файлы резервной копии(*.bak)|*.bak";
+                saveFileDialog.FileName = $"Backup_{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}.bak";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string selectedFilePath = saveFileDialog.FileName;
+
+                    using (var db = new DbDealershipManagmentContext())
+                    {
+                        // Создаем копию базы данных
+                        db.Database.ExecuteSqlRaw($"BACKUP DATABASE [Db_DealershipManagment] TO DISK = '{selectedFilePath}'");
+                    }
+
+                    MessageBox.Show("Резервное копирование базы данных выполнено успешно.");
+                }
             }
-            MessageBox.Show("Резервное копирование базы данных выполнено успешно.");
+        }
+
+        private void backBtn_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

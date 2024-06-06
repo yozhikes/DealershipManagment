@@ -36,6 +36,7 @@ namespace DealershipManagment
 
         private void AddEditCarsForm_Load(object sender, EventArgs e)
         {
+            yearTxt.Maximum = DateTime.Now.Year;
             marksCmb.DataSource = db.Marks.Select(x => x.NameMark).ToList();
             driveCmb.Items.Clear();
             transmissionCmb.Items.Clear();

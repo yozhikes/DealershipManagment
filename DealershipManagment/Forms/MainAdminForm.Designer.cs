@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainAdminForm));
             rezervBtn = new Button();
             marksBtn = new Button();
-            button2 = new Button();
+            backBtn = new Button();
             SuspendLayout();
             // 
             // rezervBtn
@@ -60,17 +60,18 @@
             marksBtn.UseVisualStyleBackColor = false;
             marksBtn.Click += marksBtn_Click;
             // 
-            // button2
+            // backBtn
             // 
-            button2.BackColor = SystemColors.ControlLightLight;
-            button2.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.Location = new Point(190, 134);
-            button2.Margin = new Padding(4);
-            button2.Name = "button2";
-            button2.Size = new Size(128, 52);
-            button2.TabIndex = 20;
-            button2.Text = "Назад";
-            button2.UseVisualStyleBackColor = false;
+            backBtn.BackColor = SystemColors.ControlLightLight;
+            backBtn.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            backBtn.Location = new Point(190, 134);
+            backBtn.Margin = new Padding(4);
+            backBtn.Name = "backBtn";
+            backBtn.Size = new Size(128, 52);
+            backBtn.TabIndex = 20;
+            backBtn.Text = "Назад";
+            backBtn.UseVisualStyleBackColor = false;
+            backBtn.Click += backBtn_Click;
             // 
             // MainAdminForm
             // 
@@ -79,7 +80,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(513, 199);
-            Controls.Add(button2);
+            Controls.Add(backBtn);
             Controls.Add(marksBtn);
             Controls.Add(rezervBtn);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -92,6 +93,6 @@
 
         private Button rezervBtn;
         private Button marksBtn;
-        private Button button2;
+        private Button backBtn;
     }
 }

@@ -215,8 +215,13 @@ namespace DealershipManagment
                 Microsoft.Office.Interop.Word.Document wordDoc = wordApp.Documents.Add();
 
                 // Получаем шаблон Word-документа
-                string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "templateDogovor.docx");
-                wordDoc = wordApp.Documents.Open(templatePath);
+                // Получаем массив байт из ресурсов проекта
+                byte[] fileBytes = Properties.Resources.templateDogovor;
+
+                // Сохраняем массив байт во временном файле
+                string tempFilePath = Path.GetTempFileName();
+                File.WriteAllBytes(tempFilePath, fileBytes);
+                wordDoc = wordApp.Documents.Open(tempFilePath);
 
                 // Заполняем данные из DataGridView в шаблон
 
