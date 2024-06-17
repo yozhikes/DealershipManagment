@@ -75,10 +75,7 @@ namespace DealershipManagment
             workerCmb.Items.Clear();
             foreach (var item in db.Cars.Include(x=>x.Mark).ToList())
             {
-                if(item.Status != 2 && item.Status != 3)
-                {
-                    carsCmb.Items.Add($"{item.Mark.NameMark} {item.Model}");
-                }
+                 carsCmb.Items.Add($"{item.Mark.NameMark} {item.Model}");
             }
             foreach (var item in db.Clients.ToList())
             {

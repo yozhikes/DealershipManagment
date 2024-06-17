@@ -159,7 +159,7 @@ namespace DealershipManagment
                     }
                     else
                     {
-                        MessageBox.Show("Этот клиент уже был использован!", "Невозможно удалить", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Этот работник уже был использован!", "Невозможно удалить", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 } 
             }
